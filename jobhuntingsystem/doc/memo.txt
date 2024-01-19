@@ -1,0 +1,4 @@
+AI-OCR
+line
+https://clova.line.me/clova-ocr/api/
+https://ocr.hblab.ai/?_ga=2.122076111.519048289.1657330866-1739047498.1657330866

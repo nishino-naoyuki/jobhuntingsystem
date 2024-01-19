@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">就職ポータル</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">西野直幸（教務）</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>西野直幸</h6>
+              <span>教務</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>マイページ</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>設定</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>サインアウト</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="dashboad.html">
+          <i class="bi bi-grid"></i>
+          <span>ダッシュボード</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="company-entry.html">
+          <i class="bi bi-box-arrow-in-up"></i>
+          <span>企業登録</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="search-company.html">
+          <i class="bi bi-search"></i>
+          <span>企業検索</span>
+        </a>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="search-job-seminar.html">
+          <i class="bi bi-search"></i>
+          <span>説明会検索</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+
+      <li class="nav-item">
+        <a class="nav-link " href="progress-list.html">
+          <i class="bi bi-pencil"></i>
+          <span>受験中一覧</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="favorit_list.html">
+          <i class="bi bi-suit-heart-fill"></i>
+          <span>お気に入り</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="student-detail.html">
+          <i class="bi bi-person-fill"></i>
+          <span>マイページ</span>
+        </a>
+      </li><!-- End マイページ Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#print-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>帳票</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="print-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>学生状況一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-layouts.html">
+              <i class="bi bi-circle"></i><span>説明会参加者一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-editors.html">
+              <i class="bi bi-circle"></i><span>選考会参加者一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-validation.html">
+              <i class="bi bi-circle"></i><span>内定企業一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-validation.html">
+              <i class="bi bi-circle"></i><span>斡旋停止者一覧</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End 帳票 Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people-fill"></i><span>ユーザー</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>学生検索</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-layouts.html">
+              <i class="bi bi-circle"></i><span>学生登録</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-editors.html">
+              <i class="bi bi-circle"></i><span>パスワード変更</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End ユーザー Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-server"></i>
+          <span>マスターメンテ</span>
+        </a>
+      </li><!-- End マスター Nav -->
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>ダッシュボード</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">           
+
+            <!-- お知らせ -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">お知らせ</h5>
+				  <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
+	               未読の重要なお知らせがあります。
+	              </div>
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">日付</th>
+                        <th scope="col">タイトル</th>
+                        <th scope="col">種類</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row"><a href="#">既</a></td>
+                        <td>2022/5/10</td>
+                        <td><a href="#" class="text-primary">説明会情報が追加されました</a></td>
+                        <td><span class="badge bg-success">情報</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">未</a></th>
+                        <td>2022/5/9</td>
+                        <td><a href="#" class="text-primary">〇×社の書類〆切について</a></td>
+                        <td><span class="badge bg-danger">重要</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">未</a></th>
+                        <td>2022/5/8</td>
+                        <td><a href="#" class="text-primary">求人情報が追加されました</a></td>
+                        <td><span class="badge bg-success">情報</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row"><a href="#">未</a></th>
+                        <td>2022/5/8</td>
+                        <td><a href="#" class="text-primary">△△社の選考結果について</a></td>
+                        <td><span class="badge bg-success">情報</span></td>
+                      </tr>
+                      <tr>
+                        <td scope="row"><a href="#">既</a></td>
+                        <td>2022/5/8</td>
+                        <td><a href="#" class="text-primary">△△社の採用試験の変更について</a></td>
+                        <td><span class="badge bg-danger">重要</span></td>
+                      </tr>
+                      <tr>
+                        <td scope="row"><a href="#">既</a></td>
+                        <td>2022/5/8</td>
+                        <td><a href="#" class="text-primary">△△社の採用試験について</a></td>
+                        <td><span class="badge bg-danger">重要</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End お知らせ -->
+
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">月別内定率（教員・就職課用）</h5>
+
+                  <!-- Line Chart -->
+                  <div id="reportsChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'system',
+                          data: [0, 5, 12, 30, 75, 82, 90],
+                        }, {
+                          name: 'business',
+                          data: [0, 0, 0, 12, 34, 52, 67]
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'date',
+                          categories: ["2022/01", "2022/02", "2022/03", "2022/04", "2022/05", "2022/06", "2022/07"]
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'yy/MM'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
+
+            <!-- Top Selling -->
+            <div class="col-12">
+              <div class="card top-selling overflow-auto">
+                <div class="card-body pb-0">
+                  <h5 class="card-title">活動状況一覧（教員・就職課用）</h5>
+
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">学籍番号</th>
+                        <th scope="col">クラス</th>
+                        <th scope="col">氏名</th>
+                        <th scope="col">状況</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1234567</td>
+                        <td>SD3D</td>
+                        <td><a href="#" class="text-primary">麻生次郎</a></td>
+                        <td><span class="badge bg-danger">斡旋停止中</span></td>
+                      </tr>
+                      <tr>
+                        <td>1234567</td>
+                        <td>SD3D</td>
+                        <td><a href="#" class="text-primary">情報太郎</a></td>
+                        <td><span class="badge bg-primary">活　動　中</span></td>
+                      </tr>
+                      <tr>
+                        <td>1234567</td>
+                        <td>SD3D</td>
+                        <td><a href="#" class="text-primary">検定三郎</a></td>
+                        <td><span class="badge bg-success">進路決定済</span></td>
+                      </tr>
+                      <tr>
+                        <td>1234567</td>
+                        <td>SD3D</td>
+                        <td><a href="#" class="text-primary">大学進学野郎</a></td>
+                        <td><span class="badge bg-secondary"> 希望せず </span></td>
+                      </tr>
+                      <tr>
+                        <td>1234567</td>
+                        <td>SD3D</td>
+                        <td><a href="#" class="text-primary">麻生四郎</a></td>
+                        <td><span class="badge bg-primary">活　動　中</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Top Selling -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

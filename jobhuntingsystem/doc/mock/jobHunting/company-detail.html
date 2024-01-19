@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">就職ポータル</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">西野直幸（教務）</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>西野直幸</h6>
+              <span>教務</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>マイページ</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>設定</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>サインアウト</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="dashboad.html">
+          <i class="bi bi-grid"></i>
+          <span>ダッシュボード</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-box-arrow-in-up"></i>
+          <span>企業登録</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-search"></i>
+          <span>企業検索</span>
+        </a>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-search"></i>
+          <span>説明会検索</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+
+      <li class="nav-item">
+        <a class="nav-link " href="progress-list.html">
+          <i class="bi bi-pencil"></i>
+          <span>受験中一覧</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-suit-heart-fill"></i>
+          <span>お気に入り</span>
+        </a>
+      </li><!-- End Components Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-person-fill"></i>
+          <span>マイページ</span>
+        </a>
+      </li><!-- End マイページ Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#print-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>帳票</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="print-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>学生状況一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-layouts.html">
+              <i class="bi bi-circle"></i><span>説明会参加者一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-editors.html">
+              <i class="bi bi-circle"></i><span>選考会参加者一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-validation.html">
+              <i class="bi bi-circle"></i><span>内定企業一覧</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-validation.html">
+              <i class="bi bi-circle"></i><span>斡旋停止者一覧</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End 帳票 Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-people-fill"></i><span>ユーザー</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>学生検索</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-layouts.html">
+              <i class="bi bi-circle"></i><span>学生登録</span>
+            </a>
+          </li>
+          <li>
+            <a href="forms-editors.html">
+              <i class="bi bi-circle"></i><span>パスワード変更</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End ユーザー Nav -->
+      
+      <li class="nav-item">
+        <a class="nav-link " href="index.html">
+          <i class="bi bi-server"></i>
+          <span>マスターメンテ</span>
+        </a>
+      </li><!-- End マスター Nav -->
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>企業情報詳細</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">企業情報詳細</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-header">
+    					<button class="btn btn-primary">お気に入り登録</button>
+    					<button class="btn btn-primary">報告書閲覧</button>
+    					<button class="btn btn-primary">卒業生確認</button>
+    					<button class="btn btn-primary">説明会申込</button>
+    					<button class="btn btn-primary">受験申込</button>
+    				</div>
+    				<div class="card-body">
+    					<div class="accordion" id="accordionExample">
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+										企業情報詳細
+									</button>
+								</h2>
+								<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+						                <form>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
+												<div class="col-sm-10">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">求人番号</label>
+												<div class="col-sm-4">
+													0000000000
+												</div>
+												<label for="inputText" class="col-sm-2 col-form-label">資本金</label>
+												<div class="col-sm-4">
+													1000万円
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label class="col-sm-2 col-form-label">企業サイトURL</label>
+												<div class="col-sm-10">
+													<a href="http://aaaaa">http://aaaaa</a>
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label class="col-sm-2 col-form-label">種類</label>
+												<div class="col-sm-4">
+													<h3><span class="badge bg-primary">併願可</span><h3>
+												</div>
+												<label class="col-sm-2 col-form-label">雇用形態</label>
+												<div class="col-sm-4">
+													正規
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label class="col-sm-2 col-form-label">募集職種</label>
+												<div class="col-sm-10">
+													<span class="badge bg-primary">システムエンジニア</span>
+													<span class="badge bg-success">プログラマ</span>
+												</div>
+											</div>
+						                	<div class="row mb-3">
+						                		<label class="col-sm-2 col-form-label">給与</label>
+												<div class="col-sm-10">
+													<table class="table table-bordered">
+								              			<thead>
+										                  <tr>
+										                    <th scope="col">内容</th>
+										                    <th scope="col">2年コース</th>
+										                    <th scope="col">3年コース</th>
+										                    <th scope="col">4年コース</th>
+										                  </tr>
+										                </thead>
+										                <tbody>
+										                  <tr>
+										                    <th scope="row">基本給</th>
+										                    <td>163,000</td>
+										                    <td>173,000</td>
+										                    <td>183,000</td>
+										                  </tr>
+										                  <tr>
+										                    <th scope="row">住宅手当</th>
+										                    <td>20,000</td>
+										                    <td>20,000</td>
+										                    <td>20,000</td>
+										                  </tr>
+										                  <tr>
+										                    <th scope="row">合計</th>
+										                    <td>183,000</td>
+										                    <td>193,000</td>
+										                    <td>203,000</td>
+										                  </tr>
+										                </tbody>
+													</table>
+												</div>
+											</div><!--row mb-3-->
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">交通費</label>
+												<div class="col-sm-4">
+													月20,000円まで
+												</div>
+												<label for="inputText" class="col-sm-2 col-form-label">賞与</label>
+												<div class="col-sm-4">
+													年2回
+												</div>
+											</div>
+						                </form><!--form-->
+									</div>
+								</div>
+    						</div>
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwo">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										受験状況
+									</button>
+								</h2>
+								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<button class="btn btn-primary">追加</button>
+										<table class="table table-bordered">
+					              			<thead>
+							                  <tr>
+							                    <th scope="col">#</th>
+							                    <th scope="col">日付</th>
+							                    <th scope="col">状況</th>
+							                    <th scope="col">合否</th>
+							                    <th scope="col">#</th>
+							                  </tr>
+							                </thead>
+							                <tbody>
+							                  <tr>
+							                    <th scope="row">1</th>
+							                    <td>2022-05-25</td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>&nbsp;</td>
+							                    <td>終了</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">2</th>
+							                    <td>2022-05-30</td>
+							                    <td><span class="badge rounded-pill bg-primary">1次試</span></td>
+							                    <td>合格</td>
+							                    <td><span class="badge bg-success">報告済</span></td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">3</th>
+							                    <td>2022-06-10</td>
+							                    <td><span class="badge rounded-pill bg-primary">2次試</span></td>
+							                    <td>合格</td>
+							                    <td><button class="btn btn-primary">受験報告</button></td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">4</th>
+							                    <td>2022-06-18</td>
+							                    <td><span class="badge rounded-pill bg-danger">最終試</span></td>
+							                    <td>&nbsp;</td>
+							                    <td><button class="btn btn-primary">受験報告</button></td>
+							                  </tr>
+							                </tbody>
+										</table>
+										<p>※管理者権限の場合は以下の表示になる</p>
+										
+										<table class="table table-bordered">
+					              			<thead>
+							                  <tr>
+							                    <th scope="col">#</th>
+							                    <th scope="col">学籍番号</th>
+							                    <th scope="col">学生名</th>
+							                    <th scope="col">状況</th>
+							                    <th scope="col">日付</th>
+							                    <th scope="col">#</th>
+							                  </tr>
+							                </thead>
+							                <tbody>
+							                  <tr>
+							                    <th scope="row">1</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">2</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">3</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">4</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">5</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">１次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td>合格</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">6</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">１次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td>不合格</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">5</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">２次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td><button class="btn btn-primary">合否登録</button></td>
+							                  </tr>
+							                </tbody>
+										</table>
+									</div>
+								</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
