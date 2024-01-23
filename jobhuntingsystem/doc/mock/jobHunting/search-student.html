@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -35,7 +35,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
 </head>
 
 <body>
@@ -108,6 +107,7 @@
 
       </ul>
     </nav><!-- End Icons Navigation -->
+
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
@@ -238,7 +238,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>学内説明会検索</h1>
+      <h1>ダッシュボード</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -248,158 +248,269 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard">
+      <div class="row">
+        <!-- Left side columns -->
+		<div class="col-lg-12">
+		
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-body">
+    					<h5 class="card-title">検索条件</h5>
+    					
+		                <form>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">学生名</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control">
+								</div>
+								<label for="inputText" class="col-sm-2 col-form-label">学籍番号</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control">
+								</div>
+							</div>
+		                	<div class="row mb-3">
+		                		<div class="col-sm-3">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label" for="gridCheck1">
+											活動中
+										</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label" for="gridCheck1">
+											内定保持
+										</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label" for="gridCheck1">
+											進路決定
+										</label>
+									</div>
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label" for="gridCheck1">
+											希望せず
+										</label>
+									</div>
+		                		</div>
+							</div>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">希望条件</label>
+								<div class="col-sm-10"><div class="accordion" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingPlace">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlace" aria-expanded="false" aria-controls="collapseOne">
+													勤務地
+												</button>
+											</h2>
+											<div id="collapsePlace" class="accordion-collapse collapse" aria-labelledby="headingPlace" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															福岡
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															佐賀
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															熊本
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															長崎
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															大分
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															宮﨑
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															鹿児島
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															関東
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															その他
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+									</div><!-- accordion -->
+								</div>
+							</div>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">職種</label>
+								<div class="col-sm-10">
+									<div class="accordion" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingOne">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+													IT系
+												</button>
+											</h2>
+											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															システムエンジニア
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															プログラマ
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															運用オペレータ
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															カスタマーエンジニア
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															IT系営業
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingTwo">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+													ビジネス系
+												</button>
+											</h2>
+											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															事務
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															営業
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															販売
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+									</div><!-- accordion -->
+								</div>
+							</div>
+							<div class="d-grid gap-2 col-6 mx-auto">
+								<button class="btn btn-outline-primary">検索</button>
+							</div>
+		                </form><!--form-->
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
     	<div class="row">
     		 <div class="col-lg-12">
     		 	<div class="card">
     		 		<div class="card-body">
-              			<h5 class="card-title">受験中企業一覧</h5>
-              			<button class="btn btn-outline-primary">追加</button>
-              			<table class="table table-bordered">
+              			<h5 class="card-title">検索結果</h5>
+              			<button class="btn btn-outline-primary">CSV出力</button>
+              			<table class="table datatable">
 	              			<thead>
 			                  <tr>
 			                    <th scope="col">#</th>
-			                    <th scope="col">企業名</th>
-			                    <th scope="col">状況</th>
-			                    <th scope="col">次回</th>
-			                    <th scope="col">#</th>
+			                    <th scope="col">クラス</th>
+			                    <th scope="col">学籍番号</th>
+			                    <th scope="col">氏名</th>
+			                    <th scope="col">ステータス</th>
+			                    <th scope="col">受験社数</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details1" aria-expanded="false">
-			                    <th scope="row" >1</th>
-			                    <td class="no-accordion"><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-secondary">1次落<span></td>
-			                    <td>2022-05-25</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
+			                  <tr>
+			                    <th scope="row">1</th>
+			                    <td>IT1A</td>
+			                    <td>0000000</td>
+			                    <td><a href="student-detail.html">麻生花子</a></td>
+			                    <td><span class="badge bg-primary">活動中</span></td>
+			                    <td>5</td>
 			                  </tr>
-			                    <tr id="details1" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">1次落</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col"><button class="btn btn-primary">報告書作成</button></td>
-						                  </tr>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details2" aria-expanded="false">
+			                  <tr>
 			                    <th scope="row">2</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-secondary">筆記落<span></td>
-			                    <td>2022-05-28</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
+			                    <td>A</td>
+			                    <td>0000001</td>
+			                    <td><a href="student-detail.html">麻生次郎</a></td>
+			                    <td><span class="badge bg-danger">斡旋停止中</span></td>
+			                    <td>5</td>
 			                  </tr>
-			                    <tr id="details2" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">筆記落</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col">報告書作成済</td>
-						                  </tr>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details3" aria-expanded="false">
+			                  <tr>
 			                    <th scope="row">3</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-primary">1次試</span></td>
-			                    <td>2022-05-29</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
+			                    <td>A</td>
+			                    <td>0000001</td>
+			                    <td><a href="student-detail.html">麻生次郎</a></td>
+			                    <td><span class="badge bg-success">進路決定済</span></td>
+			                    <td>5</td>
 			                  </tr>
-			                    <tr id="details3" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details4" aria-expanded="false">
+			                  <tr>
 			                    <th scope="row">4</th>
-			                    <td><a href="#">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-danger">最終試</span></td>
-			                    <td>2022-05-30</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                    <tr id="details4" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">1次合</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col">報告書作成済</td>
-						                  </tr>
-						                  <tr>
-						                    <td scope="col">2次合</td>
-						                    <td scope="col">2023/12/25</td>
-						                    <td scope="col"><button class="btn btn-primary">報告書作成</button></td>
-						                  </tr>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr>
-			                    <th scope="row">5</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-03</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">6</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-05</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">7</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-06</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
+			                    <td>A</td>
+			                    <td>0000001</td>
+			                    <td><a href="student-detail.html">麻生次郎</a></td>
+			                    <td><span class="badge bg-secondary">希望せず</span></td>
+			                    <td>5</td>
 			                  </tr>
 			                </tbody>
               			</table><!-- table -->
-              		</div><!-- card-body -->
-    		 	</div><!-- card -->
-    		 </div><!-- col-lg-12 -->
-    	</div><!--row-->
+              		   </div><!-- card-body -->
+					</div><!-- End Top Selling -->
+				</div>
+			</div><!-- End Left side columns -->
+		</div><!-- End Right side columns -->
+      </div>
     </section>
 
   </main><!-- End #main -->
@@ -432,17 +543,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  
-  <script>
-  document.querySelectorAll('.no-accordion a').forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        window.location.href = link.getAttribute('href');
-      });
-    });
-  });
-  </script>
 
 </body>
 
