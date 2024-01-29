@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link th:href="@{/assets/img/favicon.png}" rel="icon">
+  <link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/quill/quill.bubble.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
+  <link th:href="@{/assets/vendor/simple-datatables/style.css}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link th:href="@{/assets/css/style.css}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img th:src="@{assets/img/logo.png}" alt="">
+        <span class="d-none d-lg-block">就職ポータル</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <span class="d-none d-md-block dropdown-toggle ps-2">西野直幸（教務）</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>西野直幸</h6>
+              <span>教務</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>マイページ</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>設定</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>サインアウト</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div>  
+
+  <main id="main" class="main">
+
+    <div class="container mt-4">
+      <h1>求人登録</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">求人登録</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">求人情報入力</h5>
+                <form>
+                  <!-- 入力項目の追加 -->
+                  <!-- 例： -->
+                  <div class="mb-3">
+                    <label for="companyName" class="form-label">会社名称</label>
+                    <input type="text" class="form-control" id="companyName" name="companyName">
+                  </div>
+                  
+                  <div class="row mb-3">
+                    <div class="col-md-3">
+                      <label for="employmentType" class="form-label">募集職種１</label>
+                      <select class="form-select" id="jobtype" name="jobtype">
+                        <option selected>なし</option>
+                        <option value="0">SE</option>
+                        <option value="1">PG</option>
+                        <option value="2">OP</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="employmentType" class="form-label">募集職種２</label>
+                      <select class="form-select" id="jobtype" name="jobtype">
+                        <option selected>なし</option>
+                        <option value="0">SE</option>
+                        <option value="1">PG</option>
+                        <option value="2">OP</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="employmentType" class="form-label">募集職種３</label>
+                      <select class="form-select" id="jobtype" name="jobtype">
+                        <option selected>なし</option>
+                        <option value="0">SE</option>
+                        <option value="1">PG</option>
+                        <option value="2">OP</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="employmentType" class="form-label">募集職種４</label>
+                      <select class="form-select" id="jobtype" name="jobtype">
+                        <option selected>なし</option>
+                        <option value="0">SE</option>
+                        <option value="1">PG</option>
+                        <option value="2">OP</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-4">
+                      <label for="employmentType" class="form-label">雇用形態</label>
+                      <select class="form-select" id="employmentType" name="employmentType">
+                        <option selected>正社員</option>
+                        <option value="1">契約社員</option>
+                        <option value="2">アルバイト</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="housingAvailability" class="form-label">寮の有無</label>
+                      <select class="form-select" id="housingAvailability" name="housingAvailability">
+                        <option selected>あり</option>
+                        <option value="1">なし</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="housingAvailability" class="form-label">賃金形態</label>
+                      <select class="form-select" id="housingAvailability" name="housingAvailability">
+                        <option selected>月給</option>
+                        <option value="1">年棒</option>
+                        <option value="1">日給</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                  		<label for="housingAvailability" class="form-label">賃金</label>
+	                  <table class="table table-bordered">
+	                    <thead>
+	                      <tr>
+	                        <th scope="col"></th>
+	                        <th scope="col">２年コース</th>
+	                        <th scope="col">３年コース</th>
+	                        <th scope="col">４年コース</th>
+	                      </tr>
+	                    </thead>
+	                    <tbody>
+	                      <tr>
+	                        <th scope="row">基本給</th>
+	                        <td><input type="text" class="form-control" name="basicPayYear2"></td>
+	                        <td><input type="text" class="form-control" name="basicPayYear3"></td>
+	                        <td><input type="text" class="form-control" name="basicPayYear4"></td>
+	                      </tr>
+	                      <tr>
+	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
+	                        <td><input type="text" class="form-control" name="blank1Year2"></td>
+	                        <td><input type="text" class="form-control" name="blank1Year3"></td>
+	                        <td><input type="text" class="form-control" name="blank1Year4"></td>
+	                      </tr>
+	                      <tr>
+	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
+	                        <td><input type="text" class="form-control" name="blank2Year2"></td>
+	                        <td><input type="text" class="form-control" name="blank2Year3"></td>
+	                        <td><input type="text" class="form-control" name="blank2Year4"></td>
+	                      </tr>
+	                      <tr>
+	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
+	                        <td><input type="text" class="form-control" name="blank3Year2"></td>
+	                        <td><input type="text" class="form-control" name="blank3Year3"></td>
+	                        <td><input type="text" class="form-control" name="blank3Year4"></td>
+	                      </tr>
+	                      <tr>
+	                        <th scope="row">合計（自動計算）</th>
+	                        <td><input type="text" class="form-control" readonly></td>
+	                        <td><input type="text" class="form-control" readonly></td>
+	                        <td><input type="text" class="form-control" readonly></td>
+	                      </tr>
+	                    </tbody>
+	                  </table>
+                  </div>
+					
+                  <div class="col-md-10">
+                    <label class="form-label">必要書類</label>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="resume" name="resume">
+                      <label class="form-check-label" for="resume">履歴書</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="expectedGraduation" name="expectedGraduation">
+                      <label class="form-check-label" for="expectedGraduation">卒業見込み</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="transcript" name="transcript">
+                      <label class="form-check-label" for="transcript">成績表</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="other" name="other">
+                      <label class="form-check-label" for="other">その他</label>
+                    </div>
+                    <div class="mb-3">
+                      <label for="otherInput" class="form-label">その他の内容</label>
+                      <input type="text" class="form-control" id="otherInput" name="otherInput">
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-primary">登録する</button>
+                </form>
+              </div>
+            </div><!-- card -->
+          </div><!-- col-lg-12 -->
+        </div><!-- row -->
+      </div><!-- container -->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.min.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

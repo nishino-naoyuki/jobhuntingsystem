@@ -28,6 +28,6 @@ public class LoginController {
     		) {
 		
 		
-		return new ModelAndView("redirect:dashboad");
+		return new ModelAndView("redirect:dashboard");
 	}
 }
