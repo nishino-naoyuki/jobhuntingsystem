@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div>  
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/header"></div>  
+
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div>  
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>お気に入り一覧</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">お気に入り一覧</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		 <div class="col-lg-12">
+    		 	<div class="card">
+    		 		<div class="card-body">
+              			<h5 class="card-title">お気に入り一覧</h5>
+              			<table class="table table-bordered">
+	              			<thead>
+			                  <tr>
+			                    <th scope="col">#</th>
+			                    <th scope="col">企業名</th>
+			                    <th scope="col">登録日</th>
+			                    <th scope="col">#</th>
+			                  </tr>
+			                </thead>
+			                <tbody>
+			                  <tr>
+			                    <th scope="row">1</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">2</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">3</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">4</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">5</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">6</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">7</th>
+			                    <td><a href="#">株式会社〇×△</a></td>
+			                    <td>2022-05-25</td>
+			                    <td><button class="btn btn-primary">削除</button></td>
+			                  </tr>
+			                </tbody>
+              			</table><!-- table -->
+              		</div><!-- card-body -->
+    		 	</div><!-- card -->
+    		 </div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+
+</html>

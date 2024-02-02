@@ -11,88 +11,88 @@
         </a>
       </li><!-- End Dashboard Nav -->
       
-      <li class="nav-item">
-        <a class="nav-link " th:href="@{/inputcompany}">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
+        <a class="nav-link " th:href="@{/company/input}">
           <i class="bi bi-box-arrow-in-up"></i>
-          <span>企業登録（管理者のみ）</span>
+          <span>企業登録</span>
         </a>
       </li><!-- End Components Nav -->
       
       <li class="nav-item">
-        <a class="nav-link " href="search-company.html">
+        <a class="nav-link " th:href="@{/company/search}">
           <i class="bi bi-search"></i>
           <span>企業検索</span>
         </a>
       </li><!-- End Components Nav -->
       
-      <li class="nav-item">
-        <a class="nav-link " th:href="@{/inputjob}">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
+        <a class="nav-link " th:href="@{/job/input}">
           <i class="bi bi-box-arrow-in-up"></i>
-          <span>求人登録（管理者・企業のみ）</span>
+          <span>求人登録</span>
         </a>
       </li><!-- End Components Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="search-job-seminar.html">
+        <a class="nav-link " th:href="@{/job/search}">
           <i class="bi bi-search"></i>
           <span>説明会検索</span>
         </a>
       </li><!-- End Components Nav -->
       
 
-      <li class="nav-item">
-        <a class="nav-link " href="progress-list.html">
+      <li class="nav-item" th:if="${session['loginInfo'].isStudent()}">
+        <a class="nav-link " th:href="@{/student/progress}">
           <i class="bi bi-pencil"></i>
-          <span>受験中一覧（学生のみ）</span>
+          <span>受験中一覧</span>
         </a>
       </li><!-- End Components Nav -->
       
       <li class="nav-item">
-        <a class="nav-link " href="favorit_list.html">
+        <a class="nav-link " th:href="@{/student/favorit}">
           <i class="bi bi-suit-heart-fill"></i>
           <span>お気に入り</span>
         </a>
       </li><!-- End Components Nav -->
       
       <li class="nav-item">
-        <a class="nav-link " href="student-detail.html">
+        <a class="nav-link " th:href="@{/student/detail}">
           <i class="bi bi-person-fill"></i>
           <span>マイページ</span>
         </a>
       </li><!-- End マイページ Nav -->
       
-      <li class="nav-item">
-        <a class="nav-link " href="suspended-list.html">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
+        <a class="nav-link " th:href="@{/susupended/list}">
           <i class="bi bi-person-fill"></i>
-          <span>斡旋停止者一覧（管理者のみ）</span>
+          <span>斡旋停止者一覧</span>
         </a>
       </li><!-- End 斡旋停止者一覧 Nav -->
       
-      <li class="nav-item">
-        <a class="nav-link " href="official-job-offer-list.html">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
+        <a class="nav-link " th:href="@{/joboffer/list}">
           <i class="bi bi-person-fill"></i>
-          <span>内定者一覧（管理者のみ）</span>
+          <span>内定者一覧</span>
         </a>
       </li><!-- End 斡旋停止者一覧 Nav -->
 
-      <li class="nav-item">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
         <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-people-fill"></i><span>ユーザー</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="user-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="search-student.html">
-              <i class="bi bi-circle"></i><span>学生検索（管理者のみ）</span>
+            <a th:href="@{/student/search}">
+              <i class="bi bi-circle"></i><span>学生検索</span>
             </a>
           </li>
           <li>
-            <a href="student-entry.html">
-              <i class="bi bi-circle"></i><span>学生登録（管理者のみ）</span>
+            <a th:href="@{/student/input}">
+              <i class="bi bi-circle"></i><span>学生登録</span>
             </a>
           </li>
           <li>
             <a href="passwordreset.html">
-              <i class="bi bi-circle"></i><span>パスワードリセット（管理者のみ）</span>
+              <i class="bi bi-circle"></i><span>パスワードリセット</span>
             </a>
           </li>
         </ul>
@@ -116,7 +116,7 @@
         </ul>
       </li><!-- End ユーザー Nav -->
       
-      <li class="nav-item">
+      <li class="nav-item" th:if="${session['loginInfo'].isAdmin()}">
         <a class="nav-link " href="index.html">
           <i class="bi bi-server"></i>
           <span>マスターメンテ</span>

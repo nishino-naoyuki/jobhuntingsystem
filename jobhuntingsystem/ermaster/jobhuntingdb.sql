@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS industry_tbl;
 DROP TABLE IF EXISTS info_tbl;
 DROP TABLE IF EXISTS jobhunting_status_tbl;
 DROP TABLE IF EXISTS recrutiment_type_tbl;
-DROP TABLE IF EXISTS role_id;
+DROP TABLE IF EXISTS role_tbl;
 DROP TABLE IF EXISTS school_tbl;
 DROP TABLE IF EXISTS step_tbl;
 
@@ -56,15 +56,17 @@ CREATE TABLE class_tbl
 	class_id int NOT NULL AUTO_INCREMENT COMMENT 'クラスID',
 	name varchar(200) NOT NULL,
 	department_id int NOT NULL,
-	admin_id int NOT NULL,
+	admin_id int NOT NULL COMMENT '担任の先生のID',
 	PRIMARY KEY (class_id)
 ) COMMENT = 'クラスがない場合は「なし」のデータに紐づける';
 
 
 CREATE TABLE company_industry
 (
+	ci_id int NOT NULL AUTO_INCREMENT,
 	company_id int NOT NULL,
-	industrykind_id int NOT NULL
+	industrykind_id int NOT NULL,
+	PRIMARY KEY (ci_id)
 );
 
 
@@ -88,7 +90,7 @@ CREATE TABLE department_tbl
 (
 	department_id int NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL COMMENT '学科名',
-	school_tbl int NOT NULL,
+	school_id int NOT NULL,
 	PRIMARY KEY (department_id)
 );
 
@@ -391,7 +393,7 @@ CREATE TABLE report_tbl
 );
 
 
-CREATE TABLE role_id
+CREATE TABLE role_tbl
 (
 	role_id int NOT NULL AUTO_INCREMENT,
 	name varchar(255),
@@ -401,10 +403,10 @@ CREATE TABLE role_id
 
 CREATE TABLE school_tbl
 (
-	school_tbl int NOT NULL AUTO_INCREMENT,
+	school_id int NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL COMMENT '学校名',
 	abbreviation varchar(255) NOT NULL COMMENT '略称',
-	PRIMARY KEY (school_tbl)
+	PRIMARY KEY (school_id)
 );
 
 
@@ -426,7 +428,7 @@ CREATE TABLE student_tbl
 	class_id int NOT NULL COMMENT 'クラスID',
 	jobhunting_status_id int NOT NULL COMMENT '担任名',
 	image varchar(1024) NOT NULL COMMENT 'イメージ画像',
-	tel int NOT NULL COMMENT '電話番号',
+	tel varchar(10) NOT NULL COMMENT '電話番号',
 	address varchar(512) NOT NULL COMMENT '住所',
 	year int NOT NULL COMMENT '卒業年',
 	c_trust int COMMENT 'キュービック：信頼係数',
@@ -626,14 +628,6 @@ ALTER TABLE company_industry
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id3)
-	REFERENCES Industrykind_tbl (industrykind_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id4)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
@@ -642,7 +636,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id2)
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -650,7 +644,15 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
+	ADD FOREIGN KEY (industry_kind_id3)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id2)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -715,15 +717,15 @@ ALTER TABLE recruitment_tbl
 
 ALTER TABLE admin_tbl
 	ADD FOREIGN KEY (role_id)
-	REFERENCES role_id (role_id)
+	REFERENCES role_tbl (role_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE department_tbl
-	ADD FOREIGN KEY (school_tbl)
-	REFERENCES school_tbl (school_tbl)
+	ADD FOREIGN KEY (school_id)
+	REFERENCES school_tbl (school_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

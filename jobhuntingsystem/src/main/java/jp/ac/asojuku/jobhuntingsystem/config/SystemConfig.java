@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@ConfigurationProperties(prefix = "typing.config")
+@ConfigurationProperties(prefix = "jhs.config")
 @Data
 public class SystemConfig {
 	private static SystemConfig config;

@@ -10,18 +10,32 @@ import org.springframework.web.servlet.ModelAndView;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 
 @Controller
+@RequestMapping(value= {"/job"})
 public class JobController {
 
 	Logger logger = LoggerFactory.getLogger(JobController.class);
 	
-	@RequestMapping(value= {"/inputjob"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
     public ModelAndView input(
     		ModelAndView mv
     		) throws SystemErrorException {
 		
-		logger.info("inputjob！");
+		logger.info("job-input！");
 		
-        mv.setViewName("inputjob");
+        mv.setViewName("jobinput");
+        
+		return mv;
+	}
+	
+
+	@RequestMapping(value= {"/search"}, method=RequestMethod.GET)
+    public ModelAndView search(
+    		ModelAndView mv
+    		) throws SystemErrorException {
+		
+		logger.info("job-search！");
+		
+        mv.setViewName("jobsearch");
         
 		return mv;
 	}

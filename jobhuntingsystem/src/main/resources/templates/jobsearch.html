@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div>  
+</head>
+
+<body>
+
+  
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/header"></div>  
+  
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div> 
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>学内説明会検索</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-body">
+    					<h5 class="card-title">検索条件</h5>
+		                <form>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control">
+								</div>
+								<label for="inputText" class="col-sm-2 col-form-label">求人番号</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control">
+								</div>
+							</div>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">開催日</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control">から<input type="text" class="form-control">まで
+								</div>
+							</div>
+		                	<div class="row mb-3">
+		                		<div class="col-sm-12">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label" for="gridCheck1">
+											終了分も表示する
+										</label>
+									</div>
+		                		</div>
+							</div>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">勤務地</label>
+								<div class="col-sm-10"><div class="accordion" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingPlace">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlace" aria-expanded="false" aria-controls="collapseOne">
+													勤務地
+												</button>
+											</h2>
+											<div id="collapsePlace" class="accordion-collapse collapse" aria-labelledby="headingPlace" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															福岡
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															佐賀
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															熊本
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															長崎
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															大分
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															宮﨑
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															鹿児島
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															関東
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															その他
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+									</div><!-- accordion -->
+								</div>
+							</div>
+		                	<div class="row mb-3">
+								<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
+								<div class="col-sm-10">
+									<div class="accordion" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingOne">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+													IT系
+												</button>
+											</h2>
+											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															システムエンジニア
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															プログラマ
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															運用オペレータ
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															カスタマーエンジニア
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															IT系営業
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="headingTwo">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+													ビジネス系
+												</button>
+											</h2>
+											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+												<div class="accordion-body">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck1">
+														<label class="form-check-label" for="gridCheck1">
+															事務
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															営業
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+														<label class="form-check-label" for="gridCheck2">
+															販売
+														</label>
+													</div>
+												</div>
+											</div>
+										</div><!-- accordion-item -->
+									</div><!-- accordion -->
+								</div>
+							</div>
+							<div class="d-grid gap-2 col-6 mx-auto">
+								<button class="btn btn-outline-primary">検索</button>
+							</div>
+		                </form><!--form-->
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
+    	<div class="row">
+    		 <div class="col-lg-12">
+    		 	<div class="card">
+    		 		<div class="card-body">
+              			<h5 class="card-title">検索結果</h5>
+              			<button class="btn btn-outline-primary">CSV出力</button>
+              			<table class="table datatable">
+	              			<thead>
+			                  <tr>
+			                    <th scope="col">#</th>
+			                    <th scope="col">求人番号</th>
+			                    <th scope="col">企業名</th>
+			                    <th scope="col">職種</th>
+			                    <th scope="col">種類</th>
+			                    <th scope="col">実施日</th>
+			                    <th scope="col">開始時間</th>
+			                    <th scope="col">勤務地</th>
+			                    <th scope="col">参加者一覧（先生権限）</th>
+			                  </tr>
+			                </thead>
+			                <tbody>
+			                  <tr>
+			                    <th scope="row">1</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">2</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG OP</td>
+			                    <td>選考会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">3</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE</td>
+			                    <td>説明会/選考会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">4</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>CE</td>
+			                    <td>選考会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">5</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">6</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE OP</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">7</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">8</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">9</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">10</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                  <tr>
+			                    <th scope="row">11</th>
+			                    <td>0000000</td>
+			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                    <td>SE PG</td>
+			                    <td>説明会</td>
+			                    <td>2016-05-25</td>
+			                    <td>13:00</td>
+			                    <td>東京</td>
+			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
+			                  </tr>
+			                </tbody>
+              			</table><!-- table -->
+              		</div><!-- card-body -->
+    		 	</div><!-- card -->
+    		 </div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+
+</html>

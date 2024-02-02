@@ -43,5 +43,7 @@ public class MessageProperty extends ConfigBase {
 
 	//　コンフィグファイルの名前を返す
 	protected String getConfigName(){ return CONFIG_NAME; }
+	
+	public String getLoginErrMessage() { return getProperty(LOGIN_ERR_LOGINERR); }
 
 }
