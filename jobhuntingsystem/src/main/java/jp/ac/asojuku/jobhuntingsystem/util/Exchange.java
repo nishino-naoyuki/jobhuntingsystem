@@ -89,6 +89,9 @@ public class Exchange {
 	 * @param fmt
 	 * @return
 	 */
+	public static String toFormatString(LocalDateTime localDateTime) {
+		return toFormatString(localDateTime,"yyyy/MM/dd hh:mm:ss","");
+	}
 	public static String toFormatString(LocalDateTime localDateTime,String fmt) {
 		return toFormatString(localDateTime,fmt,"");
 	}

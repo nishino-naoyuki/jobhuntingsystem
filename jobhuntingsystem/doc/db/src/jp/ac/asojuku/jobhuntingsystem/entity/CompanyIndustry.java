@@ -13,6 +13,9 @@ public class CompanyIndustry implements Serializable {
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** ci_id. */
+	private Integer ciId;
+
 	/** 企業テーブル. */
 	private CompanyTbl companyTbl;
 
@@ -23,6 +26,25 @@ public class CompanyIndustry implements Serializable {
 	 * コンストラクタ.
 	 */
 	public CompanyIndustry() {
+	}
+
+	/**
+	 * ci_id を設定します.
+	 * 
+	 * @param ciId
+	 *            ci_id
+	 */
+	public void setCiId(Integer ciId) {
+		this.ciId = ciId;
+	}
+
+	/**
+	 * ci_id を取得します.
+	 * 
+	 * @return ci_id
+	 */
+	public Integer getCiId() {
+		return this.ciId;
 	}
 
 	/**
@@ -63,5 +85,40 @@ public class CompanyIndustry implements Serializable {
 		return this.industrykindTbl;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ciId == null) ? 0 : ciId.hashCode());
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		CompanyIndustry other = (CompanyIndustry) obj;
+		if (ciId == null) {
+			if (other.ciId != null) {
+				return false;
+			}
+		} else if (!ciId.equals(other.ciId)) {
+			return false;
+		}
+		return true;
+	}
 
 }

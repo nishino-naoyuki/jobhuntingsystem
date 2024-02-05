@@ -29,6 +29,9 @@ public class MessageTbl implements Serializable {
 	/** level. */
 	private Integer level;
 
+	/** read_flg. */
+	private Integer readFlg;
+
 	/**
 	 * コンストラクタ.
 	 */
@@ -128,6 +131,25 @@ public class MessageTbl implements Serializable {
 	 */
 	public Integer getLevel() {
 		return this.level;
+	}
+
+	/**
+	 * read_flg を設定します.
+	 * 
+	 * @param readFlg
+	 *            read_flg
+	 */
+	public void setReadFlg(Integer readFlg) {
+		this.readFlg = readFlg;
+	}
+
+	/**
+	 * read_flg を取得します.
+	 * 
+	 * @return read_flg
+	 */
+	public Integer getReadFlg() {
+		return this.readFlg;
 	}
 
 	/**

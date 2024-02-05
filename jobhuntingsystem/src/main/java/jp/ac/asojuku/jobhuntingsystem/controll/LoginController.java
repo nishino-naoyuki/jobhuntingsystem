@@ -26,7 +26,21 @@ public class LoginController {
 	LoginService loginService;
 	@Autowired
 	HttpSession session;
-	
+
+	/**
+	 * ログイン画面表示
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value= {"/signin/admin","/admin"}, method=RequestMethod.GET)
+	public ModelAndView signinAdmin(
+    		ModelAndView mv
+    		) {
+		
+		mv.setViewName("signinadmin");
+		
+		return mv;
+	}
 	/**
 	 * ログイン画面表示
 	 * @param mv
@@ -59,6 +73,35 @@ public class LoginController {
 		
 		LoginInfoDto loginInfoDto = loginService.studentLogin(username, password);
 		
+		return getModelAndViewAfterAuth(mv,loginInfoDto,username);
+	}
+
+	/**
+	 * 管理者ログイン処理
+	 * @param mv
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws SystemErrorException 
+	 */
+	@RequestMapping(value= {"/signin/admin"}, method=RequestMethod.POST)
+	public ModelAndView authAdmin(
+    		ModelAndView mv,
+    		@ModelAttribute("username")String username,
+    		@ModelAttribute("password")String password
+    		) throws SystemErrorException {
+		
+		LoginInfoDto loginInfoDto = loginService.adminLogin(username, password);
+		
+		return getModelAndViewAfterAuth(mv,loginInfoDto,username);
+	}
+	
+	/* -private method- */
+	private ModelAndView getModelAndViewAfterAuth(
+			ModelAndView mv,
+			LoginInfoDto loginInfoDto,
+			String username) throws SystemErrorException {
+
 		if( loginInfoDto == null ) {
 			//ログイン失敗
 			mv.addObject("msg", MessageProperty.getInstance().getLoginErrMessage());

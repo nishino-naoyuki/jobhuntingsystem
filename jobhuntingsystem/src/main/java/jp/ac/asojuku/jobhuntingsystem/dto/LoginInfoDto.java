@@ -16,7 +16,7 @@ public class LoginInfoDto {
 		return admin;
 	}
 	public boolean isStudent() {
-		return !student;
+		return student;
 	}
 	
 	public boolean isCompany() {

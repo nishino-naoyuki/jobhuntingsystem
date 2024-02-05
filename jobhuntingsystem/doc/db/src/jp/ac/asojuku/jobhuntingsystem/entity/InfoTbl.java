@@ -2,6 +2,8 @@ package jp.ac.asojuku.jobhuntingsystem.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * お知らせテーブル モデルクラス.
@@ -29,10 +31,14 @@ public class InfoTbl implements Serializable {
 	/** info_date. */
 	private Date infoDate;
 
+	/** 未読テーブル 一覧. */
+	private Set<UnreadTbl> unreadTblSet;
+
 	/**
 	 * コンストラクタ.
 	 */
 	public InfoTbl() {
+		this.unreadTblSet = new HashSet<UnreadTbl>();
 	}
 
 	/**
@@ -128,6 +134,35 @@ public class InfoTbl implements Serializable {
 	 */
 	public Date getInfoDate() {
 		return this.infoDate;
+	}
+
+	/**
+	 * 未読テーブル 一覧を設定します.
+	 * 
+	 * @param unreadTblSet
+	 *            未読テーブル 一覧
+	 */
+	public void setUnreadTblSet(Set<UnreadTbl> unreadTblSet) {
+		this.unreadTblSet = unreadTblSet;
+	}
+
+	/**
+	 * 未読テーブル を追加します.
+	 * 
+	 * @param unreadTbl
+	 *            未読テーブル
+	 */
+	public void addUnreadTbl(UnreadTbl unreadTbl) {
+		this.unreadTblSet.add(unreadTbl);
+	}
+
+	/**
+	 * 未読テーブル 一覧を取得します.
+	 * 
+	 * @return 未読テーブル 一覧
+	 */
+	public Set<UnreadTbl> getUnreadTblSet() {
+		return this.unreadTblSet;
 	}
 
 	/**

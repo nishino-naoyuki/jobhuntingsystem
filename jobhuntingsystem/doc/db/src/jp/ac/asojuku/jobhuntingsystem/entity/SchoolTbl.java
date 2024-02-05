@@ -15,8 +15,8 @@ public class SchoolTbl implements Serializable {
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** school_tbl. */
-	private Integer schoolTbl;
+	/** school_id. */
+	private Integer schoolId;
 
 	/** name. */
 	private String name;
@@ -35,22 +35,22 @@ public class SchoolTbl implements Serializable {
 	}
 
 	/**
-	 * school_tbl を設定します.
+	 * school_id を設定します.
 	 * 
-	 * @param schoolTbl
-	 *            school_tbl
+	 * @param schoolId
+	 *            school_id
 	 */
-	public void setSchoolTbl(Integer schoolTbl) {
-		this.schoolTbl = schoolTbl;
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
 	}
 
 	/**
-	 * school_tbl を取得します.
+	 * school_id を取得します.
 	 * 
-	 * @return school_tbl
+	 * @return school_id
 	 */
-	public Integer getSchoolTbl() {
-		return this.schoolTbl;
+	public Integer getSchoolId() {
+		return this.schoolId;
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class SchoolTbl implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((schoolTbl == null) ? 0 : schoolTbl.hashCode());
+		result = prime * result + ((schoolId == null) ? 0 : schoolId.hashCode());
 		return result;
 	}
 
@@ -146,11 +146,11 @@ public class SchoolTbl implements Serializable {
 			return false;
 		}
 		SchoolTbl other = (SchoolTbl) obj;
-		if (schoolTbl == null) {
-			if (other.schoolTbl != null) {
+		if (schoolId == null) {
+			if (other.schoolId != null) {
 				return false;
 			}
-		} else if (!schoolTbl.equals(other.schoolTbl)) {
+		} else if (!schoolId.equals(other.schoolId)) {
 			return false;
 		}
 		return true;

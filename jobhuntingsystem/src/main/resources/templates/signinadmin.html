@@ -4,6 +4,13 @@
 <head>
   <!-- ヘッダー -->
   <div id="parent" th:replace="/common/headerlink"></div>  
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.2.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
@@ -23,17 +30,20 @@
 
               <div class="card mb-3">
 
-                <div class="card-body-login-student">
+                <div class="card-body-login-admin">
 
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <h5 class="card-title text-center pb-0 fs-4">
+                    	<p>Login to Your Account</p>
+                    	<p>for ADMIN</p>
+                    </h5>
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
                   <div th:if="${msg}" class="alert alert-danger" role="alert">
 				      <strong th:text="${msg}"></strong>
 				  </div>
-                  <form th:action="@{/signin}" method="post" class="row g-3 needs-validation" novalidate>
+                  <form th:action="@{/signin/admin}" method="post" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
@@ -85,6 +95,7 @@
   </main><!-- End #main -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
 
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  

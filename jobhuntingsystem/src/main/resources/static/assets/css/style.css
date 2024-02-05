@@ -238,6 +238,21 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px 20px 20px;
 }
 
+.card-body-login-student {
+  padding: 0 20px 20px 20px;
+  background-color: #ffffff;
+}
+
+.card-body-login-admin {
+  padding: 0 20px 20px 20px;
+  background-color: #add8e6;
+}
+
+.card-body-login-company {
+  padding: 0 20px 20px 20px;
+  background-color: #fffacd;
+}
+
 .card-img-overlay {
   background-color: rgba(255, 255, 255, 0.6);
 }

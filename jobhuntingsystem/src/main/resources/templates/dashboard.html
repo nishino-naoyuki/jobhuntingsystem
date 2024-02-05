@@ -33,7 +33,7 @@
           <div class="row">           
 
             <!-- お知らせ -->
-            <div class="col-12">
+            <div class="col-12" th:if="${session['loginInfo'].isStudent()}">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
                   <h5 class="card-title">お知らせ</h5>
@@ -95,7 +95,7 @@
             </div><!-- End お知らせ -->
 
             <!-- Reports -->
-            <div class="col-12">
+            <div class="col-12" th:if="${session['loginInfo'].isAdmin()}">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">月別内定率（教員・就職課用）</h5>
@@ -161,7 +161,7 @@
 
 
             <!-- Top Selling -->
-            <div class="col-12">
+            <div class="col-12" th:if="${session['loginInfo'].isAdmin()}">
               <div class="card top-selling overflow-auto">
                 <div class="card-body pb-0">
                   <h5 class="card-title">活動状況一覧（教員・就職課用）</h5>

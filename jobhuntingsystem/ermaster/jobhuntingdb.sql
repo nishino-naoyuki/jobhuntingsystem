@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS report_tbl;
 DROP TABLE IF EXISTS job_hunting_detail_tbl;
 DROP TABLE IF EXISTS job_hunting_tbl;
 DROP TABLE IF EXISTS message_tbl;
+DROP TABLE IF EXISTS unread_tbl;
 DROP TABLE IF EXISTS student_tbl;
 DROP TABLE IF EXISTS class_tbl;
 DROP TABLE IF EXISTS admin_tbl;
@@ -323,6 +324,9 @@ CREATE TABLE message_tbl
 	student_id int NOT NULL,
 	reg_date date NOT NULL,
 	level int NOT NULL,
+	read_flg int NOT NULL COMMENT '既読フラグ
+0:未読
+1:既読',
 	PRIMARY KEY (message_id)
 );
 
@@ -552,6 +556,15 @@ CREATE TABLE student_tbl
 );
 
 
+CREATE TABLE unread_tbl
+(
+	unread_id int NOT NULL,
+	student_id int NOT NULL,
+	info_id int NOT NULL,
+	PRIMARY KEY (unread_id)
+);
+
+
 
 /* Create Foreign Keys */
 
@@ -636,7 +649,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
+	ADD FOREIGN KEY (industry_kind_id2)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -652,7 +665,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id2)
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -662,6 +675,14 @@ ALTER TABLE recruitment_tbl
 ALTER TABLE Industrykind_tbl
 	ADD FOREIGN KEY (industry_id)
 	REFERENCES industry_tbl (industry_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE unread_tbl
+	ADD FOREIGN KEY (info_id)
+	REFERENCES info_tbl (info_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
@@ -756,6 +777,14 @@ ALTER TABLE job_hunting_tbl
 
 
 ALTER TABLE message_tbl
+	ADD FOREIGN KEY (student_id)
+	REFERENCES student_tbl (student_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE unread_tbl
 	ADD FOREIGN KEY (student_id)
 	REFERENCES student_tbl (student_id)
 	ON UPDATE RESTRICT
