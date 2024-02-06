@@ -15,7 +15,7 @@ public class JobController {
 
 	Logger logger = LoggerFactory.getLogger(JobController.class);
 	
-	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/regi"}, method=RequestMethod.GET)
     public ModelAndView input(
     		ModelAndView mv
     		) throws SystemErrorException {

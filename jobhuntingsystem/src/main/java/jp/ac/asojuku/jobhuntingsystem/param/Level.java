@@ -30,6 +30,19 @@ public enum Level {
 		this.id = id;
 		this.msg = msg;
 	}
+	
+	public boolean isNormal() {
+		return (this==NORMAL);
+	}
+	public boolean isImportant() {
+		return (this==IMPORTANT);
+	}
+	public boolean isEmergency() {
+		return (this==EMERGENCY);
+	}
+	public boolean isWarning() {
+		return (this==WARNING);
+	}
 
 	public boolean equals(Integer id){
 		if(id == null){

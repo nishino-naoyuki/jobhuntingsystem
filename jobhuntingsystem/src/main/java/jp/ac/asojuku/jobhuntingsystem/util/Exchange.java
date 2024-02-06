@@ -41,6 +41,9 @@ public class Exchange {
 		SimpleDateFormat sdf = new SimpleDateFormat(fmt);
 		return sdf.parse(dateString);
 	}
+	public static Date nowDate() {
+		return toDate( LocalDateTime.now() );
+	}
 
 	/**
 	 * LocalDateTimeに変換する

@@ -27,11 +27,9 @@
 
     <section class="section dashboard">
       <div class="row">
-
         <!-- Left side columns -->
         <div class="col-lg-12">
           <div class="row">           
-
             <!-- お知らせ -->
             <div class="col-12" th:if="${session['loginInfo'].isStudent()}">
               <div class="card recent-sales overflow-auto">
@@ -40,60 +38,40 @@
 				  <div class="alert alert-danger bg-danger text-light border-0 alert-dismissible fade show" role="alert">
 	               未読の重要なお知らせがあります。
 	              </div>
-                  <table class="table table-borderless datatable">
+	              <div th:if="${infoList!=null and infoList.isEmpty()}">お知らせはありません</div>
+                  <table class="table table-borderless datatable"　th:if="${infoList!=null and !infoList.isEmpty()}">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">未既読</th>
                         <th scope="col">日付</th>
                         <th scope="col">タイトル</th>
                         <th scope="col">種類</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td scope="row"><a href="#">既</a></td>
-                        <td>2022/5/10</td>
-                        <td><a href="#" class="text-primary">説明会情報が追加されました</a></td>
-                        <td><span class="badge bg-success">情報</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">未</a></th>
-                        <td>2022/5/9</td>
-                        <td><a href="#" class="text-primary">〇×社の書類〆切について</a></td>
-                        <td><span class="badge bg-danger">重要</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">未</a></th>
-                        <td>2022/5/8</td>
-                        <td><a href="#" class="text-primary">求人情報が追加されました</a></td>
-                        <td><span class="badge bg-success">情報</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">未</a></th>
-                        <td>2022/5/8</td>
-                        <td><a href="#" class="text-primary">△△社の選考結果について</a></td>
-                        <td><span class="badge bg-success">情報</span></td>
-                      </tr>
-                      <tr>
-                        <td scope="row"><a href="#">既</a></td>
-                        <td>2022/5/8</td>
-                        <td><a href="#" class="text-primary">△△社の採用試験の変更について</a></td>
-                        <td><span class="badge bg-danger">重要</span></td>
-                      </tr>
-                      <tr>
-                        <td scope="row"><a href="#">既</a></td>
-                        <td>2022/5/8</td>
-                        <td><a href="#" class="text-primary">△△社の採用試験について</a></td>
-                        <td><span class="badge bg-danger">重要</span></td>
+                      <tr th:each="element:${infoList}">
+                        <td th:text="${element.alreadReadFlg}? '既' : '未'" th:classappend="${element.alreadReadFlg} ? '' : unreadfont"></td>
+                        <td th:text="${element.getDateString()}" th:classappend="${element.alreadReadFlg} ? '' : unreadfont"></td>
+                        <td th:classappend="${element.alreadReadFlg} ? '' : unreadfont">
+                          <a th:href="|javascript:dispInfoDetail(${element.id},${element.kind},${element.alreadReadFlg});|" class="text-primary" th:text="${element.title}">説明会情報が追加されました</a>
+                        </td>
+                        <td th:classappend="${element.alreadReadFlg} ? '' : unreadfont">
+                          <span class="badge bg-primary" th:if="${element.level.isNormal()}" >情報</span>
+                          <span class="badge bg-danger" th:if="${element.level.isImportant()}" >重要</span>
+                          <div th:if="${element.level.isEmergency()}" class="d-flex">
+                          	<i th:if="${element.level.isEmergency()}" class="ri-alarm-warning-fill emicon"></i>
+                          	<span class="badge bg-danger" th:if="${element.level.isEmergency()}" >緊急</span>
+                          	<i th:if="${element.level.isEmergency()}" class="ri-alarm-warning-fill emicon"></i>
+                          </div>
+                          <span class="badge bg-warning" th:if="${element.level.isWarning()}" >警告</span>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
-
                 </div>
-
               </div>
             </div><!-- End お知らせ -->
-
+            
             <!-- Reports -->
             <div class="col-12" th:if="${session['loginInfo'].isAdmin()}">
               <div class="card">
@@ -224,7 +202,80 @@
     </section>
 
   </main><!-- End #main -->
-
+  
+  <button id="infodetailmodal" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDialogScrollable" style="display:none"></button>
+  <div class="modal fade" id="modalDialogScrollable" tabindex="-1"><!-- start Modal Dialog Scrollable-->
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="infodetailTitle"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="infodetailText">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+  </div><!-- End Modal Dialog Scrollable-->
+  <script>
+  	const infoModalBtn = document.getElementById("infodetailmodal");
+  	
+  	//既読処理
+  	const readTimer = (id,type)=>{
+ 		const formData = new FormData();
+ 		formData.append('id',id );
+ 		formData.append('type',type );
+        const url = /*[[@{/info/readInfo}]]*/ "/info/readInfo";
+        fetch(url,{method:"post",body: formData});
+  	}
+  	
+  	//お知らせ情報詳細表示
+  	const dispInfoDetail = (id,type,alreadReadFlg)=>{
+  	
+  		//お知らせの詳細データを再度取得する
+ 		const formData = new FormData();
+ 		formData.append('id',id );
+ 		formData.append('type',type );
+ 		 		
+        const url = /*[[@{/info/detail}]]*/ "/info/detail";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result == "OK"){
+ 				const infodetailText = document.getElementById("infodetailText");
+ 				const infodetailTitle = document.getElementById("infodetailTitle");
+ 				
+ 				let iconHTML = "";
+ 				//alert(result.level);
+ 				if( result.level == "NORMAL" ){
+ 					iconHTML = '<span class="badge bg-primary" >情報</span>';
+ 				}else if(result.level == "IMPORTANT" ){
+ 					iconHTML = '<span class="badge bg-danger" >重要</span>';
+ 				}else if(result.level == "EMERGENCY" ){
+ 					iconHTML = '<span class="badge bg-danger" >重要</span>';
+ 				}else if(result.level == "WARNING" ){
+ 					iconHTML = '<span class="badge bg-warning" >警告</span>';
+ 				}
+ 				infodetailText.innerHTML = result.msg.replace(/\n/g,"<BR>");;
+ 				infodetailTitle.innerHTML = "お知らせ情報："+iconHTML+" "+result.title;
+ 				
+ 			}else{
+ 				alert("エラーが発生しました！");
+ 				for(var err of result.errorList ){
+ 					console.log(err.msg);
+ 				}
+ 			}
+ 		});
+  		
+  		infoModalBtn.click();
+  		//未読の場合はタイマー発動
+  		if( !alreadReadFlg ){
+  			setTimeout(readTimer, 3000, id,type);
+  		}
+  	}
+  </script>
   <!-- フッター -->
   <div id="parent" th:replace="/common/footer"></div>  
   <!-- フッターリンク -->

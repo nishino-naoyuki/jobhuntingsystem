@@ -46,6 +46,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.unreadfont {
+	font-weight:bold;
+}
 /*--------------------------------------------------------------
 # Page Title
 --------------------------------------------------------------*/
@@ -1089,4 +1092,9 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+.emicon {
+	font-size: .75rem;
+	color: red;
 }

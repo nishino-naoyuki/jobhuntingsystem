@@ -73,7 +73,7 @@ public class LoginController {
 		
 		LoginInfoDto loginInfoDto = loginService.studentLogin(username, password);
 		
-		return getModelAndViewAfterAuth(mv,loginInfoDto,username);
+		return getModelAndViewAfterAuth(mv,loginInfoDto,username,"signin");
 	}
 
 	/**
@@ -93,20 +93,38 @@ public class LoginController {
 		
 		LoginInfoDto loginInfoDto = loginService.adminLogin(username, password);
 		
-		return getModelAndViewAfterAuth(mv,loginInfoDto,username);
+		return getModelAndViewAfterAuth(mv,loginInfoDto,username,"signinadmin");
 	}
+
+	@RequestMapping(value= {"/logout"}, method=RequestMethod.GET)
+	public ModelAndView logout(
+    		ModelAndView mv
+    		) throws SystemErrorException {
+
+		//ログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		String redirectUrl = "/signin";
+		if(loginInfoDto != null ) {
+			redirectUrl = (loginInfoDto.isAdmin()? "/signin/admin" : (loginInfoDto.isStudent() ? "/signin":"/signin/company"));
+		}
+		
+		return new ModelAndView("redirect:"+redirectUrl);
+	}
+	
 	
 	/* -private method- */
 	private ModelAndView getModelAndViewAfterAuth(
 			ModelAndView mv,
 			LoginInfoDto loginInfoDto,
-			String username) throws SystemErrorException {
+			String username,String returnViewname) throws SystemErrorException {
 
 		if( loginInfoDto == null ) {
 			//ログイン失敗
 			mv.addObject("msg", MessageProperty.getInstance().getLoginErrMessage());
 			mv.addObject("username", username);
-			mv.setViewName("signin");
+			mv.setViewName(returnViewname);
 		}else {
 			//ログイン成功
 			mv = new ModelAndView("redirect:/dashboard");

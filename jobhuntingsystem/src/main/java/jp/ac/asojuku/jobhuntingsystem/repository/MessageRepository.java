@@ -11,4 +11,5 @@ public interface MessageRepository
 	extends JpaSpecificationExecutor<MessageEntity>, JpaRepository<MessageEntity, Integer>{
 
 	public List<MessageEntity> findByStudentId(Integer studentId);
+	public MessageEntity findByMessageIdAndStudentId(Integer messageId,Integer studentId);
 }

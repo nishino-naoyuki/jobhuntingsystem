@@ -38,6 +38,7 @@ public class UnreadEntity implements Serializable {
 	private StudentEntity studentTbl;
 
 	/** お知らせテーブル. */
+	private Integer infoId;
 	@OneToOne
     @JoinColumn(name="infoId",insertable=false ,updatable=false)
 	private InfoEntity infoTbl;

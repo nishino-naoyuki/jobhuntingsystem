@@ -46,6 +46,7 @@ public class DashboardController {
 		LoginInfoDto loginInfoDto =
 				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 		
+		//お知らせ情報取得
 		Integer studentId = (loginInfoDto.isStudent()? loginInfoDto.getUid():null);
 		List<InfoDto> infoList = infoService.getInfoData(studentId);
 		

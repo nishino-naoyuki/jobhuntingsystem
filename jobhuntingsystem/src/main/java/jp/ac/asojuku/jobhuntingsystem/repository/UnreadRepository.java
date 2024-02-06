@@ -14,4 +14,6 @@ public interface UnreadRepository
 		extends JpaSpecificationExecutor<UnreadEntity>, JpaRepository<UnreadEntity, Integer>{
 
 	public List<UnreadEntity> findByStudentId(Integer studentId);
+	
+	public UnreadEntity findByInfoIdAndStudentId(Integer infoId,Integer studentId);
 }
