@@ -37,8 +37,12 @@ public class DepartmentEntity implements Serializable {
 	private String name;
 
 	/** 学校テーブル. */
+	private Integer schoolId;
 	@OneToOne
     @JoinColumn(name="schoolId",insertable=false ,updatable=false)
 	private SchoolEntity schoolTbl;
+
+	/** code. */
+	private String code;
 
 }

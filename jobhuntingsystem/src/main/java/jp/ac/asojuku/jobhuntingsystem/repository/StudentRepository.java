@@ -9,4 +9,6 @@ public interface StudentRepository
 	extends JpaSpecificationExecutor<StudentEntity>, JpaRepository<StudentEntity, Integer>{
 
 	public StudentEntity findByMailAndPassword(String mail,String password);
+	
+	public StudentEntity findByStudentNo(String studentNo);
 }

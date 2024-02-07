@@ -37,6 +37,8 @@ public class SchoolEntity implements Serializable {
 	/** abbreviation. */
 	private String abbreviation;
 
+	/** code. */
+	private String code;
 
 
 }

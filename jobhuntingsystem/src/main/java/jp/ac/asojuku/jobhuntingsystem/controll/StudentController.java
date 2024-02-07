@@ -11,9 +11,9 @@ import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 
 @Controller
 @RequestMapping(value= {"/student"})
-public class StudentControll {
+public class StudentController {
 
-	Logger logger = LoggerFactory.getLogger(StudentControll.class);
+	Logger logger = LoggerFactory.getLogger(StudentController.class);
 	
 	@RequestMapping(value= {"/progress"}, method=RequestMethod.GET)
     public ModelAndView progress(

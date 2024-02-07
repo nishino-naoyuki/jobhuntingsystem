@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div>  
+</head>
+
+<body>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/header"></div>  
+
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div>  
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>ユーザー登録</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">           
+
+            <!-- お知らせ -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                	
+	                <ul class="nav nav-tabs" id="myTabs">
+	                  <li class="nav-item">
+	                    <a class="nav-link active" id="tabA" data-bs-toggle="tab" href="#regione">１件登録</a>
+	                  </li>
+	                  <li class="nav-item">
+	                    <a class="nav-link" id="tabB" data-bs-toggle="tab" href="#contentB">CSV登録</a>
+	                  </li>
+	                  <li class="nav-item">
+	                    <a class="nav-link" id="tabB" data-bs-toggle="tab" href="#contentB">Cubic登録</a>
+	                  </li>
+	                </ul>
+	                <div class="tab-content mt-3">
+	                	<div class="tab-pane fade show active" id="regione"><!-- regione -->
+		                	<div class="row">
+					    		<div class="col-lg-12">
+				                	<div class="row mb-3">
+										<label for="inputText" class="col-sm-2 col-form-label">役割</label>
+										<div class="col-sm-4">
+						                  <select id="roleselect" class="form-select my-3 w-50" aria-label="Select list">
+						                    <option selected>選択してください</option>
+						                    <option value="0">学生</option>
+						                    <option value="1">教員</option>
+						                    <option value="2">管理者</option>
+						                  </select>
+										</div>
+										<label for="inputText" class="col-sm-2 col-form-label">学校</label>
+										<div class="col-sm-4">
+						                  <select id="schoolselect" class="form-select my-3 w-100" aria-label="Select list">
+						                    <option value="-1" selected>選択してください</option>
+						                    <option th:each="school : ${schoolList}" th:value="${school.schoolId}" th:text="${school.name}" ></option>
+						                  </select>
+										</div>
+									</div>
+				                	<div class="row mb-3">
+										<label for="inputText" class="col-sm-2 col-form-label">学科</label>
+										<div class="col-sm-4">
+						                  <select id="departmentselect" class="form-select my-3 w-100" aria-label="Select list">
+						                    <option value="-1" selected>選択してください</option>
+						                  </select>
+										</div>
+										<label for="inputText" class="col-sm-2 col-form-label">クラス</label>
+										<div class="col-sm-4">
+						                  <select id="classselect" class="form-select my-3 w-50" aria-label="Select list">
+						                    <option selected>選択してください</option>
+						                  </select>
+										</div>
+									</div>
+				                	<div class="row mb-3">
+										<label for="inputText" class="col-sm-2 col-form-label">名前</label>
+										<div class="col-sm-4">
+											<input id="name" type="text" class="form-control" required>
+										</div>
+										<label for="inputText" class="col-sm-2 col-form-label">メールアドレス</label>
+										<div class="col-sm-4">
+											<input id="mail" type="text" class="form-control" required>
+										</div>
+									</div>
+				                	<div class="row mb-3">
+										<label for="inputText" class="col-sm-2 col-form-label">パスワード</label>
+										<div class="col-sm-4">
+											<input id="password" type="text" class="form-control" required>
+										</div>
+										<label for="inputText" class="col-sm-2 col-form-label">パスワード（確認）</label>
+										<div class="col-sm-4">
+											<input id="password2" type="text" class="form-control" required>
+										</div>
+									</div>
+				                	<div class="row mb-3" id="studentOnlyData">
+										<label for="inputText" class="col-sm-2 col-form-label">学籍番号</label>
+										<div class="col-sm-4">
+											<input id="studentNo" type="text" class="form-control">
+										</div>
+										<label for="inputText" class="col-sm-2 col-form-label">住所</label>
+										<div class="col-sm-4">
+											<input id="address" type="text" class="form-control">
+										</div>
+									</div>
+									 <button id="regioneSubmit" type="button" class="btn btn-primary">登録</button>
+					    		</div><!-- col-lg-12 -->
+					    	</div><!--row-->
+		               </div><!-- regione -->
+		               
+	                	<div class="tab-pane fade" id="contentB">
+	    					<div class="row mb-3">
+			                  <label for="inputNumber" class="col-sm-2 col-form-label">CSV読み込み</label>
+			                  <div class="col-sm-10">
+			                    <input class="form-control" type="file" id="formFile">
+			                  </div>
+			                </div>
+			                <button type="submit" class="btn btn-primary">登録</button>
+		               </div><!--contentB-->
+		               
+	                	<div class="tab-pane fade" id="contentC">
+	    					<div class="row mb-3">
+			                  <label for="inputNumber" class="col-sm-2 col-form-label">CSV読み込み</label>
+			                  <div class="col-sm-10">
+			                    <input class="form-control" type="file" id="formFile">
+			                  </div>
+			                </div>
+			                <button type="submit" class="btn btn-primary">登録</button>
+		               </div><!--contentC-->
+	                </div>
+				</div>
+              </div>
+            </div><!-- End一覧 -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+  
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success"></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           登録が完了しました！
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
+</body>
+<script>
+	const schoolselect = document.getElementById("schoolselect");
+	const departmentselect = document.getElementById("departmentselect");
+	const classselect = document.getElementById("classselect");
+	const roleselect = document.getElementById("roleselect");
+	const regioneSubmit = document.getElementById("regioneSubmit");
+	const registrationSuccess = document.getElementById("registration-success");
+	
+	//1件登録ボタンクリック時
+	regioneSubmit.addEventListener('click',()=>{	
+		if( !confirm("ユーザーを登録します。確認画面はありません。よろしいですか？")){
+			return;
+		}
+		
+    	const name = document.getElementById('name');
+    	const mail = document.getElementById('mail');
+    	const password = document.getElementById('password');
+    	const password2 = document.getElementById('password2');
+    	const studentNo = document.getElementById('studentNo');
+    	const address = document.getElementById('address');
+ 
+ 		alert(password.value + ":" +password2.value);
+ 		if( password.value != password2.value ){
+ 			alert("入力されたパスワードが一致しません");
+ 			return ;
+ 		}
+ 		const formData = new FormData();
+ 		formData.append('roleselect',roleselect.value );
+ 		formData.append('schoolselect',schoolselect.value );
+ 		formData.append('departmentselect',departmentselect.value );
+ 		formData.append('regioneSubmit',regioneSubmit.value );
+ 		formData.append('name',name.value );
+ 		formData.append('mail',mail.value );
+ 		formData.append('password',password.value );
+ 		formData.append('studentNo',studentNo.value );
+ 		formData.append('address',address.value );
+ 		 		
+        const url = /*[[@{/user/regi/one}]]*/ "/user/regi/one";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
+	});
+	
+	//役割選択時の処理
+	roleselect.addEventListener('change',(event)=>{
+		const studentOnlyData = document.getElementById("studentOnlyData");
+		if( event.target.value == 0 ){
+			studentOnlyData.style.visibility = "visible";
+		}else{
+			studentOnlyData.style.visibility = "hidden";
+		}
+	});
+	
+	//学校選択時の処理
+	schoolselect.addEventListener('change',(event)=>{
+		//alert( event.target.value );
+		if( event.target.value == -1 ){
+			return;
+		}
+		
+  		//お知らせの詳細データを再度取得する
+ 		const formData = new FormData();
+ 		formData.append('sid',event.target.value );
+ 		 		
+        let url = /*[[@{/user/getdep}]]*/ "/user/getdep";
+ 		url = url + "?sid=" + event.target.value;
+        fetch(url,{method:"get"})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result == "OK"){			
+				while( departmentselect.firstChild ){
+					departmentselect.removeChild( departmentselect.firstChild );
+				}
+				
+ 				for(var department of result.depList ){
+ 					const option = document.createElement('option');
+ 					option.value = department.departmentId;
+ 					option.textContent = department.name;
+ 					departmentselect.appendChild(option);
+ 				}
+ 				
+ 			}else{
+ 				alert("エラーが発生しました！");
+ 			}
+ 		});
+	});
+	
+	//学科選択時の処理
+	departmentselect.addEventListener('change',(event)=>{
+		//alert( event.target.value );
+		if( event.target.value == -1 ){
+			return;
+		}
+		
+  		//お知らせの詳細データを再度取得する
+ 		const formData = new FormData();
+ 		formData.append('sid',event.target.value );
+ 		 		
+        let url = /*[[@{/user/getcls}]]*/ "/user/getcls";
+ 		url = url + "?did=" + event.target.value;
+        fetch(url,{method:"get"})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result == "OK"){			
+				while( classselect.firstChild ){
+					classselect.removeChild( classselect.firstChild );
+				}
+				
+				if( result.clsList.length == 0 ){
+ 					const option = document.createElement('option');
+ 					option.value = -1;
+ 					option.textContent = "なし";
+ 					classselect.appendChild(option);
+				}else{
+	 				for(var cls of result.clsList ){
+	 					const option = document.createElement('option');
+	 					option.value = cls.classId;
+	 					option.textContent = cls.name;
+	 					classselect.appendChild(option);
+	 				}
+				}
+ 			}else{
+ 				alert("エラーが発生しました！");
+ 			}
+ 		});
+	});
+</script>
+</html>

@@ -46,11 +46,13 @@ public class StudentEntity implements Serializable {
 	private String mail;
 
 	/** 学科テーブル. */
+	private Integer classId;
 	@OneToOne
     @JoinColumn(name="classId",insertable=false ,updatable=false)
 	private ClassEntity classTbl;
 
 	/** 就職活動状況マスタ. */
+	private Integer jobhuntingStatusId;
 	@OneToOne
     @JoinColumn(name="jobhuntingStatusId",insertable=false ,updatable=false)
 	private JobhuntingStatusEntity jobhuntingStatusTbl;

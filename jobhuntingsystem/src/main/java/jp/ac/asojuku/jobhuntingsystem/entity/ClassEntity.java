@@ -37,6 +37,7 @@ public class ClassEntity implements Serializable {
 	private String name;
 
 	/** 学科テーブル. */
+	private Integer departmentId;
 	@OneToOne
     @JoinColumn(name="departmentId",insertable=false ,updatable=false)
 	private DepartmentEntity departmentTbl;
