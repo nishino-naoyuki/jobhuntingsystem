@@ -46,14 +46,6 @@ public class AdminEntity implements Serializable {
 	private String image;
 
 	/** 役割テーブル. */
-	@OneToOne
-    @JoinColumn(name="roleId",insertable=false ,updatable=false)
-	private RoleEntity roleTbl;
-
-	/** 学科テーブル 一覧. */
-	@OneToOne
-    @JoinColumn(name="roleId",insertable=false ,updatable=false)
-	private ClassEntity classId;
-
+	private Integer roleId;
 
 }

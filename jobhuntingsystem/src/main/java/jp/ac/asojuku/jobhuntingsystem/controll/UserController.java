@@ -27,6 +27,7 @@ import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.UserRegiForm;
 import jp.ac.asojuku.jobhuntingsystem.param.json.ClassJson;
 import jp.ac.asojuku.jobhuntingsystem.param.json.DepartmentJson;
+import jp.ac.asojuku.jobhuntingsystem.service.AdminService;
 import jp.ac.asojuku.jobhuntingsystem.service.SchoolService;
 import jp.ac.asojuku.jobhuntingsystem.service.StudentService;
 
@@ -34,7 +35,9 @@ import jp.ac.asojuku.jobhuntingsystem.service.StudentService;
 @RequestMapping(value= {"/user"})
 public class UserController extends RestControllerBase{
 	Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
+	@Autowired
+	AdminService adminService;
 	@Autowired
 	SchoolService schoolService;
 	@Autowired
@@ -112,6 +115,13 @@ public class UserController extends RestControllerBase{
         return jsonString;
 	}
 
+	/**
+	 * 学生1件登録
+	 * @param userRegiForm
+	 * @param bindingResult
+	 * @return
+	 * @throws JsonProcessingException
+	 */
 	@RequestMapping(value = { "/regi/one" }, method = RequestMethod.POST)
 	@ResponseBody
 	public Object regiOne(
@@ -127,6 +137,9 @@ public class UserController extends RestControllerBase{
 			}else {
 				studentService.insertOne(userRegiForm);
 			}
+		}else {
+			//教員、管理者
+			adminService.insert(userRegiForm);
 		}
 
 		return getJson(bindingResult);

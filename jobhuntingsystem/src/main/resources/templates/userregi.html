@@ -70,7 +70,7 @@
 						                  </select>
 										</div>
 									</div>
-				                	<div class="row mb-3">
+				                	<div class="row mb-3" id="studentAndTeacherData">
 										<label for="inputText" class="col-sm-2 col-form-label">学科</label>
 										<div class="col-sm-4">
 						                  <select id="departmentselect" class="form-select my-3 w-100" aria-label="Select list">
@@ -238,9 +238,18 @@
 	//役割選択時の処理
 	roleselect.addEventListener('change',(event)=>{
 		const studentOnlyData = document.getElementById("studentOnlyData");
+		const studentAndTeacherData = document.getElementById("studentAndTeacherData");
 		if( event.target.value == 0 ){
+			//学生を選択
+			studentAndTeacherData.style.visibility = "visible";
 			studentOnlyData.style.visibility = "visible";
+		}else if( event.target.value == 1 ){
+			//教員
+			studentAndTeacherData.style.visibility = "visible";
+			studentOnlyData.style.visibility = "hidden";
 		}else{
+			//管理者（職員）
+			studentAndTeacherData.style.visibility = "hidden";
 			studentOnlyData.style.visibility = "hidden";
 		}
 	});

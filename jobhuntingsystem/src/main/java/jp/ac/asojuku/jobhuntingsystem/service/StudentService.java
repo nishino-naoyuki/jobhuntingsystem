@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.UserRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.param.DefineStrings;
 import jp.ac.asojuku.jobhuntingsystem.repository.StudentRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
 
@@ -27,7 +28,7 @@ public class StudentService {
 		studentEntity.setClassId(userRegiForm.getClassselect());
 		studentEntity.setAddress(userRegiForm.getAddress());
 		studentEntity.setJobhuntingStatusId(1);
-		studentEntity.setImage("noimage.jpg");
+		studentEntity.setImage(DefineStrings.NOIMAGE);
 		String hashedPwd = Digest.createPassword(userRegiForm.getMail(), userRegiForm.getPassword());
 		studentEntity.setPassword(hashedPwd);
 		

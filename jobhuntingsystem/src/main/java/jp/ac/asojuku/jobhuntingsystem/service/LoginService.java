@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.AdminEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
+import jp.ac.asojuku.jobhuntingsystem.param.RoleId;
 import jp.ac.asojuku.jobhuntingsystem.repository.AdminRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StudentRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
@@ -89,7 +90,7 @@ public class LoginService {
 		loginInfoDto.setName( adminEntity.getName() );
 		loginInfoDto.setUid( adminEntity.getAdminId() );
 		loginInfoDto.setMail( adminEntity.getMail() );
-		loginInfoDto.setRoleName( adminEntity.getRoleTbl().getName() );
+		loginInfoDto.setRoleName( RoleId.toString(adminEntity.getRoleId()) );
 		loginInfoDto.setAdmin(true);
 		loginInfoDto.setCompany(false);
 		loginInfoDto.setStudent(false);

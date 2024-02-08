@@ -43,6 +43,7 @@ public class ClassEntity implements Serializable {
 	private DepartmentEntity departmentTbl;
 
 	/** 管理者テーブル. */
+	private Integer adminId;
 	@OneToOne
     @JoinColumn(name="adminId",insertable=false ,updatable=false)
 	private AdminEntity adminTbl;
