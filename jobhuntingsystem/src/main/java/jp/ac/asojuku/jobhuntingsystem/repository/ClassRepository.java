@@ -13,4 +13,5 @@ public interface ClassRepository
 
 	List<ClassEntity> findByDepartmentId(Integer departmentId);
 	
+	ClassEntity findByDepartmentIdAndName(Integer departmentId,String name);
 }

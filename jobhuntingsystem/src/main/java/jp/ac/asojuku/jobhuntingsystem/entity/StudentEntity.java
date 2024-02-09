@@ -61,7 +61,7 @@ public class StudentEntity implements Serializable {
 	private String image;
 
 	/** tel. */
-	private Integer tel;
+	private String tel;
 
 	/** address. */
 	private String address;

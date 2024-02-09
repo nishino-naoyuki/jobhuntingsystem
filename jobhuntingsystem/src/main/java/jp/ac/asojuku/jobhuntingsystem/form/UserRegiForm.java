@@ -20,4 +20,7 @@ public class UserRegiForm {
 	private String password;
 	private String studentNo;
 	private String address;
+	private Integer year;	//卒業年
+	private String tel;	//電話番後う
+	
 }
