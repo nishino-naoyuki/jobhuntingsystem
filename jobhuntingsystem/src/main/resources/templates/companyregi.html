@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div>  
+</head>
+
+<body>
+
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/header"></div>  
+
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div>  
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>企業登録</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">企業登録</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-body">
+    					<h5 class="card-title">企業情報入力</h5>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companyname">企業名</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companynamekana">企業名フリガナ</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companyaddress">所在地</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companycode">企業コード</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label" id="companycapital">資本金</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control">万円
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companyestablishment">設立年（西暦）</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label" id="companyannualsales">年商</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control">万円
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companypic">担当者名</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label" id="companymoc">担当者メール</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label" id="companymot">担当者電話番号</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label" id="companyurl">企業サイトURL</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
+							<div class="col-sm-10">
+								<div class="accordion" id="accordionExample">
+									<div class="accordion-item" th:each="industry : ${industryList}">
+										<h2 class="accordion-header" th:id="|heading${industry.id}|">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
+											</button>
+										</h2>
+										<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
+											<div class="accordion-body">
+												<div th:each="kind : ${industry.kindList}" class="form-check">
+													<input class="form-check-input" type="checkbox" th:value="|${industry.id}-${kind.id}|" th:name="|industryKind${industry.id}|" >
+													<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
+														
+													</label>
+												</div>
+											</div>
+										</div>
+									</div><!-- accordion-item -->
+								</div><!-- accordion -->
+							</div>
+						</div>
+						<button id="regioneSubmit" type="button" class="btn btn-primary">登録</button>
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+<script th:inline="javascript">
+	const regioneSubmit = document.getElementById("regioneSubmit");
+	
+	
+    regioneSubmit.addEventListener('click',()=>{
+ 
+		if( !confirm("企業情報を登録します。確認画面はありません。よろしいですか？")){
+			return;
+		}
+		
+ 		const companyname = document.getElementById("companyname");
+ 		const companynamekana = document.getElementById("companynamekana");
+ 		const companyaddress = document.getElementById("companyaddress");
+ 		const companycode = document.getElementById("companycode");
+ 		const companycapital = document.getElementById("companycapital");
+ 		const companyestablishment = document.getElementById("companyestablishment");
+ 		const companyannualsales = document.getElementById("companyannualsales");
+ 		const companypic = document.getElementById("companypic");
+ 		const companymoc = document.getElementById("companymoc");
+ 		const companymot = document.getElementById("companymot");
+ 		const companyurl = document.getElementById("companyurl");
+ 		
+ 		let industryArry = [];
+ 		let index = 0;
+ 		for(let id=1; id <= /*[[${industryList.size()}]]*/0; id++){
+ 			const industryKind = document.getElementsByName("industryKind"+id);
+ 			for( let i=0; i<industryKind.length; i++){
+ 				if( industryKind[i].checked ){
+ 					industryArry[index] = industryKind[i].value
+ 					index++;
+ 				}
+ 			}
+ 		} 		
+ 		
+ 		const formData = new FormData();
+ 		formData.append('companyname',companyname.value );
+ 		formData.append('companynamekana',companynamekana.value );
+ 		formData.append('companyaddress',companyaddress.value );
+ 		formData.append('companycode',companycode.value );
+ 		formData.append('companycapital',companycapital.value );
+ 		formData.append('companyestablishment',companyestablishment.value );
+ 		formData.append('companyannualsales',companyannualsales.value );
+ 		formData.append('companypic',companypic.value );
+ 		formData.append('companymoc',companymoc.value );
+ 		formData.append('companymot',companymot.value );
+ 		formData.append('companyurl',companyurl.value );
+ 		formData.append('industryArry',industryArry );
+ 		 		
+        const url = /*[[@{/company/regi}]]*/ "/company/regi";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
+ 	});
+</script>
+</html>

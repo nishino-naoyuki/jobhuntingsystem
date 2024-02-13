@@ -117,7 +117,7 @@ public class CubicCSV {
 	@CsvBindByName(column = "自己：現状分析", required = true)
 	private String c_analysis;
 	@CsvBindByName(column = "自己：洞察力", required = true)
-	private String c_Insight;
+	private String c_insight;
 	@CsvBindByName(column = "自己：企画立案", required = true)
 	private String c_planning;
 	@CsvBindByName(column = "自己：専門知識", required = true)

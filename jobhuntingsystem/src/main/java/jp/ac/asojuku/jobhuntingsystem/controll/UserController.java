@@ -25,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.ac.asojuku.jobhuntingsystem.config.SystemConfig;
+import jp.ac.asojuku.jobhuntingsystem.csv.CubicCSV;
 import jp.ac.asojuku.jobhuntingsystem.csv.StudentCSV;
 import jp.ac.asojuku.jobhuntingsystem.dto.CSVProgressDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.ClassDto;
@@ -154,6 +155,14 @@ public class UserController extends FileController{
 		return getJson(bindingResult);
 	}
 
+	/**
+	 * 学生CSV登録
+	 * @param userInputCSVForm
+	 * @param bindingResult
+	 * @return
+	 * @throws IOException
+	 * @throws SystemErrorException
+	 */
 	@RequestMapping(value = { "/regi/studentcsv" }, method = RequestMethod.POST)
 	@ResponseBody
 	public Object regiStudentByCSV(
@@ -199,6 +208,50 @@ public class UserController extends FileController{
 		//処理件数を返す
         return outputResult(studentList);
 	}
+
+	@RequestMapping(value = { "/regi/cubiccsv" }, method = RequestMethod.POST)
+	@ResponseBody
+	public Object regiCubicCSV(
+			@Valid UserInputCSVForm userInputCSVForm,
+			BindingResult bindingResult
+			) throws SystemErrorException, IOException {
+
+		 //ディレクトリを作成する
+	    File uploadDir = mkCSVUploaddirs();
+
+	    //出力ファイル名を決定する
+	    File uploadFile = new File(uploadDir.getPath() + "/" + "temp.csv");
+	    //アップロードファイルを取得
+	    String encode = SystemConfig.getInstance().getCsvoutputencode();
+	    byte[] sjisbytes = userInputCSVForm.getInputuserfile().getBytes();
+	    byte[] bytes = (new String(sjisbytes,encode)).getBytes();
+	    //出力ストリームを取得
+	    try(BufferedOutputStream uploadFileStream =
+             new BufferedOutputStream(new FileOutputStream(uploadFile))){
+		    //ストリームに書き込んでクローズ
+		    uploadFileStream.write(bytes);
+	    }
+
+       //エラーチェックを行う
+	   List<String> errMsg = new ArrayList<>();
+       List<CubicCSV> cubicList = studentService.checkForCubicCSV(uploadFile.getAbsolutePath(),errMsg);
+
+       //もうファイルはいらないので削除
+		FileUtils.delete(uploadFile.getParentFile());
+		
+		//if( errors.isHasErr() ){
+       if(errMsg.size()>0) {
+			String jsonMsg =  outputErrorResult(errMsg);
+			logger.info(jsonMsg);
+			return jsonMsg;
+		}
+
+		//登録処理
+       int updateCount = studentService.updateCubicData(cubicList);
+
+		//処理件数を返す
+       return outputCubicResult(cubicList,updateCount);
+	}
 	
 	/* -private- */
 	/**
@@ -214,6 +267,28 @@ public class UserController extends FileController{
 		
 		progress.setTotal(userList.size());
 		progress.setNow(userList.size());
+
+		ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(progress);
+
+        logger.trace("jsonString:{}",jsonString);
+
+        return jsonString;
+
+	}
+	/**
+	 * 処理結果のJSON文字列を作成する
+	 * 
+	 * @param userList
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	private String outputCubicResult(List<CubicCSV> cubicList,int updateCount ) throws JsonProcessingException {
+
+		CSVProgressDto progress = new CSVProgressDto();
+		
+		progress.setTotal(cubicList.size());
+		progress.setNow(updateCount);
 
 		ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(progress);

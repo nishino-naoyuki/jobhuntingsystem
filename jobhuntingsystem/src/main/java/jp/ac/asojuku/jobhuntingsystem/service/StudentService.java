@@ -1,6 +1,7 @@
 package jp.ac.asojuku.jobhuntingsystem.service;
 
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import jp.ac.asojuku.jobhuntingsystem.csv.CubicCSV;
 import jp.ac.asojuku.jobhuntingsystem.csv.StudentCSV;
 import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.DepartmentEntity;
@@ -52,6 +54,12 @@ public class StudentService {
 		return ( studentRepository.findByStudentNo(studentNo) != null );
 	}
 	
+	/**
+	 * 学生登録CSVチェック
+	 * @param csvPath
+	 * @param err
+	 * @return
+	 */
 	public List<StudentCSV> checkForCSV(String csvPath, List<String> err){
 		List<StudentCSV> list = null;
 		CsvToBean<StudentCSV> beans = null;
@@ -61,6 +69,36 @@ public class StudentService {
 			//CSVを読み込みマッピング
 			beans =new CsvToBeanBuilder<StudentCSV>(
                     fileReader).withType(StudentCSV.class).withThrowExceptions(false).build();
+			
+			list = beans.parse(); 
+
+			beans.getCapturedExceptions().stream().forEach(
+					ex -> err.add( ex.getMessage())
+					);
+		}catch (Exception e) {
+        	logger.warn("CSVパースエラー：",e);
+        	err.add("CSVパースエラー");
+        	err.add( e.getMessage() );
+        	if( beans != null) {
+				beans.getCapturedExceptions().stream().forEach(
+						ex -> err.add( ex.getMessage())
+						);
+        	}
+
+        }
+		
+		return list;
+	}
+
+	public List<CubicCSV> checkForCubicCSV(String csvPath, List<String> err){
+		List<CubicCSV> list = null;
+		CsvToBean<CubicCSV> beans = null;
+
+		try (FileReader fileReader = new FileReader(csvPath)){
+			///////////////////////////////
+			//CSVを読み込みマッピング
+			beans =new CsvToBeanBuilder<CubicCSV>(
+                    fileReader).withType(CubicCSV.class).withThrowExceptions(false).build();
 			
 			list = beans.parse(); 
 
@@ -94,7 +132,101 @@ public class StudentService {
 		}
 	}
 	
+	/**
+	 * Cubicのデータを取得
+	 * @param cubicCSVList
+	 * @return
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public int updateCubicData(List<CubicCSV> cubicCSVList) {
+		List<StudentEntity> studentList = new ArrayList<>();
+		for( CubicCSV cubicCSV : cubicCSVList) {
+			//学籍番号を取得
+			String studentNo = cubicCSV.getStudentno();
+			//学生データを取得
+			StudentEntity studentEntity = studentRepository.findByStudentNo(studentNo);
+			if( studentEntity != null ) {
+				studentEntity = updateFrom(studentEntity,cubicCSV);
+				studentList.add(studentEntity);
+			}			
+		}
+		//更新
+		studentList = studentRepository.saveAll(studentList);
+		
+		return studentList.size();
+	}
+	
 	/* -private method- */
+	private StudentEntity updateFrom(StudentEntity studentEntity,CubicCSV cubicCSV) {
+		studentEntity.setCTrust(Integer.parseInt(cubicCSV.getC_trust() ) );
+		studentEntity.setCEntrapment(Integer.parseInt(cubicCSV.getC_entrapment() ) );
+		studentEntity.setCObjectivity(Integer.parseInt(cubicCSV.getC_objectivity() ) );
+		studentEntity.setCPhysicality(Integer.parseInt(cubicCSV.getC_physicality() ) );
+		studentEntity.setCMoodiness(Integer.parseInt(cubicCSV.getC_moodiness() ) );
+		studentEntity.setCPersistence(Integer.parseInt(cubicCSV.getC_persistence() ) );
+		studentEntity.setCRegularity(Integer.parseInt(cubicCSV.getC_regularity() ) );
+		studentEntity.setCCompetitiveness(Integer.parseInt(cubicCSV.getC_competitiveness() ) );
+		studentEntity.setCSelfesteem(Integer.parseInt(cubicCSV.getC_selfesteem() ) );
+		studentEntity.setCPrudence(Integer.parseInt(cubicCSV.getC_prudence() ) );
+		studentEntity.setCBearishness(Integer.parseInt(cubicCSV.getC_bearishness() ) );
+		studentEntity.setCSurroundings(Integer.parseInt(cubicCSV.getC_surroundings() ) );
+		studentEntity.setCScience(Integer.parseInt(cubicCSV.getC_science() ) );
+		studentEntity.setCSociety(Integer.parseInt(cubicCSV.getC_society() ) );
+		studentEntity.setCPsychology(Integer.parseInt(cubicCSV.getC_psychology() ) );
+		studentEntity.setCArt(Integer.parseInt(cubicCSV.getC_art() ) );
+		studentEntity.setCPositivity(Integer.parseInt(cubicCSV.getC_positivity() ) );
+		studentEntity.setCCooperativeness(Integer.parseInt(cubicCSV.getC_cooperativeness() ) );
+		studentEntity.setCResponsibility(Integer.parseInt(cubicCSV.getC_responsibility() ) );
+		studentEntity.setCReliability(Integer.parseInt(cubicCSV.getC_reliability() ) );
+		studentEntity.setCLeadership(Integer.parseInt(cubicCSV.getC_leadership() ) );
+		studentEntity.setCEmpathy(Integer.parseInt(cubicCSV.getC_empathy() ) );
+		studentEntity.setCEmotionalStability(Integer.parseInt(cubicCSV.getC_emotional_stability() ) );
+		studentEntity.setCObedience(Integer.parseInt(cubicCSV.getC_obedience() ) );
+		studentEntity.setCAutonomy(Integer.parseInt(cubicCSV.getC_autonomy() ) );
+		studentEntity.setCMoratorium(Integer.parseInt(cubicCSV.getC_moratorium() ) );
+		studentEntity.setCDesireSuccess(Integer.parseInt(cubicCSV.getC_desire_success() ) );
+		studentEntity.setCAffinity(Integer.parseInt(cubicCSV.getC_affinity() ) );
+		studentEntity.setCSeeking(Integer.parseInt(cubicCSV.getC_seeking() ) );
+		studentEntity.setCManifestation(Integer.parseInt(cubicCSV.getC_manifestation() ) );
+		studentEntity.setCOrder(Integer.parseInt(cubicCSV.getC_order() ) );
+		studentEntity.setCMaterial(Integer.parseInt(cubicCSV.getC_material() ) );
+		studentEntity.setCCrisisResistance(Integer.parseInt(cubicCSV.getC_crisis_resistance() ) );
+		studentEntity.setCIndependence(Integer.parseInt(cubicCSV.getC_independence() ) );
+		studentEntity.setCControl(Integer.parseInt(cubicCSV.getC_control() ) );
+		studentEntity.setCWorkethic(Integer.parseInt(cubicCSV.getC_workethic() ) );
+		studentEntity.setCActive(Integer.parseInt(cubicCSV.getC_active() ) );
+		studentEntity.setCEnthusiasm(Integer.parseInt(cubicCSV.getC_enthusiasm() ) );
+		studentEntity.setCPerseverance(Integer.parseInt(cubicCSV.getC_perseverance() ) );
+		studentEntity.setCResponsibility2(Integer.parseInt(cubicCSV.getC_responsibility2() ) );
+		studentEntity.setCDecisive(Integer.parseInt(cubicCSV.getC_decisive() ) );
+		studentEntity.setCLeadership2(Integer.parseInt(cubicCSV.getC_leadership2() ) );
+		studentEntity.setCLeader(Integer.parseInt(cubicCSV.getC_leader() ) );
+		studentEntity.setCSelftrust(Integer.parseInt(cubicCSV.getC_selftrust() ) );
+		studentEntity.setCAdjustment(Integer.parseInt(cubicCSV.getC_adjustment() ) );
+		studentEntity.setCNegotiation(Integer.parseInt(cubicCSV.getC_negotiation() ) );
+		studentEntity.setCInnovative(Integer.parseInt(cubicCSV.getC_innovative() ) );
+		studentEntity.setCAnalysis(Integer.parseInt(cubicCSV.getC_analysis() ) );
+		studentEntity.setCInsight(Integer.parseInt(cubicCSV.getC_insight() ) );
+		studentEntity.setCPlanning(Integer.parseInt(cubicCSV.getC_planning() ) );
+		studentEntity.setCExpertise(Integer.parseInt(cubicCSV.getC_expertise() ) );
+		studentEntity.setCUtilization(Integer.parseInt(cubicCSV.getC_utilization() ) );
+		studentEntity.setCGeneral(Integer.parseInt(cubicCSV.getC_general() ) );
+		studentEntity.setCMental(Integer.parseInt(cubicCSV.getC_mental() ) );
+		studentEntity.setCLegwaist(Integer.parseInt(cubicCSV.getC_legwaist() ) );
+		studentEntity.setCConcentration(Integer.parseInt(cubicCSV.getC_concentration() ) );
+		studentEntity.setCStandardization(Integer.parseInt(cubicCSV.getC_standardization() ) );
+		studentEntity.setCRange(Integer.parseInt(cubicCSV.getC_range() ) );
+		studentEntity.setCEstablished(Integer.parseInt(cubicCSV.getC_established() ) );
+		studentEntity.setCTypejudge(cubicCSV.getC_typejudge()  );
+
+		return studentEntity;
+	}
+	
+	/**
+	 * Form→Entity変換
+	 * @param userRegiForm
+	 * @return
+	 */
 	private StudentEntity getFrom(UserRegiForm userRegiForm) {
 		StudentEntity studentEntity = new StudentEntity();
 		
@@ -112,6 +244,12 @@ public class StudentService {
 		
 		return studentEntity;		
 	}
+	/**
+	 * CSVデータ→Formデータ変換
+	 * @param scsv
+	 * @param mailDomain
+	 * @return
+	 */
 	private UserRegiForm getFrom(StudentCSV scsv,String mailDomain) {
 		UserRegiForm form = new UserRegiForm();
 		

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,7 +38,8 @@ public class IndustrykindTbl implements Serializable {
 	private String name;
 
 	/** 業界マスタ. */
-	@OneToOne
+	private Integer industryId;
+	@ManyToOne
     @JoinColumn(name="industryId",insertable=false ,updatable=false)
 	private IndustryEntity industryTbl;
 
