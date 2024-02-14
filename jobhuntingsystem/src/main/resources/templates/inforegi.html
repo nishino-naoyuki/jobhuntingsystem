@@ -55,8 +55,8 @@
                 <div class="tab-pane fade show active profile-overview" id="general-notification">
                   <h5 class="card-title">全体通知（全学生・教職員に通知する内容）を入れてください</h5>
                   
-                  <div class="alert alert-danger" role="alert" id="alertmsg">
-			        <strong id="errrmessage1"></strong>
+                  <div class="alert alert-danger" role="alert" id="alertmsg" style='display:none'>
+			        <strong id="errrmessage"></strong>
 			      </div>
                   <!-- Profile Edit Form -->
                   <div class="row mb-3">
@@ -316,7 +316,14 @@
         //レスポンスの受け取り
         .then( response => response.json()).then(result => {
  			if( result.result != "OK"){
-
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
  			}else{
  				//console.log(regiSuccessBtn);
  				regiSuccessBtn.click();

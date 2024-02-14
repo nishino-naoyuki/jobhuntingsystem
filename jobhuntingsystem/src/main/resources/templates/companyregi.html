@@ -9,12 +9,18 @@
 <body>
 
   <!-- ヘッダー -->
-  <div id="parent" th:replace="/common/header"></div>  
+  <div th:if="${!fromLogin}">
+  	<div id="parent" th:replace="/common/header"></div>  
+  </div>
+  
 
   <!-- サイドバー -->
-  <div id="parent" th:replace="/common/sidebar"></div>  
+  <div th:if="${!fromLogin}">
+  	<div id="parent" th:replace="/common/sidebar"></div>  
+  </div>
+  
 
-  <main id="main" class="main">
+  <main th:id="${fromLogin}? '' : 'main'" th:class="${fromLogin}? 'container' : 'main'">
 
     <div class="pagetitle">
       <h1>企業登録</h1>
@@ -31,63 +37,74 @@
     		<div class="col-lg-12">
     			<div class="card">
     				<div class="card-body">
-    					<h5 class="card-title">企業情報入力</h5>
+    					<h5 class="card-title">企業情報入力</h5>					    			
+	                    <div class="alert alert-danger" role="alert" id="alertmsg" style='display:none'>
+				          <strong id="errrmessage"></strong>
+				        </div>
 	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companyname">企業名</label>
+							<label for="inputText" class="col-sm-2 col-form-label" >企業名</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="companyname">
 							</div>
 						</div>
 	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companynamekana">企業名フリガナ</label>
+							<label for="inputText" class="col-sm-2 col-form-label" >企業名フリガナ</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="companynamekana">
 							</div>
 						</div>
 	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companyaddress">所在地</label>
+							<label for="inputText" class="col-sm-2 col-form-label" th:if="${!fromLogin}">ログインパスワード</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="password">
 							</div>
 						</div>
 	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companycode">企業コード</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control">
-							</div>
-							<label for="inputText" class="col-sm-2 col-form-label" id="companycapital">資本金</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control">万円
-							</div>
-						</div>
-	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companyestablishment">設立年（西暦）</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control">
-							</div>
-							<label for="inputText" class="col-sm-2 col-form-label" id="companyannualsales">年商</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control">万円
-							</div>
-						</div>
-	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companypic">担当者名</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control">
-							</div>
-							<label for="inputText" class="col-sm-2 col-form-label" id="companymoc">担当者メール</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control">
-							</div>
-							<label for="inputText" class="col-sm-2 col-form-label" id="companymot">担当者電話番号</label>
-							<div class="col-sm-2">
-								<input type="text" class="form-control">
-							</div>
-						</div>
-	                	<div class="row mb-3">
-							<label for="inputText" class="col-sm-2 col-form-label" id="companyurl">企業サイトURL</label>
+							<label for="inputText" class="col-sm-2 col-form-label" >所在地</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="companyaddress">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">企業コード</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companycode">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label">資本金（千円）</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companycapital">千円
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">設立年（西暦）</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companyestablishment">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label">年商（千円）</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companyannualsales">千円
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">担当者名</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companypic">
+							</div>
+							<label for="inputText" class="col-sm-2 col-form-label">担当者電話番号</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="companymot">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">担当者メール</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="companymoc">
+							</div>
+						</div>
+	                	<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">企業サイトURL</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="companyurl">
 							</div>
 						</div>
 	                	<div class="row mb-3">
@@ -102,7 +119,7 @@
 										<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 											<div class="accordion-body">
 												<div th:each="kind : ${industry.kindList}" class="form-check">
-													<input class="form-check-input" type="checkbox" th:value="|${industry.id}-${kind.id}|" th:name="|industryKind${industry.id}|" >
+													<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${industry.id}|" >
 													<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
 														
 													</label>
@@ -126,12 +143,30 @@
   <div id="parent" th:replace="/common/footer"></div>  
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
-
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success" style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <div th:if="${!fromLogin}">登録が完了しました！</div>
+           <div th:if="${fromLogin}">仮登録いたしました。<br>本登録方法はご登録頂いたメールアドレスへメールを送信しております。ご確認ください。</div>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 </body>
 <script th:inline="javascript">
 	const regioneSubmit = document.getElementById("regioneSubmit");
-	
-	
+	const registrationSuccess = document.getElementById("registration-success");
+		
     regioneSubmit.addEventListener('click',()=>{
  
 		if( !confirm("企業情報を登録します。確認画面はありません。よろしいですか？")){
@@ -149,6 +184,7 @@
  		const companymoc = document.getElementById("companymoc");
  		const companymot = document.getElementById("companymot");
  		const companyurl = document.getElementById("companyurl");
+ 		const password = document.getElementById("password");
  		
  		let industryArry = [];
  		let index = 0;
@@ -174,25 +210,42 @@
  		formData.append('companymoc',companymoc.value );
  		formData.append('companymot',companymot.value );
  		formData.append('companyurl',companyurl.value );
+ 		if( password == null ){
+ 			formData.append('password',password.value );
+ 		}else{
+ 			formData.append('password',"" );
+ 		}
  		formData.append('industryArry',industryArry );
  		 		
-        const url = /*[[@{/company/regi}]]*/ "/company/regi";
+        const url = getURL();
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
         .then( response => response.json()).then(result => {
  			if( result.result != "OK"){
  				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
  				var msgs = "";
  				for(var err of result.errorList ){
  					msgs += err.msg + "<BR>";
  				}
  				errorText.innerHTML = msgs;
  				alertarea.style.display = "block";
+ 				location.href="#alertmsg";
  			}else{
  				//console.log(regiSuccessBtn);
  				registrationSuccess.click();
  			}
  		});
  	});
+</script>
+<script th:inline="javascript" th:if="${!fromLogin}">
+	const getURL = ()=>{
+		return /*[[@{/company/regi}]]*/ "/company/regi";
+	};
+</script>
+<script th:inline="javascript" th:if="${fromLogin}">
+	const getURL = ()=>{
+		return /*[[@{/company/new/regi}]]*/ "/company/new/regi";
+	};
 </script>
 </html>

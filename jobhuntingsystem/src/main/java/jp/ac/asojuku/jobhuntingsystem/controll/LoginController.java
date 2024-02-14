@@ -1,10 +1,17 @@
 package jp.ac.asojuku.jobhuntingsystem.controll;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +34,27 @@ public class LoginController {
 	@Autowired
 	HttpSession session;
 
+	////////test/////////////
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+    public void javaMailSender() {
+        // 新しいメッセージを作成
+        MimeMessage message = javaMailSender.createMimeMessage();
+        try {
+        	MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
+            messageHelper.setFrom("xxxx@gmail.com");
+            messageHelper.setTo("nishino@asojuku.ac.jp");
+            messageHelper.setText("お元気ですかテストです。JavaMail利用です",
+                    "<span style='color: red'>赤文字出力</span><br>段落下げた");
+            messageHelper.setSubject("タイトルですよ");
+
+            javaMailSender.send(message);
+        } catch(MessagingException e) {
+            throw new RuntimeException("メッセージの設定に失敗しました", e);
+        }
+    }
+	/////////////////////////
 	/**
 	 * ログイン画面表示
 	 * @param mv
@@ -41,6 +69,19 @@ public class LoginController {
 		
 		return mv;
 	}
+
+	@RequestMapping(value= {"/signin/company","/company"}, method=RequestMethod.GET)
+	public ModelAndView signinCompany(
+    		ModelAndView mv
+    		) {
+		mv.setViewName("signincompany");
+		
+		//javaMailSender();//test
+		
+		
+		return mv;
+	}
+	
 	/**
 	 * ログイン画面表示
 	 * @param mv

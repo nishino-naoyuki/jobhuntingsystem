@@ -43,7 +43,7 @@ public class IndustryEntity implements Serializable {
 	/** 業種テーブル 一覧. */
 	@OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="industryId")
-	private List<IndustrykindTbl> industrykindTbl;
+	private List<IndustrykindEntity> industrykindTbl;
 
 
 }

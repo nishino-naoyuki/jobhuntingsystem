@@ -55,5 +55,16 @@ public class CompanyEntity implements Serializable {
 	/** url. */
 	private String url;
 
+	/** password. */
+	private String password;
+
+	/** pic. */
+	private String pic;
+
+	/** moc. */
+	private String moc;
+
+	/** toc. */
+	private String toc;
 
 }

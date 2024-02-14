@@ -59,22 +59,22 @@ public class RecruitmentEntity implements Serializable {
 	/** 業種テーブル. */
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
-	private IndustrykindTbl industryKindId1industrykindTbl;
+	private IndustrykindEntity industryKindId1industrykindTbl;
 
 	/** 業種テーブル. */
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
-	private IndustrykindTbl industryKindId2industrykindTbl;
+	private IndustrykindEntity industryKindId2industrykindTbl;
 
 	/** 業種テーブル. */
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
-	private IndustrykindTbl industryKindId3industrykindTbl;
+	private IndustrykindEntity industryKindId3industrykindTbl;
 
 	/** 業種テーブル. */
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
-	private IndustrykindTbl industryKindId4industrykindTbl;
+	private IndustrykindEntity industryKindId4industrykindTbl;
 
 	/** base_salary_for2. */
 	private Integer baseSalaryFor2;
