@@ -14,6 +14,7 @@ import jp.ac.asojuku.jobhuntingsystem.form.CompanyRegiForm;
 import jp.ac.asojuku.jobhuntingsystem.repository.CompanyIndustryRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.CompanyRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.IndustryKindRepository;
+import jp.ac.asojuku.jobhuntingsystem.util.Digest;
 
 @Service
 public class CompanyService {
@@ -63,7 +64,7 @@ public class CompanyService {
 		cEntity.setPic(form.getCompanypic());
 		cEntity.setMoc(form.getCompanymoc());
 		cEntity.setToc(form.getCompanymot());
-		cEntity.setPassword(form.getPassword());
+		cEntity.setPassword( Digest.createPassword(form.getCompanymoc(), form.getPassword()) );
 		
 		return cEntity;
 	}

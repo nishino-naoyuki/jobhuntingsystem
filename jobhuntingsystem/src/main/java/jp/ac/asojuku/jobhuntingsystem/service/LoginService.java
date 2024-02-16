@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.AdminEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 import jp.ac.asojuku.jobhuntingsystem.param.RoleId;
 import jp.ac.asojuku.jobhuntingsystem.repository.AdminRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.CompanyRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StudentRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
 
@@ -18,6 +20,8 @@ public class LoginService {
 	StudentRepository studentRepository;
 	@Autowired
 	AdminRepository adminRepository;
+	@Autowired
+	CompanyRepository companyRepository;
 	
 	/**
 	 * 学生ログイン処理
@@ -57,7 +61,26 @@ public class LoginService {
 		
 		return loginInfoDto;
 	}
-	
+
+	/**
+	 * 企業ログイン処理
+	 * 
+	 * @param mail
+	 * @param pass
+	 * @return
+	 */
+	public LoginInfoDto companyLogin(String mail,String pass) {
+		LoginInfoDto loginInfoDto = null;
+		String pwdHash = Digest.createPassword(mail, pass);
+		
+		CompanyEntity companyEntity = companyRepository.findByMocAndPassword(mail,pwdHash);
+		
+		if( companyEntity != null ) {
+			loginInfoDto = getFrom( companyEntity );
+		}
+		
+		return loginInfoDto;
+	}
 	
 	/* -private method- */
 	/**
@@ -93,6 +116,20 @@ public class LoginService {
 		loginInfoDto.setRoleName( RoleId.toString(adminEntity.getRoleId()) );
 		loginInfoDto.setAdmin(true);
 		loginInfoDto.setCompany(false);
+		loginInfoDto.setStudent(false);
+		
+		return loginInfoDto;
+	}
+
+	private LoginInfoDto getFrom(CompanyEntity companyEntity) {
+		LoginInfoDto loginInfoDto = new LoginInfoDto();
+		
+		loginInfoDto.setName( companyEntity.getName() );
+		loginInfoDto.setUid( companyEntity.getCompanyId() );
+		loginInfoDto.setMail( companyEntity.getMoc() );
+		loginInfoDto.setRoleName( RoleId.COMPANY.getMsg() );
+		loginInfoDto.setAdmin(false);
+		loginInfoDto.setCompany(true);
 		loginInfoDto.setStudent(false);
 		
 		return loginInfoDto;

@@ -4,7 +4,8 @@ public enum RoleId {
 
 	STUDENT(0,"学生"),
 	TEACHER(1,"教員"),
-	ADMIN(2,"管理者");
+	ADMIN(2,"管理者"),
+	COMPANY(3,"企業");
 	
 
 	//ステータス

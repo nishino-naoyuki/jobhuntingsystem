@@ -137,6 +137,18 @@ public class LoginController {
 		return getModelAndViewAfterAuth(mv,loginInfoDto,username,"signinadmin");
 	}
 
+	@RequestMapping(value= {"/signin/company"}, method=RequestMethod.POST)
+	public ModelAndView authCompany(
+    		ModelAndView mv,
+    		@ModelAttribute("username")String username,
+    		@ModelAttribute("password")String password
+    		) throws SystemErrorException {
+		
+		LoginInfoDto loginInfoDto = loginService.companyLogin(username, password);
+		
+		return getModelAndViewAfterAuth(mv,loginInfoDto,username,"signincompany");
+	}
+	
 	@RequestMapping(value= {"/logout"}, method=RequestMethod.GET)
 	public ModelAndView logout(
     		ModelAndView mv

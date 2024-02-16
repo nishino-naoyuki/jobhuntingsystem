@@ -9,4 +9,5 @@ import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 public interface CompanyRepository 
 		extends JpaSpecificationExecutor<CompanyEntity>, JpaRepository<CompanyEntity, Integer>{
 
+	CompanyEntity findByMocAndPassword(String moc,String password);
 }

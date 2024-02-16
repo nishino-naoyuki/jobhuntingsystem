@@ -39,44 +39,36 @@
                   <!-- 例： -->
                   <div class="mb-3">
                     <label for="companyName" class="form-label">会社名称</label>
-                    <input type="text" class="form-control" id="companyName" name="companyName">
+                    <input type="text" class="form-control" id="companyName" name="companyName" th:value="${companyName}" readonly>
                   </div>
                   
                   <div class="row mb-3">
                     <div class="col-md-3">
                       <label for="employmentType" class="form-label">募集職種１</label>
-                      <select class="form-select" id="jobtype" name="jobtype">
+                      <select class="form-select" id="jobtype1" name="jobtype1">
                         <option selected>なし</option>
-                        <option value="0">SE</option>
-                        <option value="1">PG</option>
-                        <option value="2">OP</option>
+                        <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label for="employmentType" class="form-label">募集職種２</label>
-                      <select class="form-select" id="jobtype" name="jobtype">
+                      <select class="form-select" id="jobtype2" name="jobtype2">
                         <option selected>なし</option>
-                        <option value="0">SE</option>
-                        <option value="1">PG</option>
-                        <option value="2">OP</option>
+                        <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label for="employmentType" class="form-label">募集職種３</label>
-                      <select class="form-select" id="jobtype" name="jobtype">
+                      <select class="form-select" id="jobtype3" name="jobtype3">
                         <option selected>なし</option>
-                        <option value="0">SE</option>
-                        <option value="1">PG</option>
-                        <option value="2">OP</option>
+                        <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label for="employmentType" class="form-label">募集職種４</label>
-                      <select class="form-select" id="jobtype" name="jobtype">
+                      <select class="form-select" id="jobtype4" name="jobtype4">
                         <option selected>なし</option>
-                        <option value="0">SE</option>
-                        <option value="1">PG</option>
-                        <option value="2">OP</option>
+                        <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                   </div>
@@ -85,7 +77,7 @@
                     <div class="col-md-4">
                       <label for="employmentType" class="form-label">雇用形態</label>
                       <select class="form-select" id="employmentType" name="employmentType">
-                        <option selected>正社員</option>
+                        <option value="0" selected>正社員</option>
                         <option value="1">契約社員</option>
                         <option value="2">アルバイト</option>
                       </select>
@@ -93,16 +85,16 @@
                     <div class="col-md-4">
                       <label for="housingAvailability" class="form-label">寮の有無</label>
                       <select class="form-select" id="housingAvailability" name="housingAvailability">
-                        <option selected>あり</option>
+                        <option value="0" selected>あり</option>
                         <option value="1">なし</option>
                       </select>
                     </div>
                     <div class="col-md-4">
                       <label for="housingAvailability" class="form-label">賃金形態</label>
-                      <select class="form-select" id="housingAvailability" name="housingAvailability">
-                        <option selected>月給</option>
+                      <select class="form-select" id="salaryType" name="salaryType">
+                        <option value="0" selected>月給</option>
                         <option value="1">年棒</option>
-                        <option value="1">日給</option>
+                        <option value="2">日給</option>
                       </select>
                     </div>
                   </div>
@@ -121,27 +113,27 @@
 	                    <tbody>
 	                      <tr>
 	                        <th scope="row">基本給</th>
-	                        <td><input type="text" class="form-control" name="basicPayYear2"></td>
-	                        <td><input type="text" class="form-control" name="basicPayYear3"></td>
-	                        <td><input type="text" class="form-control" name="basicPayYear4"></td>
+	                        <td><input type="text" class="form-control" name="optionName1" id="optionName1"></td>
+	                        <td><input type="text" class="form-control" name="optionName2" id="optionName2"></td>
+	                        <td><input type="text" class="form-control" name="optionName3" id="optionName3"></td>
 	                      </tr>
 	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
-	                        <td><input type="text" class="form-control" name="blank1Year2"></td>
-	                        <td><input type="text" class="form-control" name="blank1Year3"></td>
-	                        <td><input type="text" class="form-control" name="blank1Year4"></td>
+	                        <th scope="row"><input type="text" class="form-control" name="baseSalaryFor2" id="baseSalaryFor2"></th>
+	                        <td><input type="text" class="form-control" name="option1For2" id="option1For2"></td>
+	                        <td><input type="text" class="form-control" name="option2For2" id="option2For2"></td>
+	                        <td><input type="text" class="form-control" name="option3For2" id="option3For2"></td>
 	                      </tr>
 	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
-	                        <td><input type="text" class="form-control" name="blank2Year2"></td>
-	                        <td><input type="text" class="form-control" name="blank2Year3"></td>
-	                        <td><input type="text" class="form-control" name="blank2Year4"></td>
+	                        <th scope="row"><input type="text" class="form-control"name="baseSalaryFor3" id="baseSalaryFor3"></th>
+	                        <td><input type="text" class="form-control" name="option1For3" id="option1For3"></td>
+	                        <td><input type="text" class="form-control" name="option2For3" id="option2For3"></td>
+	                        <td><input type="text" class="form-control" name="option3For3" id="option3For3"></td>
 	                      </tr>
 	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control" name="blank1Year2"></th>
-	                        <td><input type="text" class="form-control" name="blank3Year2"></td>
-	                        <td><input type="text" class="form-control" name="blank3Year3"></td>
-	                        <td><input type="text" class="form-control" name="blank3Year4"></td>
+	                        <th scope="row"><input type="text" class="form-control" name="baseSalaryFor4" id="baseSalaryFor4"></th>
+	                        <td><input type="text" class="form-control" name="option1For4" id="option1For4"></td>
+	                        <td><input type="text" class="form-control" name="option2For4" id="option2For4"></td>
+	                        <td><input type="text" class="form-control" name="option3For4" id="option3For4"></td>
 	                      </tr>
 	                      <tr>
 	                        <th scope="row">合計（自動計算）</th>
@@ -181,7 +173,7 @@
                     </div>
                   </div>
                   
-                  <button type="submit" class="btn btn-primary">登録する</button>
+                  <button type="submit" class="btn btn-primary" id="jobentrybutton" >登録する</button>
                 </form>
               </div>
             </div><!-- card -->
@@ -197,6 +189,57 @@
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
 
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success"></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           登録が完了しました！
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 </body>
-
+<script th:inline="javascript">
+	const jobentrybutton = document.getElementById("jobentrybutton");
+	
+	jobentrybutton.addEventListener('click',()=>{
+		if( !confirm("ユーザーを登録します。確認画面はありません。よろしいですか？")){
+			return;
+		}
+		
+		//項目取得
+    	const jobtype1 = document.getElementById('jobtype1');
+    	const jobtype2 = document.getElementById('jobtype2');
+    	const jobtype3 = document.getElementById('jobtype3');
+    	const jobtype4 = document.getElementById('jobtype4');
+ 
+    	const employmentType = document.getElementById('employmentType');
+    	const housingAvailability = document.getElementById('housingAvailability');
+    	const salaryType = document.getElementById('salaryType');
+ 
+    	const optionName1 = document.getElementById('optionName1');
+    	const optionName2 = document.getElementById('optionName2');
+    	const optionName3 = document.getElementById('optionName3');
+    	const option1For2 = document.getElementById('option1For2');
+    	const option2For2 = document.getElementById('option2For2');
+    	const option3For2 = document.getElementById('option3For2');
+    	const option1For3 = document.getElementById('option1For3');
+    	const option2For3 = document.getElementById('option2For3');
+    	const option3For3 = document.getElementById('option3For3');
+    	const option1For4 = document.getElementById('option1For4');
+    	const option2For4 = document.getElementById('option2For4');
+    	const option3For4 = document.getElementById('option3For4');
+ 
+    	const resume = document.getElementById('resume');
+	});
+</script>
 </html>

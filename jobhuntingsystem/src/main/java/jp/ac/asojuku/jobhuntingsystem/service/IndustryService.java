@@ -8,14 +8,18 @@ import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
+import jp.ac.asojuku.jobhuntingsystem.entity.CompanyIndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
+import jp.ac.asojuku.jobhuntingsystem.repository.CompanyIndustryRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.IndustryRepository;
 
 @Service
 public class IndustryService {
 	@Autowired
 	IndustryRepository industryRepository;
+	@Autowired
+	CompanyIndustryRepository companyIndustryRepository;
 	
 	/**
 	 * 業界リストを取得する
@@ -36,6 +40,26 @@ public class IndustryService {
 				kDto.setName(ikEntity.getName());
 				dto.addKindList(kDto);
 			}
+			list.add(dto);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 企業に紐づく職種を取得する
+	 * @param companyId
+	 * @return
+	 */
+	public List<IndustryKindDto> getIndustryKind(Integer companyId){
+		List<IndustryKindDto> list = new ArrayList<>();
+		List<CompanyIndustryEntity> ciList =
+				companyIndustryRepository.findByCompanyIdOrderByIndustrykindId(companyId);
+		
+		for(CompanyIndustryEntity ci : ciList) {
+			IndustryKindDto dto = new IndustryKindDto();
+			dto.setId( ci.getIndustrykindId() );
+			dto.setName( ci.getIndustrykindTbl().getName() );
 			list.add(dto);
 		}
 		
