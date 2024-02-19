@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.CompanyInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.RecrutimentTypeDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyIndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.RecrutimentTypeEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.CompanyRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.form.CompanySearchForm;
 import jp.ac.asojuku.jobhuntingsystem.repository.CompanyIndustryRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.CompanyRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.IndustryKindRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentTypeRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
 
 @Service
@@ -24,6 +29,8 @@ public class CompanyService {
 	IndustryKindRepository industryKindRepository;
 	@Autowired
 	CompanyIndustryRepository companyIndustryRepository;
+	@Autowired
+	RecruitmentTypeRepository recruitmentTypeRepository;
 
 	/**
 	 * 企業の登録を行う
@@ -47,6 +54,32 @@ public class CompanyService {
 		if( ciEntityList.size() > 0 ) {
 			companyIndustryRepository.saveAll(ciEntityList);			
 		}
+	}
+	
+	/**
+	 * 求人タイプ取得
+	 * @return
+	 */
+	public List<RecrutimentTypeDto> getRecrutimentTypeAllList(){
+		List<RecrutimentTypeDto> list = new ArrayList<>();
+		List<RecrutimentTypeEntity> entityList = recruitmentTypeRepository.findAll();
+		
+		for( RecrutimentTypeEntity entity : entityList ) {
+			RecrutimentTypeDto dto = new RecrutimentTypeDto();
+			
+			dto.setId(entity.getRecrutimentTypeId());
+			dto.setName(entity.getName());
+			
+			list.add(dto);
+		}
+		
+		return list;
+	}
+	
+	public List<CompanyInfoDto> search(CompanySearchForm scForm){
+		List<CompanyInfoDto> searchResultList = new ArrayList<>();
+		
+		return searchResultList;
 	}
 	
 	/* -private method- */

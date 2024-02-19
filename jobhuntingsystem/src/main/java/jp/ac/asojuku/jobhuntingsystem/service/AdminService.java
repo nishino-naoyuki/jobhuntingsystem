@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jp.ac.asojuku.jobhuntingsystem.entity.AdminEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
-import jp.ac.asojuku.jobhuntingsystem.form.UserRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.DefineStrings;
 import jp.ac.asojuku.jobhuntingsystem.param.RoleId;
 import jp.ac.asojuku.jobhuntingsystem.repository.AdminRepository;
@@ -21,7 +21,7 @@ public class AdminService {
 	ClassRepository classRepository;
 	
 	@Transactional(rollbackFor = Exception.class)
-	public void insert(UserRegiForm userRegiForm) {
+	public void insert(UserInputForm userRegiForm) {
 		AdminEntity adminEntity = new AdminEntity();
 		
 		adminEntity.setName(userRegiForm.getName());

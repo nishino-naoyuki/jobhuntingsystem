@@ -33,7 +33,7 @@ import jp.ac.asojuku.jobhuntingsystem.dto.DepartmentDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.SchoolDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputCSVForm;
-import jp.ac.asojuku.jobhuntingsystem.form.UserRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.json.ClassJson;
 import jp.ac.asojuku.jobhuntingsystem.param.json.DepartmentJson;
 import jp.ac.asojuku.jobhuntingsystem.service.AdminService;
@@ -135,7 +135,7 @@ public class UserController extends FileController{
 	@RequestMapping(value = { "/regi/one" }, method = RequestMethod.POST)
 	@ResponseBody
 	public Object regiOne(
-			@Valid UserRegiForm userRegiForm,
+			@Valid UserInputForm userRegiForm,
 			BindingResult bindingResult
 			) throws JsonProcessingException {
 

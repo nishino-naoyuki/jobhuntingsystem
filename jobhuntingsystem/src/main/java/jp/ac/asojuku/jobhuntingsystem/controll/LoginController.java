@@ -36,23 +36,17 @@ public class LoginController {
 
 	////////test/////////////
 	@Autowired
-	private JavaMailSender javaMailSender;
+	private MailSender sender;
 
     public void javaMailSender() {
-        // 新しいメッセージを作成
-        MimeMessage message = javaMailSender.createMimeMessage();
-        try {
-        	MimeMessageHelper messageHelper = new MimeMessageHelper(message, true);
-            messageHelper.setFrom("xxxx@gmail.com");
-            messageHelper.setTo("nishino@asojuku.ac.jp");
-            messageHelper.setText("お元気ですかテストです。JavaMail利用です",
-                    "<span style='color: red'>赤文字出力</span><br>段落下げた");
-            messageHelper.setSubject("タイトルですよ");
+    	SimpleMailMessage msg = new SimpleMailMessage();
 
-            javaMailSender.send(message);
-        } catch(MessagingException e) {
-            throw new RuntimeException("メッセージの設定に失敗しました", e);
-        }
+        msg.setFrom("test@mail.com");
+        msg.setTo("nishino@asojuku.ac.jp");
+        msg.setSubject("テストメール"); //タイトルの設定
+        msg.setText("Spring Boot より本文送信"); //本文の設定
+
+        this.sender.send(msg);
     }
 	/////////////////////////
 	/**
@@ -74,10 +68,7 @@ public class LoginController {
 	public ModelAndView signinCompany(
     		ModelAndView mv
     		) {
-		mv.setViewName("signincompany");
-		
-		//javaMailSender();//test
-		
+		mv.setViewName("signincompany");	
 		
 		return mv;
 	}

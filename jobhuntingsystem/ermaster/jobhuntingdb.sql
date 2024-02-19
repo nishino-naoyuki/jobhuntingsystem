@@ -22,7 +22,6 @@ DROP TABLE IF EXISTS industry_tbl;
 DROP TABLE IF EXISTS info_tbl;
 DROP TABLE IF EXISTS jobhunting_status_tbl;
 DROP TABLE IF EXISTS recrutiment_type_tbl;
-DROP TABLE IF EXISTS role_tbl;
 DROP TABLE IF EXISTS school_tbl;
 DROP TABLE IF EXISTS step_tbl;
 
@@ -38,7 +37,9 @@ CREATE TABLE admin_tbl
 	mail varchar(255) NOT NULL,
 	password varchar(255) NOT NULL,
 	image varchar(1024) NOT NULL COMMENT '画像パス',
-	role_id int NOT NULL,
+	role_id int NOT NULL COMMENT '役割ID
+1:教員
+2:職員',
 	PRIMARY KEY (admin_id)
 );
 
@@ -82,6 +83,11 @@ CREATE TABLE company_tbl
 	establishment int COMMENT '設立年（西暦）',
 	annualsales int COMMENT '年商（千円）',
 	url varchar(1024),
+	password varchar(255) COMMENT 'パスワード
+NULLは初期値で、NULLの場合はパスワード変更を促される',
+	pic varchar(200) NOT NULL COMMENT '担当者名',
+	moc varchar(255) NOT NULL COMMENT '担当者メール',
+	toc varchar(255) COMMENT '担当者電話番号',
 	PRIMARY KEY (company_id),
 	UNIQUE (code)
 );
@@ -92,7 +98,9 @@ CREATE TABLE department_tbl
 	department_id int NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL COMMENT '学科名',
 	school_id int NOT NULL,
-	PRIMARY KEY (department_id)
+	code varchar(10) NOT NULL COMMENT '塾システムの学科コード',
+	PRIMARY KEY (department_id),
+	UNIQUE (code)
 );
 
 
@@ -274,7 +282,7 @@ CREATE TABLE info_tbl
 １：重要
 ２：緊急
 ３：警告',
-	info_date date NOT NULL,
+	info_date datetime NOT NULL,
 	PRIMARY KEY (info_id)
 );
 
@@ -357,12 +365,15 @@ CREATE TABLE recruitment_tbl
 	salary_op1 varchar(100) COMMENT '手当項目１（オプション）',
 	salary_op2 varchar(100) COMMENT '手当項目２',
 	salary_op3 varchar(200),
-	salary_op1_for2 int,
-	salary_op1_for3 int,
-	salary_op1_for4 int,
-	salary_op2_for2 int,
-	salary_op2_for3 int,
-	salary_op2_for4 int,
+	salary_op1for2 int,
+	salary_op1for3 int,
+	salary_op1for4 int,
+	salary_op2for2 int,
+	salary_op2for3 int,
+	salary_op2for4 int,
+	salary_op3for2 int,
+	salary_op3for3 int,
+	salary_op3for4 int,
 	required_resume int NOT NULL COMMENT '必要書類：履歴書
 ０：不要
 １：必要',
@@ -397,20 +408,14 @@ CREATE TABLE report_tbl
 );
 
 
-CREATE TABLE role_tbl
-(
-	role_id int NOT NULL AUTO_INCREMENT,
-	name varchar(255),
-	PRIMARY KEY (role_id)
-);
-
-
 CREATE TABLE school_tbl
 (
 	school_id int NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL COMMENT '学校名',
 	abbreviation varchar(255) NOT NULL COMMENT '略称',
-	PRIMARY KEY (school_id)
+	code varchar(10) NOT NULL COMMENT '塾システムの「学校コード」',
+	PRIMARY KEY (school_id),
+	UNIQUE (code)
 );
 
 
@@ -432,7 +437,8 @@ CREATE TABLE student_tbl
 	class_id int NOT NULL COMMENT 'クラスID',
 	jobhunting_status_id int NOT NULL COMMENT '担任名',
 	image varchar(1024) NOT NULL COMMENT 'イメージ画像',
-	tel varchar(10) NOT NULL COMMENT '電話番号',
+	tel varchar(30) NOT NULL COMMENT '電話番号
+ハイフンありで登録',
 	address varchar(512) NOT NULL COMMENT '住所',
 	year int NOT NULL COMMENT '卒業年',
 	c_trust int COMMENT 'キュービック：信頼係数',
@@ -558,7 +564,7 @@ CREATE TABLE student_tbl
 
 CREATE TABLE unread_tbl
 (
-	unread_id int NOT NULL,
+	unread_id int NOT NULL AUTO_INCREMENT,
 	student_id int NOT NULL,
 	info_id int NOT NULL,
 	PRIMARY KEY (unread_id)
@@ -649,6 +655,14 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id1)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id2)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
@@ -658,14 +672,6 @@ ALTER TABLE recruitment_tbl
 
 ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id3)
-	REFERENCES Industrykind_tbl (industrykind_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -731,14 +737,6 @@ ALTER TABLE job_hunting_tbl
 ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (recrutiment_type_id)
 	REFERENCES recrutiment_type_tbl (recrutiment_type_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE admin_tbl
-	ADD FOREIGN KEY (role_id)
-	REFERENCES role_tbl (role_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;

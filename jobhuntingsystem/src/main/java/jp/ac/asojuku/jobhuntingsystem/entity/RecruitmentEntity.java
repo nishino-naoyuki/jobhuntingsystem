@@ -35,6 +35,7 @@ public class RecruitmentEntity implements Serializable {
 	private Integer recruitmentId;
 
 	/** 企業テーブル. */
+	private Integer companyId;
 	@OneToOne
     @JoinColumn(name="companyId",insertable=false ,updatable=false)
 	private CompanyEntity companyTbl;
@@ -52,26 +53,31 @@ public class RecruitmentEntity implements Serializable {
 	private String recrutimentCode;
 
 	/** 求人タイプテーブル. */
+	private Integer recrutimentTypeId;
 	@OneToOne
     @JoinColumn(name="recrutimentTypeId",insertable=false ,updatable=false)
 	private RecrutimentTypeEntity recrutimentTypeTbl;
 
 	/** 業種テーブル. */
+	private Integer industryKindId1;
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId1industrykindTbl;
 
 	/** 業種テーブル. */
+	private Integer industryKindId2;
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId2industrykindTbl;
 
 	/** 業種テーブル. */
+	private Integer industryKindId3;
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId3industrykindTbl;
 
 	/** 業種テーブル. */
+	private Integer industryKindId4;
 	@OneToOne
     @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId4industrykindTbl;
@@ -111,6 +117,15 @@ public class RecruitmentEntity implements Serializable {
 
 	/** salary_op2_for4. */
 	private Integer salaryOp2For4;
+
+	/** salary_op3_for2. */
+	private Integer salaryOp3For2;
+
+	/** salary_op3_for3. */
+	private Integer salaryOp3For3;
+
+	/** salary_op3_for4. */
+	private Integer salaryOp3For4;
 
 	/** required_resume. */
 	private Integer requiredResume;

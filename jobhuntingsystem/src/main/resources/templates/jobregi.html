@@ -33,8 +33,10 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">求人情報入力</h5>
-                <form>
+                <h5 class="card-title">求人情報入力</h5>				    			
+                  <div class="alert alert-danger" role="alert" id="alertmsg" style='display:none'>
+		            <strong id="errrmessage"></strong>
+		          </div>
                   <!-- 入力項目の追加 -->
                   <!-- 例： -->
                   <div class="mb-3">
@@ -113,26 +115,26 @@
 	                    <tbody>
 	                      <tr>
 	                        <th scope="row">基本給</th>
-	                        <td><input type="text" class="form-control" name="optionName1" id="optionName1"></td>
-	                        <td><input type="text" class="form-control" name="optionName2" id="optionName2"></td>
-	                        <td><input type="text" class="form-control" name="optionName3" id="optionName3"></td>
+	                        <td><input type="text" class="form-control" name="baseSalaryFor2" id="baseSalaryFor2"></td>
+	                        <td><input type="text" class="form-control" name="baseSalaryFor3" id="baseSalaryFor3"></td>
+	                        <td><input type="text" class="form-control" name="baseSalaryFor4" id="baseSalaryFor4"></td>
 	                      </tr>
 	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control" name="baseSalaryFor2" id="baseSalaryFor2"></th>
+	                        <th scope="row"><input type="text" class="form-control" name="optionName1" id="optionName1"></th>
 	                        <td><input type="text" class="form-control" name="option1For2" id="option1For2"></td>
-	                        <td><input type="text" class="form-control" name="option2For2" id="option2For2"></td>
-	                        <td><input type="text" class="form-control" name="option3For2" id="option3For2"></td>
-	                      </tr>
-	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control"name="baseSalaryFor3" id="baseSalaryFor3"></th>
 	                        <td><input type="text" class="form-control" name="option1For3" id="option1For3"></td>
-	                        <td><input type="text" class="form-control" name="option2For3" id="option2For3"></td>
-	                        <td><input type="text" class="form-control" name="option3For3" id="option3For3"></td>
+	                        <td><input type="text" class="form-control" name="option1For4" id="option1For4"></td>
 	                      </tr>
 	                      <tr>
-	                        <th scope="row"><input type="text" class="form-control" name="baseSalaryFor4" id="baseSalaryFor4"></th>
-	                        <td><input type="text" class="form-control" name="option1For4" id="option1For4"></td>
+	                        <th scope="row"><input type="text" class="form-control"name="optionName2" id="optionName2"></th>
+	                        <td><input type="text" class="form-control" name="option2For2" id="option2For2"></td>
+	                        <td><input type="text" class="form-control" name="option2For3" id="option2For3"></td>
 	                        <td><input type="text" class="form-control" name="option2For4" id="option2For4"></td>
+	                      </tr>
+	                      <tr>
+	                        <th scope="row"><input type="text" class="form-control" name="optionName3" id="optionName3"></th>
+	                        <td><input type="text" class="form-control" name="option1For4" id="option3For2"></td>
+	                        <td><input type="text" class="form-control" name="option3For3" id="option3For3"></td>
 	                        <td><input type="text" class="form-control" name="option3For4" id="option3For4"></td>
 	                      </tr>
 	                      <tr>
@@ -149,18 +151,18 @@
                     <label class="form-label">必要書類</label>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="resume" name="resume">
-                      <label class="form-check-label" for="resume">履歴書</label>
+                      <input class="form-check-input" value="1" type="checkbox" id="resume" name="resume">
+                      <label class="form-check-label" id="resume" for="resume">履歴書</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="expectedGraduation" name="expectedGraduation">
-                      <label class="form-check-label" for="expectedGraduation">卒業見込み</label>
+                      <input class="form-check-input" value="1" type="checkbox" id="expectedGraduation" name="expectedGraduation">
+                      <label class="form-check-label" id="expectedGraduation" for="expectedGraduation">卒業見込み</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="transcript" name="transcript">
-                      <label class="form-check-label" for="transcript">成績表</label>
+                      <input class="form-check-input" value="1" type="checkbox" id="transcript" name="transcript">
+                      <label class="form-check-label" id="transcript" for="transcript">成績表</label>
                     </div>
 
                     <div class="form-check form-check-inline">
@@ -174,7 +176,6 @@
                   </div>
                   
                   <button type="submit" class="btn btn-primary" id="jobentrybutton" >登録する</button>
-                </form>
               </div>
             </div><!-- card -->
           </div><!-- col-lg-12 -->
@@ -210,6 +211,7 @@
 </body>
 <script th:inline="javascript">
 	const jobentrybutton = document.getElementById("jobentrybutton");
+	const registrationSuccess = document.getElementById("registration-success");
 	
 	jobentrybutton.addEventListener('click',()=>{
 		if( !confirm("ユーザーを登録します。確認画面はありません。よろしいですか？")){
@@ -226,6 +228,9 @@
     	const housingAvailability = document.getElementById('housingAvailability');
     	const salaryType = document.getElementById('salaryType');
  
+    	const baseSalaryFor2 = document.getElementById('baseSalaryFor2');
+    	const baseSalaryFor3 = document.getElementById('baseSalaryFor3');
+    	const baseSalaryFor4 = document.getElementById('baseSalaryFor4');
     	const optionName1 = document.getElementById('optionName1');
     	const optionName2 = document.getElementById('optionName2');
     	const optionName3 = document.getElementById('optionName3');
@@ -240,6 +245,65 @@
     	const option3For4 = document.getElementById('option3For4');
  
     	const resume = document.getElementById('resume');
+    	const expectedGraduation = document.getElementById('expectedGraduation');
+    	const transcript = document.getElementById('transcript'); 
+    	const otherInput = document.getElementById('otherInput');
+ 
+ 
+ 		const formData = new FormData();
+ 		
+ 		formData.append('companyId',/*[[${companyId}]]*/0 );
+ 		
+ 		formData.append('jobtype1',jobtype1.value );
+ 		formData.append('jobtype2',jobtype2.value );
+ 		formData.append('jobtype3',jobtype3.value );
+ 		formData.append('jobtype4',jobtype4.value );
+ 		
+ 		formData.append('employmentType',employmentType.value );
+ 		formData.append('housingAvailability',housingAvailability.value );
+ 		formData.append('salaryType',salaryType.value );
+ 		
+ 		formData.append('baseSalaryFor2',baseSalaryFor2.value );
+ 		formData.append('baseSalaryFor3',baseSalaryFor3.value );
+ 		formData.append('baseSalaryFor4',baseSalaryFor4.value );
+ 		
+ 		formData.append('optionName1',optionName1.value );
+ 		formData.append('optionName2',optionName2.value );
+ 		formData.append('optionName3',optionName3.value );
+ 		formData.append('option1For2',option1For2.value );
+ 		formData.append('option2For2',option2For2.value );
+ 		formData.append('option3For2',option3For2.value );
+ 		formData.append('option1For3',option1For3.value );
+ 		formData.append('option2For3',option2For3.value );
+ 		formData.append('option3For3',option3For3.value );
+ 		formData.append('option1For4',option1For4.value );
+ 		formData.append('option2For4',option2For4.value );
+ 		formData.append('option3For4',option3For4.value );
+ 		
+ 		formData.append('resume',resume.value );
+ 		formData.append('expectedGraduation',expectedGraduation.value );
+ 		formData.append('transcript',transcript.value );
+ 		formData.append('otherInput',otherInput.value );
+ 		 		
+        const url = /*[[@{/job/regi}]]*/ "/job/regi";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 				location.href="#alertmsg";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
 	});
 </script>
 </html>

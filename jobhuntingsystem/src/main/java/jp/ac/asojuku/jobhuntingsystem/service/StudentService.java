@@ -18,7 +18,7 @@ import jp.ac.asojuku.jobhuntingsystem.csv.StudentCSV;
 import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.DepartmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
-import jp.ac.asojuku.jobhuntingsystem.form.UserRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.DefineStrings;
 import jp.ac.asojuku.jobhuntingsystem.repository.ClassRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.DepartmentRepository;
@@ -40,7 +40,7 @@ public class StudentService {
 	 * 
 	 * @param userRegiForm
 	 */
-	public void insertOne(UserRegiForm userRegiForm) {
+	public void insertOne(UserInputForm userRegiForm) {
 		
 		studentRepository.save( getFrom(userRegiForm) );
 	}
@@ -227,7 +227,7 @@ public class StudentService {
 	 * @param userRegiForm
 	 * @return
 	 */
-	private StudentEntity getFrom(UserRegiForm userRegiForm) {
+	private StudentEntity getFrom(UserInputForm userRegiForm) {
 		StudentEntity studentEntity = new StudentEntity();
 		
 		studentEntity.setStudentNo(userRegiForm.getStudentNo());
@@ -250,8 +250,8 @@ public class StudentService {
 	 * @param mailDomain
 	 * @return
 	 */
-	private UserRegiForm getFrom(StudentCSV scsv,String mailDomain) {
-		UserRegiForm form = new UserRegiForm();
+	private UserInputForm getFrom(StudentCSV scsv,String mailDomain) {
+		UserInputForm form = new UserInputForm();
 		
 		form.setName(scsv.getStudentname());
 		String address = scsv.getAddress1() + scsv.getAddress2() + scsv.getAddress3();

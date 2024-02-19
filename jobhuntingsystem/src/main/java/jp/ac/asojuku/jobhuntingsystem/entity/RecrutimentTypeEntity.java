@@ -21,7 +21,7 @@ import lombok.Data;
  */
 @Data
 @Entity 
-@Table(name="recruitment_tbl")
+@Table(name="recrutiment_type_tbl")
 public class RecrutimentTypeEntity implements Serializable {
 
 	/** serialVersionUID. */

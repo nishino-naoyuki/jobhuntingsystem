@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class UserRegiForm {
+public class UserInputForm {
 	private Integer roleselect;
 	private Integer schoolselect;
 	private Integer departmentselect;

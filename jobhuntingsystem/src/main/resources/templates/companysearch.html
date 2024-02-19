@@ -36,171 +36,28 @@
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control">
+									<input type="text" id="companyName" class="form-control">
 								</div>
-								<label for="inputText" class="col-sm-2 col-form-label">求人番号</label>
+								<label for="inputText" class="col-sm-2 col-form-label">所在地</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-		                	<div class="row mb-3">
-								<label for="inputText" class="col-sm-2 col-form-label">社員数</label>
-								<div class="col-sm-2">
-									<input type="text" class="form-control">
-								</div>～
-								<div class="col-sm-2">
-									<input type="text" class="form-control">
-								</div>
-								<label for="inputText" class="col-sm-2 col-form-label">種類</label>
-								<div class="col-sm-3">
-									<select class="form-select" aria-label="Default select example">
-				                      <option selected>併願可</option>
-				                      <option value="1">専願</option>
-				                      <option value="2">オープン</option>
-				                      <option value="3">その他</option>
-				                    </select>
-								</div>
-							</div>
-		                	<div class="row mb-3">
-								<label for="inputText" class="col-sm-2 col-form-label">勤務地</label>
-								<div class="col-sm-10"><div class="accordion" id="accordionExample">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingPlace">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlace" aria-expanded="false" aria-controls="collapseOne">
-													勤務地
-												</button>
-											</h2>
-											<div id="collapsePlace" class="accordion-collapse collapse" aria-labelledby="headingPlace" data-bs-parent="#accordionExample">
-												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															福岡
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															佐賀
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															熊本
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															長崎
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															大分
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															宮﨑
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															鹿児島
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															関東
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															その他
-														</label>
-													</div>
-												</div>
-											</div>
-										</div><!-- accordion-item -->
-									</div><!-- accordion -->
+									<input type="text" id="companyAddress" class="form-control">
 								</div>
 							</div>
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
 								<div class="col-sm-10">
 									<div class="accordion" id="accordionExample">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingOne">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-													IT系
+										<div class="accordion-item" th:each="industry : ${industryList}">
+											<h2 class="accordion-header" th:id="|heading${industry.id}|">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
 												</button>
 											</h2>
-											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+											<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															システムエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															プログラマ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															運用オペレータ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															カスタマーエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															IT系営業
-														</label>
-													</div>
-												</div>
-											</div>
-										</div><!-- accordion-item -->
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingTwo">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-													ビジネス系
-												</button>
-											</h2>
-											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															事務
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															営業
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															販売
+													<div th:each="kind : ${industry.kindList}" class="form-check">
+														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${industry.id}|" >
+														<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
+															
 														</label>
 													</div>
 												</div>
@@ -210,7 +67,7 @@
 								</div>
 							</div>
 							<div class="d-grid gap-2 col-6 mx-auto">
-								<button class="btn btn-outline-primary">検索</button>
+								<button id="searchButton" class="btn btn-outline-primary">検索</button>
 							</div>
 		                </form><!--form-->
     				</div>
@@ -340,4 +197,48 @@
 
 </body>
 
+<script th:inline="javascript">
+	const searchButton = document.getElementById("searchButton");
+	
+	searchButton.addEventListener('click',()=>{
+		const companyName = document.getElementById("companyName");
+		const companyAddress = document.getElementById("companyAddress");		
+ 		let industryArry = [];
+ 		let index = 0;
+ 		for(let id=1; id <= /*[[${industryList.size()}]]*/0; id++){
+ 			const industryKind = document.getElementsByName("industryKind"+id);
+ 			for( let i=0; i<industryKind.length; i++){
+ 				if( industryKind[i].checked ){
+ 					industryArry[index] = industryKind[i].value
+ 					index++;
+ 				}
+ 			}
+ 		} 		
+ 		
+ 		const formData = new FormData();
+ 		formData.append('companyName',companyName.value );
+ 		formData.append('companyAddress',companyAddress.value );
+ 		formData.append('industryArry',industryArry );
+ 		 		
+        const url = /*[[@{/company/search/result}]]*/ "/company/search/result";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 				location.href="#alertmsg";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				//registrationSuccess.click();
+ 			}
+ 		});
+	});
+</script>
 </html>

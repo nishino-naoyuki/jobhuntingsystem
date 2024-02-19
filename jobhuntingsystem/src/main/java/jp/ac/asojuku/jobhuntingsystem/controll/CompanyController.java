@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.RecrutimentTypeDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.CompanyRegiForm;
+import jp.ac.asojuku.jobhuntingsystem.form.CompanySearchForm;
 import jp.ac.asojuku.jobhuntingsystem.service.CompanyService;
 import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
 
@@ -112,8 +114,35 @@ public class CompanyController extends RestControllerBase{
 		
 		logger.info("search-company！");
 		
+		List<RecrutimentTypeDto> ryDtoList = companyService.getRecrutimentTypeAllList();
+		List<IndustryDto> industryList = industryService.getAllIndustryDto();
+		
+		mv.addObject("industryList", industryList);
+		mv.addObject("ryDtoList",ryDtoList);
+		
         mv.setViewName("companysearch");
         
 		return mv;
+	}
+
+	/**
+	 * 企業検索処理
+	 * @param mv
+	 * @return
+	 * @throws SystemErrorException
+	 * @throws JsonProcessingException 
+	 */
+	@RequestMapping(value= {"/search/result"}, method=RequestMethod.GET)
+	@ResponseBody
+    public Object searchResult(
+    		@Valid CompanySearchForm companySearchForm,
+    		BindingResult bindingResult
+    		) throws SystemErrorException, JsonProcessingException {
+		
+		logger.info("search-company！");
+		
+		
+		
+		return getJson(bindingResult);
 	}
 }
