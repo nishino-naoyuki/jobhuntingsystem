@@ -2,12 +2,16 @@ package jp.ac.asojuku.jobhuntingsystem.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -67,4 +71,8 @@ public class CompanyEntity implements Serializable {
 	/** toc. */
 	private String toc;
 
+	/** 業種テーブル 一覧. */
+	@OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="companyId")
+	private List<CompanyIndustryEntity> companyIndustryTbl;
 }

@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
+import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyIndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
 import jp.ac.asojuku.jobhuntingsystem.repository.CompanyIndustryRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.CompanyRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.IndustryRepository;
 
 @Service
@@ -20,6 +22,8 @@ public class IndustryService {
 	IndustryRepository industryRepository;
 	@Autowired
 	CompanyIndustryRepository companyIndustryRepository;
+	@Autowired
+	CompanyRepository companyRepository;
 	
 	/**
 	 * 業界リストを取得する
@@ -36,6 +40,8 @@ public class IndustryService {
 			dto.setName( iEntity.getName() );
 			for( IndustrykindEntity ikEntity : iEntity.getIndustrykindTbl()) {
 				IndustryKindDto kDto = new IndustryKindDto();
+				kDto.setIndustryId(iEntity.getIndustryId());
+				kDto.setIndustryName(iEntity.getName());
 				kDto.setId(ikEntity.getIndustrykindId());
 				kDto.setName(ikEntity.getName());
 				dto.addKindList(kDto);
@@ -52,9 +58,13 @@ public class IndustryService {
 	 * @return
 	 */
 	public List<IndustryKindDto> getIndustryKind(Integer companyId){
+		
+		CompanyEntity cEntity = companyRepository.getOne(companyId);
+		List<CompanyIndustryEntity> ciList = cEntity.getCompanyIndustryTbl();
+		
 		List<IndustryKindDto> list = new ArrayList<>();
-		List<CompanyIndustryEntity> ciList =
-				companyIndustryRepository.findByCompanyIdOrderByIndustrykindId(companyId);
+		//List<CompanyIndustryEntity> ciList =
+		//		companyIndustryRepository.findByCompanyIdOrderByIndustrykindId(companyId);
 		
 		for(CompanyIndustryEntity ci : ciList) {
 			IndustryKindDto dto = new IndustryKindDto();

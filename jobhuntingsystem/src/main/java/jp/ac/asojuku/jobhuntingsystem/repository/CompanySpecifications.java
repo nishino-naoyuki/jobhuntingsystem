@@ -1,5 +1,7 @@
 package jp.ac.asojuku.jobhuntingsystem.repository;
 
+import java.util.List;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -12,15 +14,21 @@ import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 
 public class CompanySpecifications {
 
-    public static Specification<CompanyEntity> mailContains(String companyName) {
-        return StringUtils.isEmpty(companyName) ? null : new Specification<CompanyEntity>() {
-			@Override
-			public Predicate toPredicate(Root<CompanyEntity> root, CriteriaQuery<?> query,
-					CriteriaBuilder cb) {
-				// TODO 自動生成されたメソッド・スタブ
-				return cb.like(root.get("companyName"),  "%" + companyName + "%" );
-			}
-
-        };
+    public static Specification<CompanyEntity> companyContains(String companyName) {
+        return (StringUtils.isEmpty(companyName) ? null : 
+        		 ( root,  query, cb) -> cb.like(root.get("name"),  "%" + companyName + "%" ));
     }
+    
+
+    public static Specification<CompanyEntity> adressContains(String address) {
+        return (StringUtils.isEmpty(address) ? null : 
+        			( root,  query, cb) -> cb.like(root.get("address"),  "%" + address + "%" ));
+    }
+
+
+    public static Specification<CompanyEntity> industryContains(List<Integer> industryList) {
+        return (industryList.isEmpty() ? null : 
+        			( root,  query, cb) -> root.join("companyIndustryTbl").get("industrykindId").in(industryList)  );
+    }
+
 }

@@ -32,7 +32,6 @@
     			<div class="card">
     				<div class="card-body">
     					<h5 class="card-title">検索条件</h5>
-		                <form>
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
 								<div class="col-sm-4">
@@ -69,7 +68,6 @@
 							<div class="d-grid gap-2 col-6 mx-auto">
 								<button id="searchButton" class="btn btn-outline-primary">検索</button>
 							</div>
-		                </form><!--form-->
     				</div>
     			</div><!-- card -->
     		</div><!-- col-lg-12 -->
@@ -80,106 +78,15 @@
     		 		<div class="card-body">
               			<h5 class="card-title">検索結果</h5>
               			<button class="btn btn-outline-primary">CSV出力</button>
-              			<table class="table datatable">
+              			<table class="table table-bordered table-striped" id="companyList">
 	              			<thead>
 			                  <tr>
-			                    <th scope="col">#</th>
-			                    <th scope="col">求人番号</th>
-			                    <th scope="col">企業名</th>
-			                    <th scope="col">種類</th>
-			                    <th scope="col">登録日</th>
-			                    <th scope="col">お気に入り登録</th>
+			                    <th>企業名</th>
+			                    <th>ヨミガナ</th>
+			                    <th>お気に入り登録</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
-			                  <tr>
-			                    <th scope="row">1</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">2</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">3</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">4</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">5</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">6</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">7</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">8</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">9</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">10</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">11</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>併願可</td>
-			                    <td>2016-05-25</td>
-			                    <td><button type="button" class="btn btn-danger"><i class="bi bi-heart-fill"></i></button></td>
-			                  </tr>
 			                </tbody>
               			</table><!-- table -->
               		</div><!-- card-body -->
@@ -194,11 +101,25 @@
   <div id="parent" th:replace="/common/footer"></div>  
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
-
+<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 </body>
-
 <script th:inline="javascript">
 	const searchButton = document.getElementById("searchButton");
+	let  dataTable = $('#companyList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+    });
+
+	const clickFavorit =(companyId) =>{
+		alert(companyId);
+	};
 	
 	searchButton.addEventListener('click',()=>{
 		const companyName = document.getElementById("companyName");
@@ -223,21 +144,49 @@
         const url = /*[[@{/company/search/result}]]*/ "/company/search/result";
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
-        .then( response => response.json()).then(result => {
- 			if( result.result != "OK"){
- 				const errorText = document.getElementById('errrmessage');
- 				const alertarea = document.getElementById('alertmsg');
- 				var msgs = "";
- 				for(var err of result.errorList ){
- 					msgs += err.msg + "<BR>";
- 				}
- 				errorText.innerHTML = msgs;
- 				alertarea.style.display = "block";
- 				location.href="#alertmsg";
- 			}else{
- 				//console.log(regiSuccessBtn);
- 				//registrationSuccess.click();
- 			}
+        .then( response => response.json()).then(resultList => {
+ 			//alert( resultList.length );
+ 			dataTable.clear();
+ 			dataTable.destroy();
+ 			
+   		  dataTable = $('#companyList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+				"data":resultList,
+	            "columns": [
+	            	{
+	            		data:"name" ,
+	            		type:"id",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+	                		return '<a href="'+url+'?id='+row.id+'" target="companydetail">'+data+'</a>';
+	                	}
+	            	},
+	            	{ data:"kana"},
+	            	{
+	            		data:"name" ,
+	            		type:"id",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/user/info}]]*/ "/user/info";
+
+	                		return '<button type="button" class="btn btn-danger" onClick="javascript:clickFavorit('+row.id+')"><i class="bi bi-heart-fill"></i></button>';
+	                	}
+	            	}
+	            ]
+	   	    });
+	   	    dataTable.draw();
+ 			//resultList.forEach(
+ 			//	element =>{
+ 			//		alert( element.name );
+ 			//	}
+ 			//);
  		});
 	});
 </script>

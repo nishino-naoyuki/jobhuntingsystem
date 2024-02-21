@@ -1,13 +1,19 @@
 package jp.ac.asojuku.jobhuntingsystem.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.CompanyDetailDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.CompanyInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.RecrutimentTypeDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyIndustryEntity;
@@ -20,6 +26,7 @@ import jp.ac.asojuku.jobhuntingsystem.repository.CompanyRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.IndustryKindRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentTypeRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
+import static jp.ac.asojuku.jobhuntingsystem.repository.CompanySpecifications.*;
 
 @Service
 public class CompanyService {
@@ -76,13 +83,75 @@ public class CompanyService {
 		return list;
 	}
 	
+	/**
+	 * 企業検索処理
+	 * @param scForm
+	 * @return
+	 */
 	public List<CompanyInfoDto> search(CompanySearchForm scForm){
 		List<CompanyInfoDto> searchResultList = new ArrayList<>();
+		List<Integer> industryList = new ArrayList<>();
+		if( scForm.getIndustryArry() != null ) {
+			industryList = Arrays.asList(scForm.getIndustryArry());
+		}
+		
+		List<CompanyEntity> entityList = 
+				companyRepository.findAll(
+				Specification.where(companyContains( scForm.getCompanyName()) )
+				.and( adressContains(scForm.getCompanyAddress()) )
+				.and( industryContains(industryList) ),
+				Sort.by(Sort.Direction.ASC,"furigana")
+				.and( Sort.by(Sort.Direction.ASC,"companyId") )
+				);
+		
+		for( CompanyEntity cEntity : entityList ) {
+			searchResultList.add(getFrom(cEntity));
+		}
 		
 		return searchResultList;
 	}
 	
+	/**
+	 * 企業の詳細情報を取得
+	 * @param companyId
+	 * @return
+	 */
+	public CompanyDetailDto getDetail(Integer companyId) {
+		CompanyEntity cEntity = companyRepository.getOne(companyId);
+		CompanyDetailDto dto = null;
+		if( cEntity != null ) {
+			dto =getDetailFrom(cEntity);
+		}
+		return dto;
+	}
+	
 	/* -private method- */
+	private CompanyDetailDto getDetailFrom(CompanyEntity cEntity) {
+		CompanyDetailDto dto = new CompanyDetailDto();
+
+		dto.setCompanyId(cEntity.getCompanyId());
+		dto.setCompanyname(cEntity.getName());
+		dto.setCompanynamekana(cEntity.getFurigana());
+		dto.setCompanyaddress(cEntity.getAddress());
+		dto.setCompanycode(cEntity.getCode());
+		dto.setCompanycapital(cEntity.getCapital());
+		dto.setCompanyestablishment(cEntity.getEstablishment());
+		dto.setCompanyannualsales(cEntity.getCompanyId());
+		dto.setCompanypic(cEntity.getPic());
+		dto.setCompanymoc(cEntity.getMoc());
+		dto.setCompanymot(cEntity.getToc());
+		dto.setCompanyurl(cEntity.getUrl());
+		
+		for( CompanyIndustryEntity ciEntity : cEntity.getCompanyIndustryTbl() ) {
+			IndustryKindDto ikDto = new IndustryKindDto();
+			ikDto.setIndustryId(ciEntity.getIndustrykindTbl().getIndustryId());
+			ikDto.setIndustryName(ciEntity.getIndustrykindTbl().getIndustryTbl().getName());
+			ikDto.setId(ciEntity.getIndustrykindId());
+			ikDto.setName(ciEntity.getIndustrykindTbl().getName());	
+			dto.addIndustryList(ikDto);
+		}
+		return dto;
+	}
 	private CompanyEntity getFrom(CompanyRegiForm form) {
 		CompanyEntity cEntity = new CompanyEntity();
 		
@@ -100,5 +169,20 @@ public class CompanyService {
 		cEntity.setPassword( Digest.createPassword(form.getCompanymoc(), form.getPassword()) );
 		
 		return cEntity;
+	}
+	
+	/**
+	 * Entity→DTO取得
+	 * @param cEntity
+	 * @return
+	 */
+	private CompanyInfoDto getFrom(CompanyEntity cEntity) {
+		CompanyInfoDto dto = new CompanyInfoDto();
+		
+		dto.setId(cEntity.getCompanyId());
+		dto.setName(cEntity.getName());
+		dto.setKana(cEntity.getFurigana());
+		
+		return dto;
 	}
 }

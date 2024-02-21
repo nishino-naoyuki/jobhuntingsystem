@@ -39,7 +39,7 @@
 	               未読の重要なお知らせがあります。
 	              </div>
 	              <div th:if="${infoList!=null and infoList.isEmpty()}">お知らせはありません</div>
-                  <table class="table table-borderless datatable"　th:if="${infoList!=null and !infoList.isEmpty()}">
+                  <table class="table table-borderless datatable"　id="companyList" th:if="${infoList!=null and !infoList.isEmpty()}">
                     <thead>
                       <tr>
                         <th scope="col">未既読</th>
@@ -219,6 +219,7 @@
         </div>
       </div>
   </div><!-- End Modal Dialog Scrollable-->
+  
   <script th:inline="javascript">
   	const infoModalBtn = document.getElementById("infodetailmodal");
   	
@@ -282,5 +283,4 @@
   <div id="parent" th:replace="/common/footerlink"></div>  
 
 </body>
-
 </html>

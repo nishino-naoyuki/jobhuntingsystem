@@ -1,10 +1,15 @@
 package jp.ac.asojuku.jobhuntingsystem.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.RecruitmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
+import jp.ac.asojuku.jobhuntingsystem.param.JobType;
 import jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentRepository;
 
 @Service
@@ -19,6 +24,30 @@ public class JobService {
 	public void insert(JobOfferInputForm jobOfferInputForm) {
 		RecruitmentEntity recruitmentEntity = getFrom( jobOfferInputForm );
 		recruitmentRepository.save(recruitmentEntity);
+	}
+	
+	/**
+	 * 企業が出している求人の一覧を表示する
+	 * @param companyId
+	 * @return
+	 */
+	public List<JobOfferListDto> getList(Integer companyId){
+		List<JobOfferListDto> list = new ArrayList<>();
+		List<RecruitmentEntity> entityList =
+					recruitmentRepository.findByCompanyIdOrderByPublicDateDesc(companyId);
+		
+		for( RecruitmentEntity entity : entityList) {
+			JobOfferListDto dto = new JobOfferListDto();
+			dto.setCode(entity.getRecrutimentCode());
+			dto.setRecruitmentId(entity.getRecruitmentId());
+			dto.setRecruitmentType(entity.getRecrutimentTypeTbl().getName());
+			Integer type = entity.getType();
+			JobType jt = JobType.search(type);
+			dto.setType(jt.getMsg());
+			list.add(dto);
+		}
+		
+		return list;
 	}
 	
 	/* -private metod- */

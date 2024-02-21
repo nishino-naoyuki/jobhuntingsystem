@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div> 
+</head>
+
+<body>
+
+  <!-- ヘッダー -->
+  <div>
+  	<div id="parent" th:replace="/common/header"></div>  
+  </div>
+  
+
+  <!-- サイドバー -->
+  <div>
+  	<div id="parent" th:replace="/common/sidebar"></div>  
+  </div>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>企業情報詳細</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">企業情報詳細</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-header">
+    					<button class="btn btn-primary">お気に入り登録</button>
+    					<button class="btn btn-primary">報告書閲覧</button>
+    					<button class="btn btn-primary">卒業生確認</button>
+    					<button class="btn btn-primary">説明会申込</button>
+    					<button class="btn btn-primary">受験申込</button>
+    				</div>
+    				<div class="card-body">
+    					<div class="accordion" id="accordionExample">
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+										企業情報詳細
+									</button>
+								</h2>
+								<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
+												<div class="col-sm-10" th:text="${companyDto.companyname}">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">企業ヨミガナ</label>
+												<div class="col-sm-10" th:text="${companyDto.companynamekana}">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">住所</label>
+												<div class="col-sm-10" th:text="${companyDto.companyaddress}">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">設立年</label>
+												<div class="col-sm-4" th:text="${companyDto.companyestablishment}">
+													0000000000
+												</div>
+												<label for="inputText" class="col-sm-2 col-form-label">資本金（千円）</label>
+												<div class="col-sm-4" th:text="${companyDto.companycapital}">
+													1000万円
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">売上（千円）</label>
+												<div class="col-sm-4" th:text="${companyDto.companyannualsales}">
+													0000000000
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label class="col-sm-2 col-form-label">企業サイトURL</label>
+												<div class="col-sm-10">
+													<a th:href="${companyDto.companyurl}" th:text="${companyDto.companyurl}">http://aaaaa</a>
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label class="col-sm-2 col-form-label">募集職種</label>
+												<div class="col-sm-10">
+													<span th:each="industry : ${companyDto.industryList}" class="badge bg-primary companydetailicon" th:text="${industry.name}" >システムエンジニア</span>
+												</div>
+											</div>
+									</div>
+								</div>
+    						</div>
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingRecuruitment">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRecuruitment" aria-expanded="false" aria-controls="collapseRecuruitment">
+										求人一覧
+									</button>
+								</h2>
+								<div id="collapseRecuruitment" class="accordion-collapse collapse" aria-labelledby="headingRecuruitment" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+									</div>
+								</div>
+    						</div>
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwo">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										受験状況
+									</button>
+								</h2>
+								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<button class="btn btn-primary">追加</button>
+										<table class="table table-bordered">
+					              			<thead>
+							                  <tr>
+							                    <th scope="col">#</th>
+							                    <th scope="col">日付</th>
+							                    <th scope="col">状況</th>
+							                    <th scope="col">合否</th>
+							                    <th scope="col">#</th>
+							                  </tr>
+							                </thead>
+							                <tbody>
+							                  <tr>
+							                    <th scope="row">1</th>
+							                    <td>2022-05-25</td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>&nbsp;</td>
+							                    <td>終了</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">2</th>
+							                    <td>2022-05-30</td>
+							                    <td><span class="badge rounded-pill bg-primary">1次試</span></td>
+							                    <td>合格</td>
+							                    <td><span class="badge bg-success">報告済</span></td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">3</th>
+							                    <td>2022-06-10</td>
+							                    <td><span class="badge rounded-pill bg-primary">2次試</span></td>
+							                    <td>合格</td>
+							                    <td><button class="btn btn-primary">受験報告</button></td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">4</th>
+							                    <td>2022-06-18</td>
+							                    <td><span class="badge rounded-pill bg-danger">最終試</span></td>
+							                    <td>&nbsp;</td>
+							                    <td><button class="btn btn-primary">受験報告</button></td>
+							                  </tr>
+							                </tbody>
+										</table>
+										<p>※管理者権限の場合は以下の表示になる</p>
+										
+										<table class="table table-bordered">
+					              			<thead>
+							                  <tr>
+							                    <th scope="col">#</th>
+							                    <th scope="col">学籍番号</th>
+							                    <th scope="col">学生名</th>
+							                    <th scope="col">状況</th>
+							                    <th scope="col">日付</th>
+							                    <th scope="col">#</th>
+							                  </tr>
+							                </thead>
+							                <tbody>
+							                  <tr>
+							                    <th scope="row">1</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">2</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">3</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">4</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
+							                    <td>2022-05-25</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">5</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">１次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td>合格</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">6</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">１次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td>不合格</td>
+							                  </tr>
+							                  <tr>
+							                    <th scope="row">5</th>
+							                    <td>1234567</td>
+							                    <td><a href="#">麻生花子</a></td>
+							                    <td><span class="badge rounded-pill bg-primary">２次試</span></td>
+							                    <td>2022-05-25</td>
+							                    <td><button class="btn btn-primary">合否登録</button></td>
+							                  </tr>
+							                </tbody>
+										</table>
+									</div>
+								</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+
+</html>
