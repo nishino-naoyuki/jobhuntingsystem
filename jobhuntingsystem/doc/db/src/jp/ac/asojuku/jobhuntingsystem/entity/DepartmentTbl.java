@@ -24,6 +24,9 @@ public class DepartmentTbl implements Serializable {
 	/** 学校テーブル. */
 	private SchoolTbl schoolTbl;
 
+	/** code. */
+	private String code;
+
 	/** 学科テーブル 一覧. */
 	private Set<ClassTbl> classTblSet;
 
@@ -89,6 +92,25 @@ public class DepartmentTbl implements Serializable {
 	 */
 	public SchoolTbl getSchoolTbl() {
 		return this.schoolTbl;
+	}
+
+	/**
+	 * code を設定します.
+	 * 
+	 * @param code
+	 *            code
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * code を取得します.
+	 * 
+	 * @return code
+	 */
+	public String getCode() {
+		return this.code;
 	}
 
 	/**

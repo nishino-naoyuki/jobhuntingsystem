@@ -388,6 +388,10 @@ NULL：なし
 ',
 	public_date date COMMENT '情報公開日
 NULLの場合は公開されない',
+	target_year int NOT NULL COMMENT '対象となる学生（卒業年度）',
+	offerstart_date date DEFAULT NOW(), SYSDATE() COMMENT '募集開始日',
+	offerend_flg int DEFAULT 0 NOT NULL COMMENT '0:募集中
+1:募集終了',
 	PRIMARY KEY (recruitment_id)
 );
 
@@ -663,7 +667,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id2)
+	ADD FOREIGN KEY (industry_kind_id3)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -671,7 +675,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id3)
+	ADD FOREIGN KEY (industry_kind_id2)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT

@@ -30,8 +30,8 @@ public class AdminTbl implements Serializable {
 	/** image. */
 	private String image;
 
-	/** 役割テーブル. */
-	private RoleTbl roleTbl;
+	/** role_id. */
+	private Integer roleId;
 
 	/** 学科テーブル 一覧. */
 	private Set<ClassTbl> classTblSet;
@@ -139,22 +139,22 @@ public class AdminTbl implements Serializable {
 	}
 
 	/**
-	 * 役割テーブル を設定します.
+	 * role_id を設定します.
 	 * 
-	 * @param roleTbl
-	 *            役割テーブル
+	 * @param roleId
+	 *            role_id
 	 */
-	public void setRoleTbl(RoleTbl roleTbl) {
-		this.roleTbl = roleTbl;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
 
 	/**
-	 * 役割テーブル を取得します.
+	 * role_id を取得します.
 	 * 
-	 * @return 役割テーブル
+	 * @return role_id
 	 */
-	public RoleTbl getRoleTbl() {
-		return this.roleTbl;
+	public Integer getRoleId() {
+		return this.roleId;
 	}
 
 	/**

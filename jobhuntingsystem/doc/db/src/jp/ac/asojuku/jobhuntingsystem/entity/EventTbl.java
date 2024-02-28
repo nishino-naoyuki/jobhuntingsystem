@@ -43,6 +43,12 @@ public class EventTbl implements Serializable {
 	/** 採用求人テーブル. */
 	private RecruitmentTbl recruitmentTbl;
 
+	/** recruit_startdatetime. */
+	private Date recruitStartdatetime;
+
+	/** recruit_enddatetime. */
+	private Date recruitEnddatetime;
+
 	/** 就職活動詳細テーブル 一覧. */
 	private Set<JobHuntingDetailTbl> jobHuntingDetailTblSet;
 
@@ -222,6 +228,44 @@ public class EventTbl implements Serializable {
 	 */
 	public RecruitmentTbl getRecruitmentTbl() {
 		return this.recruitmentTbl;
+	}
+
+	/**
+	 * recruit_startdatetime を設定します.
+	 * 
+	 * @param recruitStartdatetime
+	 *            recruit_startdatetime
+	 */
+	public void setRecruitStartdatetime(Date recruitStartdatetime) {
+		this.recruitStartdatetime = recruitStartdatetime;
+	}
+
+	/**
+	 * recruit_startdatetime を取得します.
+	 * 
+	 * @return recruit_startdatetime
+	 */
+	public Date getRecruitStartdatetime() {
+		return this.recruitStartdatetime;
+	}
+
+	/**
+	 * recruit_enddatetime を設定します.
+	 * 
+	 * @param recruitEnddatetime
+	 *            recruit_enddatetime
+	 */
+	public void setRecruitEnddatetime(Date recruitEnddatetime) {
+		this.recruitEnddatetime = recruitEnddatetime;
+	}
+
+	/**
+	 * recruit_enddatetime を取得します.
+	 * 
+	 * @return recruit_enddatetime
+	 */
+	public Date getRecruitEnddatetime() {
+		return this.recruitEnddatetime;
 	}
 
 	/**

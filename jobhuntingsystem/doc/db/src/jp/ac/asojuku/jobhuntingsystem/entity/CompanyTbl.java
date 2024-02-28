@@ -42,6 +42,18 @@ public class CompanyTbl implements Serializable {
 	/** url. */
 	private String url;
 
+	/** password. */
+	private String password;
+
+	/** pic. */
+	private String pic;
+
+	/** moc. */
+	private String moc;
+
+	/** toc. */
+	private String toc;
+
 	/** 企業業種テーブル 一覧. */
 	private Set<CompanyIndustry> companyIndustrySet;
 
@@ -233,6 +245,82 @@ public class CompanyTbl implements Serializable {
 	 */
 	public String getUrl() {
 		return this.url;
+	}
+
+	/**
+	 * password を設定します.
+	 * 
+	 * @param password
+	 *            password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * password を取得します.
+	 * 
+	 * @return password
+	 */
+	public String getPassword() {
+		return this.password;
+	}
+
+	/**
+	 * pic を設定します.
+	 * 
+	 * @param pic
+	 *            pic
+	 */
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
+	/**
+	 * pic を取得します.
+	 * 
+	 * @return pic
+	 */
+	public String getPic() {
+		return this.pic;
+	}
+
+	/**
+	 * moc を設定します.
+	 * 
+	 * @param moc
+	 *            moc
+	 */
+	public void setMoc(String moc) {
+		this.moc = moc;
+	}
+
+	/**
+	 * moc を取得します.
+	 * 
+	 * @return moc
+	 */
+	public String getMoc() {
+		return this.moc;
+	}
+
+	/**
+	 * toc を設定します.
+	 * 
+	 * @param toc
+	 *            toc
+	 */
+	public void setToc(String toc) {
+		this.toc = toc;
+	}
+
+	/**
+	 * toc を取得します.
+	 * 
+	 * @return toc
+	 */
+	public String getToc() {
+		return this.toc;
 	}
 
 	/**

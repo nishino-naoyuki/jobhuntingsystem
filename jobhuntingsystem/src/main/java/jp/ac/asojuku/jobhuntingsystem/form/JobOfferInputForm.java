@@ -2,8 +2,10 @@ package jp.ac.asojuku.jobhuntingsystem.form;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -48,4 +50,10 @@ public class JobOfferInputForm {
 	private String expectedGraduation;
 	private String transcript;
 	private String otherInput;
+	@Range(min=2020, max=999999,message = "{errmsg0407}" )
+	private Integer targetYear;
+	@Range(min=0, max=1,message = "{errmsg0408}" )
+	private Integer joboffer;
+	@DateTimeFormat(pattern = "yyyy/MM/dd" )
+	private String publicDate;
 }

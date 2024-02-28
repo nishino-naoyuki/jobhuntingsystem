@@ -109,6 +109,28 @@
 								</h2>
 								<div id="collapseRecuruitment" class="accordion-collapse collapse" aria-labelledby="headingRecuruitment" data-bs-parent="#accordionExample">
 									<div class="accordion-body">
+										<table class="table table-bordered">
+					              			<thead>
+							                  <tr>
+							                    <th scope="col">種類</th>
+							                    <th scope="col">契約</th>
+							                    <th scope="col">対象</th>
+							                    <th scope="col">募集中</th>
+							                    <th scope="col">募集職種</th>
+							                  </tr>
+							                </thead>
+							                <tbody>
+							                  <tr th:each="job:${jobList}">
+							                    <td　th:text="${job.recruitmentType}">2022-05-25</td>
+							                    <td　th:text="${job.type}">2022-05-25</td>
+							                    <td　th:text="|${job.target}年卒|">2022-05-25</td>
+							                    <td　th:text="${job.inOffer}? '募集中' : '募集終了'">2022-05-25</td>
+							                    <td>
+							                    	<span th:each="idustry:${job.industryList}" class="badge bg-primary companydetailicon" th:text="${idustry.name}" >システムエンジニア</span>
+							                    </td>
+							                  </tr>
+							                </tbody>
+										</table>
 									</div>
 								</div>
     						</div>

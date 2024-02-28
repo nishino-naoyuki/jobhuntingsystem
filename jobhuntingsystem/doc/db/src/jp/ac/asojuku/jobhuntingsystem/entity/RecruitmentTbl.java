@@ -67,23 +67,32 @@ public class RecruitmentTbl implements Serializable {
 	/** salary_op3. */
 	private String salaryOp3;
 
-	/** salary_op1_for2. */
-	private Integer salaryOp1For2;
+	/** salary_op1for2. */
+	private Integer salaryOp1for2;
 
-	/** salary_op1_for3. */
-	private Integer salaryOp1For3;
+	/** salary_op1for3. */
+	private Integer salaryOp1for3;
 
-	/** salary_op1_for4. */
-	private Integer salaryOp1For4;
+	/** salary_op1for4. */
+	private Integer salaryOp1for4;
 
-	/** salary_op2_for2. */
-	private Integer salaryOp2For2;
+	/** salary_op2for2. */
+	private Integer salaryOp2for2;
 
-	/** salary_op2_for3. */
-	private Integer salaryOp2For3;
+	/** salary_op2for3. */
+	private Integer salaryOp2for3;
 
-	/** salary_op2_for4. */
-	private Integer salaryOp2For4;
+	/** salary_op2for4. */
+	private Integer salaryOp2for4;
+
+	/** salary_op3for2. */
+	private Integer salaryOp3for2;
+
+	/** salary_op3for3. */
+	private Integer salaryOp3for3;
+
+	/** salary_op3for4. */
+	private Integer salaryOp3for4;
 
 	/** required_resume. */
 	private Integer requiredResume;
@@ -99,6 +108,15 @@ public class RecruitmentTbl implements Serializable {
 
 	/** public_date. */
 	private Date publicDate;
+
+	/** target_year. */
+	private Integer targetYear;
+
+	/** offerstart_date. */
+	private Date offerstartDate;
+
+	/** offerend_flg. */
+	private Integer offerendFlg;
 
 	/** イベントテーブル 一覧. */
 	private Set<EventTbl> eventTblSet;
@@ -438,117 +456,174 @@ public class RecruitmentTbl implements Serializable {
 	}
 
 	/**
-	 * salary_op1_for2 を設定します.
+	 * salary_op1for2 を設定します.
 	 * 
-	 * @param salaryOp1For2
-	 *            salary_op1_for2
+	 * @param salaryOp1for2
+	 *            salary_op1for2
 	 */
-	public void setSalaryOp1For2(Integer salaryOp1For2) {
-		this.salaryOp1For2 = salaryOp1For2;
+	public void setSalaryOp1for2(Integer salaryOp1for2) {
+		this.salaryOp1for2 = salaryOp1for2;
 	}
 
 	/**
-	 * salary_op1_for2 を取得します.
+	 * salary_op1for2 を取得します.
 	 * 
-	 * @return salary_op1_for2
+	 * @return salary_op1for2
 	 */
-	public Integer getSalaryOp1For2() {
-		return this.salaryOp1For2;
+	public Integer getSalaryOp1for2() {
+		return this.salaryOp1for2;
 	}
 
 	/**
-	 * salary_op1_for3 を設定します.
+	 * salary_op1for3 を設定します.
 	 * 
-	 * @param salaryOp1For3
-	 *            salary_op1_for3
+	 * @param salaryOp1for3
+	 *            salary_op1for3
 	 */
-	public void setSalaryOp1For3(Integer salaryOp1For3) {
-		this.salaryOp1For3 = salaryOp1For3;
+	public void setSalaryOp1for3(Integer salaryOp1for3) {
+		this.salaryOp1for3 = salaryOp1for3;
 	}
 
 	/**
-	 * salary_op1_for3 を取得します.
+	 * salary_op1for3 を取得します.
 	 * 
-	 * @return salary_op1_for3
+	 * @return salary_op1for3
 	 */
-	public Integer getSalaryOp1For3() {
-		return this.salaryOp1For3;
+	public Integer getSalaryOp1for3() {
+		return this.salaryOp1for3;
 	}
 
 	/**
-	 * salary_op1_for4 を設定します.
+	 * salary_op1for4 を設定します.
 	 * 
-	 * @param salaryOp1For4
-	 *            salary_op1_for4
+	 * @param salaryOp1for4
+	 *            salary_op1for4
 	 */
-	public void setSalaryOp1For4(Integer salaryOp1For4) {
-		this.salaryOp1For4 = salaryOp1For4;
+	public void setSalaryOp1for4(Integer salaryOp1for4) {
+		this.salaryOp1for4 = salaryOp1for4;
 	}
 
 	/**
-	 * salary_op1_for4 を取得します.
+	 * salary_op1for4 を取得します.
 	 * 
-	 * @return salary_op1_for4
+	 * @return salary_op1for4
 	 */
-	public Integer getSalaryOp1For4() {
-		return this.salaryOp1For4;
+	public Integer getSalaryOp1for4() {
+		return this.salaryOp1for4;
 	}
 
 	/**
-	 * salary_op2_for2 を設定します.
+	 * salary_op2for2 を設定します.
 	 * 
-	 * @param salaryOp2For2
-	 *            salary_op2_for2
+	 * @param salaryOp2for2
+	 *            salary_op2for2
 	 */
-	public void setSalaryOp2For2(Integer salaryOp2For2) {
-		this.salaryOp2For2 = salaryOp2For2;
+	public void setSalaryOp2for2(Integer salaryOp2for2) {
+		this.salaryOp2for2 = salaryOp2for2;
 	}
 
 	/**
-	 * salary_op2_for2 を取得します.
+	 * salary_op2for2 を取得します.
 	 * 
-	 * @return salary_op2_for2
+	 * @return salary_op2for2
 	 */
-	public Integer getSalaryOp2For2() {
-		return this.salaryOp2For2;
+	public Integer getSalaryOp2for2() {
+		return this.salaryOp2for2;
 	}
 
 	/**
-	 * salary_op2_for3 を設定します.
+	 * salary_op2for3 を設定します.
 	 * 
-	 * @param salaryOp2For3
-	 *            salary_op2_for3
+	 * @param salaryOp2for3
+	 *            salary_op2for3
 	 */
-	public void setSalaryOp2For3(Integer salaryOp2For3) {
-		this.salaryOp2For3 = salaryOp2For3;
+	public void setSalaryOp2for3(Integer salaryOp2for3) {
+		this.salaryOp2for3 = salaryOp2for3;
 	}
 
 	/**
-	 * salary_op2_for3 を取得します.
+	 * salary_op2for3 を取得します.
 	 * 
-	 * @return salary_op2_for3
+	 * @return salary_op2for3
 	 */
-	public Integer getSalaryOp2For3() {
-		return this.salaryOp2For3;
+	public Integer getSalaryOp2for3() {
+		return this.salaryOp2for3;
 	}
 
 	/**
-	 * salary_op2_for4 を設定します.
+	 * salary_op2for4 を設定します.
 	 * 
-	 * @param salaryOp2For4
-	 *            salary_op2_for4
+	 * @param salaryOp2for4
+	 *            salary_op2for4
 	 */
-	public void setSalaryOp2For4(Integer salaryOp2For4) {
-		this.salaryOp2For4 = salaryOp2For4;
+	public void setSalaryOp2for4(Integer salaryOp2for4) {
+		this.salaryOp2for4 = salaryOp2for4;
 	}
 
 	/**
-	 * salary_op2_for4 を取得します.
+	 * salary_op2for4 を取得します.
 	 * 
-	 * @return salary_op2_for4
+	 * @return salary_op2for4
 	 */
-	public Integer getSalaryOp2For4() {
-		return this.salaryOp2For4;
+	public Integer getSalaryOp2for4() {
+		return this.salaryOp2for4;
+	}
+
+	/**
+	 * salary_op3for2 を設定します.
+	 * 
+	 * @param salaryOp3for2
+	 *            salary_op3for2
+	 */
+	public void setSalaryOp3for2(Integer salaryOp3for2) {
+		this.salaryOp3for2 = salaryOp3for2;
+	}
+
+	/**
+	 * salary_op3for2 を取得します.
+	 * 
+	 * @return salary_op3for2
+	 */
+	public Integer getSalaryOp3for2() {
+		return this.salaryOp3for2;
+	}
+
+	/**
+	 * salary_op3for3 を設定します.
+	 * 
+	 * @param salaryOp3for3
+	 *            salary_op3for3
+	 */
+	public void setSalaryOp3for3(Integer salaryOp3for3) {
+		this.salaryOp3for3 = salaryOp3for3;
+	}
+
+	/**
+	 * salary_op3for3 を取得します.
+	 * 
+	 * @return salary_op3for3
+	 */
+	public Integer getSalaryOp3for3() {
+		return this.salaryOp3for3;
+	}
+
+	/**
+	 * salary_op3for4 を設定します.
+	 * 
+	 * @param salaryOp3for4
+	 *            salary_op3for4
+	 */
+	public void setSalaryOp3for4(Integer salaryOp3for4) {
+		this.salaryOp3for4 = salaryOp3for4;
+	}
+
+	/**
+	 * salary_op3for4 を取得します.
+	 * 
+	 * @return salary_op3for4
+	 */
+	public Integer getSalaryOp3for4() {
+		return this.salaryOp3for4;
 	}
 
 	/**
@@ -644,6 +719,63 @@ public class RecruitmentTbl implements Serializable {
 	 */
 	public Date getPublicDate() {
 		return this.publicDate;
+	}
+
+	/**
+	 * target_year を設定します.
+	 * 
+	 * @param targetYear
+	 *            target_year
+	 */
+	public void setTargetYear(Integer targetYear) {
+		this.targetYear = targetYear;
+	}
+
+	/**
+	 * target_year を取得します.
+	 * 
+	 * @return target_year
+	 */
+	public Integer getTargetYear() {
+		return this.targetYear;
+	}
+
+	/**
+	 * offerstart_date を設定します.
+	 * 
+	 * @param offerstartDate
+	 *            offerstart_date
+	 */
+	public void setOfferstartDate(Date offerstartDate) {
+		this.offerstartDate = offerstartDate;
+	}
+
+	/**
+	 * offerstart_date を取得します.
+	 * 
+	 * @return offerstart_date
+	 */
+	public Date getOfferstartDate() {
+		return this.offerstartDate;
+	}
+
+	/**
+	 * offerend_flg を設定します.
+	 * 
+	 * @param offerendFlg
+	 *            offerend_flg
+	 */
+	public void setOfferendFlg(Integer offerendFlg) {
+		this.offerendFlg = offerendFlg;
+	}
+
+	/**
+	 * offerend_flg を取得します.
+	 * 
+	 * @return offerend_flg
+	 */
+	public Integer getOfferendFlg() {
+		return this.offerendFlg;
 	}
 
 	/**

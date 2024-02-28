@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -54,32 +55,32 @@ public class RecruitmentEntity implements Serializable {
 
 	/** 求人タイプテーブル. */
 	private Integer recrutimentTypeId;
-	@OneToOne
+	@ManyToOne
     @JoinColumn(name="recrutimentTypeId",insertable=false ,updatable=false)
 	private RecrutimentTypeEntity recrutimentTypeTbl;
 
 	/** 業種テーブル. */
 	private Integer industryKindId1;
-	@OneToOne
-    @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
+	@ManyToOne
+    @JoinColumn(name="industryKindId1",referencedColumnName="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId1industrykindTbl;
 
 	/** 業種テーブル. */
 	private Integer industryKindId2;
-	@OneToOne
-    @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
+	@ManyToOne
+    @JoinColumn(name="industryKindId2",referencedColumnName="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId2industrykindTbl;
 
 	/** 業種テーブル. */
 	private Integer industryKindId3;
-	@OneToOne
-    @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
+	@ManyToOne
+    @JoinColumn(name="industryKindId3",referencedColumnName="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId3industrykindTbl;
 
 	/** 業種テーブル. */
 	private Integer industryKindId4;
-	@OneToOne
-    @JoinColumn(name="industrykindId",insertable=false ,updatable=false)
+	@ManyToOne
+    @JoinColumn(name="industryKindId4",referencedColumnName="industrykindId",insertable=false ,updatable=false)
 	private IndustrykindEntity industryKindId4industrykindTbl;
 
 	/** base_salary_for2. */
@@ -142,6 +143,14 @@ public class RecruitmentEntity implements Serializable {
 	/** public_date. */
 	private Date publicDate;
 
+	/** target_year. */
+	private Integer targetYear;
+
+	/** offerstart_date. */
+	private Date offerstartDate;
+
+	/** offerend_flg. */
+	private Integer offerendFlg;
 
 	/**
 	 * コンストラクタ.

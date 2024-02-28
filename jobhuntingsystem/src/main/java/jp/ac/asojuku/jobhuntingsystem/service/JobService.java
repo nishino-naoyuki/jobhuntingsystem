@@ -1,22 +1,27 @@
 package jp.ac.asojuku.jobhuntingsystem.service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
+import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.RecruitmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.JobType;
 import jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentRepository;
+import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
 
 @Service
 public class JobService {
 	@Autowired
 	RecruitmentRepository recruitmentRepository;
 	
+	private final String DATE_FMT = "yyyy-MM-dd";
 	/**
 	 * 求人登録処理
 	 * @param jobOfferInputForm
@@ -41,16 +46,48 @@ public class JobService {
 			dto.setCode(entity.getRecrutimentCode());
 			dto.setRecruitmentId(entity.getRecruitmentId());
 			dto.setRecruitmentType(entity.getRecrutimentTypeTbl().getName());
+			dto.setInOffer(entity.getOfferendFlg() == 0);
+			dto.setTarget(entity.getTargetYear());
 			Integer type = entity.getType();
 			JobType jt = JobType.search(type);
 			dto.setType(jt.getMsg());
+			dto = addIndustryKindList(dto,entity);
 			list.add(dto);
 		}
 		
 		return list;
 	}
 	
+	
 	/* -private metod- */
+	/**
+	 * 
+	 * @param dto
+	 * @param entity
+	 * @return
+	 */
+	private JobOfferListDto addIndustryKindList(JobOfferListDto dto,RecruitmentEntity entity) {
+		IndustrykindEntity[] IKArray = {
+				entity.getIndustryKindId1industrykindTbl(),
+				entity.getIndustryKindId2industrykindTbl(),
+				entity.getIndustryKindId3industrykindTbl(),
+				entity.getIndustryKindId4industrykindTbl()
+		};
+		
+		for(IndustrykindEntity ikEntity : IKArray) {
+			if( ikEntity != null ) {
+				IndustryKindDto ikDto = new IndustryKindDto();
+
+				ikDto.setIndustryId(ikEntity.getIndustryId());
+				ikDto.setIndustryName(ikEntity.getName());
+				ikDto.setId(ikEntity.getIndustrykindId());
+				ikDto.setName(ikEntity.getName());
+				dto.addIndustryList(ikDto);
+			}
+		}
+		
+		return dto;
+	}
 	private RecruitmentEntity getFrom(JobOfferInputForm jiForm) {
 		RecruitmentEntity entity = new RecruitmentEntity();
 
@@ -92,6 +129,15 @@ public class JobService {
 		entity.setRequiredExpected( (jiForm.getExpectedGraduation().equals("1") ? 1:0) );
 		entity.setRequiredGrades( (jiForm.getTranscript().equals("1") ? 1:0) );
 		entity.setRequiredElse( jiForm.getOtherInput() );
+		
+		//対象・募集状況・情報公開開始日
+		entity.setTargetYear( jiForm.getTargetYear() );
+		entity.setOfferendFlg( jiForm.getJoboffer() );
+		try {
+			entity.setPublicDate( Exchange.toDate(jiForm.getPublicDate(),DATE_FMT) );
+		} catch (Exception e) {
+			entity.setPublicDate(null);
+		}
 		
 		return entity;
 	}

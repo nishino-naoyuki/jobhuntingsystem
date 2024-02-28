@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
@@ -68,6 +70,7 @@ public class JobController extends FileController {
 	}
 
 	/**
+	 * 求人情報の登録処理
 	 * 
 	 * @param mv
 	 * @return
@@ -92,6 +95,45 @@ public class JobController extends FileController {
 		return getJson(bindingResult);
 	}
 	
+	/**
+	 * 求人情報の付随するイベントの登録画面表示処理
+	 * @param mv
+	 * @return
+	 * @throws SystemErrorException
+	 * @throws PermitionException 
+	 */
+	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.GET)
+    public ModelAndView eventInput(
+    		@ModelAttribute("id")Integer id,
+    		ModelAndView mv
+    		) throws SystemErrorException, PermitionException {
+		
+		logger.info("event-input！");
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(id)) {
+			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",id);
+		}else if( loginInfoDto.isAdmin()) {
+			logger.info("管理者がイベント登録画面を表示しようとしています。");
+		}else {
+			//登録・更新権限ない人
+			throw new PermitionException("この画面を表示する権限がありません");
+		}
+		
+		List<IndustryKindDto> industryKindList = 
+					industryService.getIndustryKind( loginInfoDto.getUid() );
+		
+		mv.addObject("companyName",loginInfoDto.getName());
+		mv.addObject("companyId",loginInfoDto.getUid());
+		mv.addObject("industryKindList",industryKindList);
+		
+        mv.setViewName("eventregi");
+        
+		return mv;
+	}
 
 	@RequestMapping(value= {"/search"}, method=RequestMethod.GET)
     public ModelAndView search(

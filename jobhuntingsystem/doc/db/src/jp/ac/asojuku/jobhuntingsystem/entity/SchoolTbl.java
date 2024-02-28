@@ -24,6 +24,9 @@ public class SchoolTbl implements Serializable {
 	/** abbreviation. */
 	private String abbreviation;
 
+	/** code. */
+	private String code;
+
 	/** 学科テーブル 一覧. */
 	private Set<DepartmentTbl> departmentTblSet;
 
@@ -89,6 +92,25 @@ public class SchoolTbl implements Serializable {
 	 */
 	public String getAbbreviation() {
 		return this.abbreviation;
+	}
+
+	/**
+	 * code を設定します.
+	 * 
+	 * @param code
+	 *            code
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	/**
+	 * code を取得します.
+	 * 
+	 * @return code
+	 */
+	public String getCode() {
+		return this.code;
 	}
 
 	/**
