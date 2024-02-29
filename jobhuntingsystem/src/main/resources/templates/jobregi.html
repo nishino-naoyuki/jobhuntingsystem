@@ -75,21 +75,21 @@
                     <div class="col-md-3">
                       <label for="jobtype2" class="form-label">募集職種２</label>
                       <select class="form-select" id="jobtype2" name="jobtype2">
-                        <option selected>なし</option>
+                        <option value="-1" selected>なし</option>
                         <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label for="jobtype3" class="form-label">募集職種３</label>
                       <select class="form-select" id="jobtype3" name="jobtype3">
-                        <option selected>なし</option>
+                        <option value="-1" selected>なし</option>
                         <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label for="jobtype4" class="form-label">募集職種４</label>
                       <select class="form-select" id="jobtype4" name="jobtype4">
-                        <option selected>なし</option>
+                        <option value="-1" selected>なし</option>
                         <option th:each="kind : ${industryKindList}" th:value="${kind.id}" th:text="${kind.name}"></option>
                       </select>
                     </div>

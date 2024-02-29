@@ -52,6 +52,7 @@ public class EventEntity implements Serializable {
 	private Date endDatetime;
 
 	/** 企業テーブル. */
+	private Integer companyId;
 	@OneToOne
     @JoinColumn(name="companyId",insertable=false ,updatable=false)
 	private CompanyEntity companyTbl;

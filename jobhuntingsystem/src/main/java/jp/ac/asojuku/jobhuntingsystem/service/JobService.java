@@ -102,9 +102,9 @@ public class JobService {
 
 		//募集職種
 		entity.setIndustryKindId1(jiForm.getJobtype1());
-		entity.setIndustryKindId2(jiForm.getJobtype2());
-		entity.setIndustryKindId3(jiForm.getJobtype3());
-		entity.setIndustryKindId4(jiForm.getJobtype4());
+		entity.setIndustryKindId2( ( jiForm.getJobtype2() == -1 ? null:jiForm.getJobtype2() ) );
+		entity.setIndustryKindId3( ( jiForm.getJobtype3() == -1 ? null:jiForm.getJobtype3() ) );
+		entity.setIndustryKindId4( ( jiForm.getJobtype4() == -1 ? null:jiForm.getJobtype4() ) );
 		
 		//給料
 		entity.setBaseSalaryFor2(jiForm.getBaseSalaryFor2());

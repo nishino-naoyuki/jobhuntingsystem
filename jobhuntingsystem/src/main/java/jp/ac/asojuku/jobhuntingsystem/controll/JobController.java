@@ -18,13 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
+import jp.ac.asojuku.jobhuntingsystem.service.EventService;
 import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
 import jp.ac.asojuku.jobhuntingsystem.service.JobService;
 
@@ -39,6 +42,8 @@ public class JobController extends FileController {
 	IndustryService industryService;
 	@Autowired
 	JobService jobService;
+	@Autowired
+	EventService eventService;
 	
 	/**
 	 * 企業ログイン後、企業自身が求人を登録する画面
@@ -123,12 +128,11 @@ public class JobController extends FileController {
 			throw new PermitionException("この画面を表示する権限がありません");
 		}
 		
-		List<IndustryKindDto> industryKindList = 
-					industryService.getIndustryKind( loginInfoDto.getUid() );
+		List<EventInfoDto> eventList = eventService.getList(id);
+		List<StepDto> stepList = eventService.getAllStepList();
 		
-		mv.addObject("companyName",loginInfoDto.getName());
-		mv.addObject("companyId",loginInfoDto.getUid());
-		mv.addObject("industryKindList",industryKindList);
+		mv.addObject("eventList",eventList);
+		mv.addObject("stepList",stepList);
 		
         mv.setViewName("eventregi");
         
