@@ -234,7 +234,28 @@
 	const jobentrybutton = document.getElementById("jobentrybutton");
 	const registrationSuccess = document.getElementById("registration-success");
 	const regi_event = document.getElementById("regi_event");
+	let recruitment_id = -1;
 	
+	//イベント登録クリック
+	regi_event.addEventListener('click',()=>{
+		if( recruitment_id == -1 ){
+			alert("求人を登録してからイベント登録してください");
+			return;
+		} 
+		
+ 		const formData = new FormData();
+ 		
+ 		formData.append('companyId',/*[[${companyId}]]*/0 ); 		
+ 		formData.append('recruitmentId',recruitment_id );
+ 		
+        let url = /*[[@{/job/event/regi}]]*/ "/job/event/regi";
+ 
+ 		url += "?companyId=" + /*[[${companyId}]]*/0;
+ 		url += "&recruitmentId=" + recruitment_id;
+
+ 		window.location.href = url;
+	});
+	//求人登録エントリ
 	jobentrybutton.addEventListener('click',()=>{
 		if( !confirm("ユーザーを登録します。確認画面はありません。よろしいですか？")){
 			return;
@@ -319,9 +340,9 @@
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
         .then( response => response.json()).then(result => {
+ 			const alertarea = document.getElementById('alertmsg');
  			if( result.result != "OK"){
  				const errorText = document.getElementById('errrmessage');
- 				const alertarea = document.getElementById('alertmsg');
  				var msgs = "";
  				for(var err of result.errorList ){
  					msgs += err.msg + "<BR>";
@@ -332,10 +353,10 @@
  				regi_event.disabled = true;
  			}else{
  				//console.log(regiSuccessBtn);
+ 				recruitment_id = result.value;
  				registrationSuccess.click();
- 				alertarea.style.display = "none";
  				regi_event.disabled = false;
- 				location.href="#alertmsg";
+ 				alertarea.style.display = "none";
  			}
  		});
 	});

@@ -29,10 +29,10 @@ public class EventService {
 	 * @param companyId
 	 * @return
 	 */
-	public List<EventInfoDto> getList(Integer companyId){
+	public List<EventInfoDto> getList(Integer companyId,Integer recruitmentId){
 		List<EventInfoDto> list = new ArrayList<>();
 		List<EventEntity> entityList = 
-				eventRepository.findByCompanyIdOrderByStartDatetimeDesc(companyId);
+				eventRepository.findByCompanyIdAndRecruitmentIdOrderByStartDatetimeDesc(companyId,recruitmentId);
 		
 		for( EventEntity entity : entityList ) {
 			list.add( getFrom(entity) );

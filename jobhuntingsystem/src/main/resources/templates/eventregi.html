@@ -32,19 +32,78 @@
         <div class="row">
           <div class="col-lg-12">
           	<button class="btn btn-primary" id="addEvent">イベント追加</button>
-            <div class="card" id="element-base-1" >
+            <div class="card newevent" id="element-base" style='display:none'>
   			  <div class="card-header">
   			  </div>
-              <div class="card-body d-flex input-element" th:each="event:${eventList}">
-	              <div class="form-group col-md-6">
-	                <label for="ans-input">場所</label>
-	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="開催場所" th:text="${event.place}"></textarea>
+              <div class="card-body input-element">
+              	<div class="d-flex">
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-input">イベント種類</label>
+                    <select class="form-select" name="evt-kind">
+                    	<option th:each="step : ${stepList}" th:value="${step.id}" th:text="${step.name}"></option>
+                    </select>
 	              </div>
-	              <div class="form-group col-md-6">
-	                <label for="ans-output">出力値<span class="float-right text-danger">（必須）</span></label>
-	                <textarea id="ans-output" class="form-control ans-output" name="" placeholder="出力値"></textarea>
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-output">場所<span class="float-right text-danger">（必須）</span></label>
+	                <input type="text" class="form-control ans-output" name="evt-place" placeholder="終了日時">
+	              </div>    
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-input">開始日時<span class="float-right text-danger">（必須）</span></label>	                
+	                <input type="datetime-local" class="form-control ans-output" name="evt-start" placeholder="終了日時">
 	              </div>
-                  
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-output">終了日時<span class="float-right text-danger">（必須）</span></label>
+	                <input type="datetime-local" class="form-control ans-output" name="evt-end" placeholder="終了日時">
+	              </div>    
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-10 p-3">
+	                <label for="ans-input">必要書類<span class="float-right text-danger">（必須）</span></label>
+	                <textarea class="form-control ans-input" name="evt-document" placeholder="必要書類"></textarea>
+	              </div>
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-10 p-3">
+	                <button class="btn btn-primary" id="delEvent">イベント削除</button>
+	              </div>
+              	</div>
+              </div>
+            </div>
+            <div class="card" >
+  			  <div class="card-header">
+  			  </div>
+              <div class="card-body input-element" th:each="event:${eventList}">
+              	<div class="d-flex">
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-input">イベント種類</label>
+                    <select class="form-select" id="jobtype1" name="jobtype1">
+                    	<option th:each="step : ${stepList}" th:value="${step.id}" ></option>
+                    </select>
+	              </div>
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-output">場所<span class="float-right text-danger">（必須）</span></label>
+	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="開催場所"></textarea>
+	              </div>    
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-input">開始日時<span class="float-right text-danger">（必須）</span></label>	                
+	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="終了日時">
+	              </div>
+	              <div class="form-group col-md-6 p-3">
+	                <label for="ans-output">終了日時<span class="float-right text-danger">（必須）</span></label>
+	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="終了日時">
+	              </div>    
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-10">
+	                <label for="ans-input">必要書類<span class="float-right text-danger">（必須）</span></label>
+	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="必要書類"></textarea>
+	              </div>
+              	</div>
+              </div>
               </div>
             </div><!-- card -->
             <button type="submit" class="btn btn-primary" id="jobentrybutton" >登録する</button>
@@ -84,11 +143,11 @@
 	const addEvent = document.getElementById("addEvent");
 	
 	addEvent.addEventListener('click',()=>{
-		let element = document.getElementById("element-base-1");
+		let element = document.getElementById("element-base");
 		let clone_element = element.cloneNode(true);
 		
 		element.after(clone_element);
-		
+		clone_element.style.display = "block";
 	});
 </script>
 </html>

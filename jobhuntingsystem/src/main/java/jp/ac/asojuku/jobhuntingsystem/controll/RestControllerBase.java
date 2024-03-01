@@ -17,6 +17,7 @@ import jp.ac.asojuku.jobhuntingsystem.param.json.ResultJson;
 public class RestControllerBase {
 
 	Logger logger = LoggerFactory.getLogger(RestControllerBase.class);
+
 	/**
 	 * JSON変換
 	 * @param bindingResult
@@ -24,6 +25,16 @@ public class RestControllerBase {
 	 * @throws JsonProcessingException
 	 */
 	protected String getJson(BindingResult bindingResult) throws JsonProcessingException {
+        return getJson(bindingResult,"");
+	}
+	
+	/**
+	 * JSON変換
+	 * @param bindingResult
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	protected String getJson(BindingResult bindingResult,String value) throws JsonProcessingException {
 		ResultJson result = new ResultJson();
 		List<ErrorField> errList = new ArrayList<>();
 		for(FieldError error : bindingResult.getFieldErrors() ) {
@@ -34,7 +45,8 @@ public class RestControllerBase {
 		}
 		result.setErrorList(errList);
 		result.setResult( (errList.size() > 0 ? "NG":"OK") );
-
+		result.setValue(value);
+		
 		ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(result);
 

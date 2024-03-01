@@ -95,9 +95,9 @@ public class JobController extends FileController {
 			return getJson(bindingResult);
 		}
 		//登録処理
-		jobService.insert(jobOfferInputForm);
+		Integer recruitmentId = jobService.insert(jobOfferInputForm);
 		
-		return getJson(bindingResult);
+		return getJson(bindingResult,String.valueOf(recruitmentId));
 	}
 	
 	/**
@@ -109,7 +109,8 @@ public class JobController extends FileController {
 	 */
 	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.GET)
     public ModelAndView eventInput(
-    		@ModelAttribute("id")Integer id,
+    		@ModelAttribute("companyId")Integer companyId,
+    		@ModelAttribute("recruitmentId")Integer recruitmentId,
     		ModelAndView mv
     		) throws SystemErrorException, PermitionException {
 		
@@ -119,8 +120,8 @@ public class JobController extends FileController {
 		LoginInfoDto loginInfoDto =
 				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 		
-		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(id)) {
-			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",id);
+		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(companyId)) {
+			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",companyId);
 		}else if( loginInfoDto.isAdmin()) {
 			logger.info("管理者がイベント登録画面を表示しようとしています。");
 		}else {
@@ -128,7 +129,7 @@ public class JobController extends FileController {
 			throw new PermitionException("この画面を表示する権限がありません");
 		}
 		
-		List<EventInfoDto> eventList = eventService.getList(id);
+		List<EventInfoDto> eventList = eventService.getList(companyId,recruitmentId);
 		List<StepDto> stepList = eventService.getAllStepList();
 		
 		mv.addObject("eventList",eventList);

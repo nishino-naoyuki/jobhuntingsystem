@@ -61,6 +61,7 @@ public class EventEntity implements Serializable {
 	private String place;
 
 	/** 採用求人テーブル. */
+	private Integer recruitmentId;
 	@OneToOne
     @JoinColumn(name="recruitmentId",insertable=false ,updatable=false)
 	private RecruitmentEntity recruitmentTbl;

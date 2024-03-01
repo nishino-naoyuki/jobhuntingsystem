@@ -11,5 +11,5 @@ import jp.ac.asojuku.jobhuntingsystem.entity.EventEntity;
 public interface EventRepository 
 		extends JpaSpecificationExecutor<EventEntity>, JpaRepository<EventEntity, Integer>{
 
-	List<EventEntity> findByCompanyIdOrderByStartDatetimeDesc(Integer companyId);
+	List<EventEntity> findByCompanyIdAndRecruitmentIdOrderByStartDatetimeDesc(Integer companyId,Integer recruitmentId);
 }

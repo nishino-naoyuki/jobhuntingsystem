@@ -59,7 +59,7 @@ public class InformationController extends RestControllerBase{
 			) throws JsonProcessingException {
 		//エラーがあったか？
 		if( bindingResult.hasErrors() ) {
-			return getJson(bindingResult,null);
+			return getJson(bindingResult,(InfoDto)null);
 		}
 		
 		//ログイン情報取得

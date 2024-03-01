@@ -26,9 +26,11 @@ public class JobService {
 	 * 求人登録処理
 	 * @param jobOfferInputForm
 	 */
-	public void insert(JobOfferInputForm jobOfferInputForm) {
+	public Integer insert(JobOfferInputForm jobOfferInputForm) {
 		RecruitmentEntity recruitmentEntity = getFrom( jobOfferInputForm );
-		recruitmentRepository.save(recruitmentEntity);
+		recruitmentEntity = recruitmentRepository.save(recruitmentEntity);
+		
+		return recruitmentEntity.getRecruitmentId();
 	}
 	
 	/**

@@ -8,4 +8,5 @@ import lombok.Data;
 public class ResultJson {
 	private String result;
 	private List<ErrorField> errorList;
+	private String value;
 }
