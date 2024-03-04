@@ -24,6 +24,7 @@ import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
+import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
@@ -140,6 +141,23 @@ public class JobController extends FileController {
 		return mv;
 	}
 
+	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.POST)
+	@ResponseBody
+    public Object eventRegister(
+    		@Valid EventsForm eventsForm,
+    		BindingResult bindingResult
+    		) throws SystemErrorException, JsonProcessingException {
+		
+		logger.info("job-regi！");
+
+		if( bindingResult.hasErrors() ) {
+			return getJson(bindingResult);
+		}
+		
+		
+		return "";
+	}
+    
 	@RequestMapping(value= {"/search"}, method=RequestMethod.GET)
     public ModelAndView search(
     		ModelAndView mv

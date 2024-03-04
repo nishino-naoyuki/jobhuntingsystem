@@ -30,8 +30,9 @@
     <section class="section dashboard">
       <div class="container">
         <div class="row">
+         <button class="btn btn-primary" id="addEvent">イベント追加</button>
+         <form th:action="@{/job/event/regi}" method="POST">
           <div class="col-lg-12">
-          	<button class="btn btn-primary" id="addEvent">イベント追加</button>
             <div class="card newevent" id="element-base" style='display:none'>
   			  <div class="card-header">
   			  </div>
@@ -39,29 +40,29 @@
               	<div class="d-flex">
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-input">イベント種類</label>
-                    <select class="form-select" name="evt-kind">
+                    <select class="form-select evt-kind" name="evt-kind">
                     	<option th:each="step : ${stepList}" th:value="${step.id}" th:text="${step.name}"></option>
                     </select>
 	              </div>
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-output">場所<span class="float-right text-danger">（必須）</span></label>
-	                <input type="text" class="form-control ans-output" name="evt-place" placeholder="終了日時">
+	                <input type="text" class="form-control ans-output evt-place" name="evt-place" placeholder="終了日時">
 	              </div>    
               	</div>
               	<div class="d-flex">
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-input">開始日時<span class="float-right text-danger">（必須）</span></label>	                
-	                <input type="datetime-local" class="form-control ans-output" name="evt-start" placeholder="終了日時">
+	                <input type="datetime-local" class="form-control ans-output evt-start" name="evt-start" placeholder="終了日時">
 	              </div>
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-output">終了日時<span class="float-right text-danger">（必須）</span></label>
-	                <input type="datetime-local" class="form-control ans-output" name="evt-end" placeholder="終了日時">
+	                <input type="datetime-local" class="form-control ans-output evt-end" name="evt-end" placeholder="終了日時">
 	              </div>    
               	</div>
               	<div class="d-flex">
 	              <div class="form-group col-md-10 p-3">
 	                <label for="ans-input">必要書類<span class="float-right text-danger">（必須）</span></label>
-	                <textarea class="form-control ans-input" name="evt-document" placeholder="必要書類"></textarea>
+	                <textarea class="form-control ans-input evt-document" name="evt-document" placeholder="必要書類"></textarea>
 	              </div>
               	</div>
               	<div class="d-flex">
@@ -106,7 +107,8 @@
               </div>
               </div>
             </div><!-- card -->
-            <button type="submit" class="btn btn-primary" id="jobentrybutton" >登録する</button>
+            <button type="submit" class="btn btn-primary" id="eventEntrybutton" >登録する</button>
+           </form>
           </div><!-- col-lg-12 -->
         </div><!-- row -->
       </div><!-- container -->
@@ -141,6 +143,7 @@
 </body>
 <script th:inline="javascript">
 	const addEvent = document.getElementById("addEvent");
+	const eventEntrybutton = document.getElementById("eventEntrybutton");
 	
 	addEvent.addEventListener('click',()=>{
 		let element = document.getElementById("element-base");
@@ -148,6 +151,35 @@
 		
 		element.after(clone_element);
 		clone_element.style.display = "block";
+		
+		const elements = document.getElementsByClassName("newevent");
+		let index = 0;
+		 Array.from( elements ).forEach( (e) => {
+		 
+			let kinds = e.getElementsByClassName("evt-kind");
+			Array.from( kinds ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].kind");
+			});
+			
+			let places = e.getElementsByClassName("evt-place");
+			Array.from( places ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].place");
+			});
+			let starts = e.getElementsByClassName("evt-start");
+			Array.from( starts ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].startDateStr");
+			});
+			let ends = e.getElementsByClassName("evt-end");
+			Array.from( ends ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].endDateStr");
+			});
+			let documents = e.getElementsByClassName("evt-document");
+			Array.from( documents ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].documentStr");
+			});
+			index++;
+		 });
 	});
+	
 </script>
 </html>
