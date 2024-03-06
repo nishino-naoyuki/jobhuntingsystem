@@ -38,6 +38,7 @@ public class EventEntity implements Serializable {
 	private Integer eventId;
 
 	/** ステップテーブル. */
+	private Integer stepId;
 	@OneToOne
     @JoinColumn(name="stepId",insertable=false ,updatable=false)
 	private StepEntity stepTbl;

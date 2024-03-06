@@ -29,9 +29,13 @@
 
     <section class="section dashboard">
       <div class="container">
-        <div class="row">
+        <div class="row col-3 p-3">
          <button class="btn btn-primary" id="addEvent">イベント追加</button>
-         <form th:action="@{/job/event/regi}" method="POST">
+        </div>
+        <div class="row">
+         <form  id="eventRegiForm" action="post">
+         	<input type="hidden" name="companyId" th:value="${companyId}" >
+         	<input type="hidden" name="recruitmentId" th:value="${recruitmentId}" >
           <div class="col-lg-12">
             <div class="card newevent" id="element-base" style='display:none'>
   			  <div class="card-header">
@@ -46,7 +50,7 @@
 	              </div>
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-output">場所<span class="float-right text-danger">（必須）</span></label>
-	                <input type="text" class="form-control ans-output evt-place" name="evt-place" placeholder="終了日時">
+	                <input type="text" class="form-control ans-output evt-place" name="evt-place" placeholder="開催場所">
 	              </div>    
               	</div>
               	<div class="d-flex">
@@ -67,47 +71,48 @@
               	</div>
               	<div class="d-flex">
 	              <div class="form-group col-md-10 p-3">
-	                <button class="btn btn-primary" id="delEvent">イベント削除</button>
+	                <button type="button" class="btn btn-primary deleteButton" data-id="0" onClick="javascript:clickDelete(this);">イベント削除</button>
 	              </div>
               	</div>
               </div>
             </div>
-            <div class="card" >
+            <div class="card editEventElement" th:each="event:${eventList}">
+              <input type="hidden" class="eventId" th:value="${event.eventId}">
   			  <div class="card-header">
   			  </div>
-              <div class="card-body input-element" th:each="event:${eventList}">
+              <div class="card-body input-element" >
               	<div class="d-flex">
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-input">イベント種類</label>
                     <select class="form-select" id="jobtype1" name="jobtype1">
-                    	<option th:each="step : ${stepList}" th:value="${step.id}" ></option>
+                    	<option th:each="step : ${stepList}" th:value="${step.id}" th:text="${step.name}" th:selected="${step.id == event.stepId}"></option>
                     </select>
 	              </div>
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-output">場所<span class="float-right text-danger">（必須）</span></label>
-	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="開催場所"></textarea>
+	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="開催場所" th:text="${event.place}"></textarea>
 	              </div>    
               	</div>
               	<div class="d-flex">
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-input">開始日時<span class="float-right text-danger">（必須）</span></label>	                
-	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="終了日時">
+	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="開始日時" th:value="${event.start_datetime}">
 	              </div>
 	              <div class="form-group col-md-6 p-3">
 	                <label for="ans-output">終了日時<span class="float-right text-danger">（必須）</span></label>
-	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="終了日時">
+	                <input type="datetime-local" id="ans-output" class="form-control ans-output" name="" placeholder="終了日時" th:value="${event.end_datetime}">
 	              </div>    
               	</div>
               	<div class="d-flex">
-	              <div class="form-group col-md-10">
+	              <div class="form-group col-md-10 p-3">
 	                <label for="ans-input">必要書類<span class="float-right text-danger">（必須）</span></label>
-	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="必要書類"></textarea>
+	                <textarea id="ans-input" class="form-control ans-input" name="" placeholder="必要書類" th:text="${event.document}"></textarea>
 	              </div>
               	</div>
               </div>
               </div>
             </div><!-- card -->
-            <button type="submit" class="btn btn-primary" id="eventEntrybutton" >登録する</button>
+            <button type="button" class="btn btn-primary" id="eventEntrybutton" >登録する</button>
            </form>
           </div><!-- col-lg-12 -->
         </div><!-- row -->
@@ -122,7 +127,7 @@
   <div id="parent" th:replace="/common/footerlink"></div>  
 
    <!-- Vertically centered Modal -->
-   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success"></button>
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success" style='display:none'></button>
    <div class="modal fade" id="regi-success" tabindex="-1">
      <div class="modal-dialog modal-dialog-centered">
        <div class="modal-content">
@@ -144,18 +149,70 @@
 <script th:inline="javascript">
 	const addEvent = document.getElementById("addEvent");
 	const eventEntrybutton = document.getElementById("eventEntrybutton");
+	const eventRegiForm = document.getElementById("eventRegiForm");
+	
+	const clickDelete = (obj)=>{
+		//alert("clickDelete");
+		//alert(obj.dataset.id);
+		let pObj = obj.closest(".newevent");
+		if( pObj != null ){
+			pObj.classList.remove("addEventElement");
+			pObj.classList.add("deleteEventElement");
+			pObj.style.display = "none";
+		}
+		
+		//番号降り直し
+		numberingAddEvents();
+	};
 	
 	addEvent.addEventListener('click',()=>{
 		let element = document.getElementById("element-base");
 		let clone_element = element.cloneNode(true);
+		clone_element.classList.add("addEventElement");
 		
 		element.after(clone_element);
 		clone_element.style.display = "block";
 		
-		const elements = document.getElementsByClassName("newevent");
+		//番号降り直し
+		numberingAddEvents();
+	});
+	
+	eventEntrybutton.addEventListener('click',()=>{
+		if( !confirm("イベントを登録します。確認画面はありません。よろしいですか？")){
+			return;
+		}
+		
+ 		const formData = new FormData(eventRegiForm);
+ 		 		
+        const url = /*[[@{/job/event/regi}]]*/ "/job/event/regi";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
+	});
+	
+	const numberingAddEvents = ()=>{
+	
+		const elements = document.getElementsByClassName("addEventElement");
 		let index = 0;
 		 Array.from( elements ).forEach( (e) => {
 		 
+			let eventId = e.getElementsByClassName("eventId");
+			Array.from( eventId ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].eventId");
+			});
 			let kinds = e.getElementsByClassName("evt-kind");
 			Array.from( kinds ).forEach( (e)=>{
 				e.setAttribute("name","addEvents["+index+"].kind");
@@ -177,9 +234,51 @@
 			Array.from( documents ).forEach( (e)=>{
 				e.setAttribute("name","addEvents["+index+"].documentStr");
 			});
+			let delBtn = e.getElementsByClassName("deleteButton");
+			Array.from( delBtn ).forEach( (e)=>{
+				e.dataset.id = index;
+			});
+			
 			index++;
+			//alert(index);
 		 });
-	});
+	}
 	
+	const numberingEditEvents = ()=>{
+	
+		const elements = document.getElementsByClassName("editEventElement");
+		let index = 0;
+		 Array.from( elements ).forEach( (e) => {
+		 
+			let kinds = e.getElementsByClassName("evt-kind");
+			Array.from( kinds ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].kind");
+			});
+			
+			let places = e.getElementsByClassName("evt-place");
+			Array.from( places ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].place");
+			});
+			let starts = e.getElementsByClassName("evt-start");
+			Array.from( starts ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].startDateStr");
+			});
+			let ends = e.getElementsByClassName("evt-end");
+			Array.from( ends ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].endDateStr");
+			});
+			let documents = e.getElementsByClassName("evt-document");
+			Array.from( documents ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].documentStr");
+			});
+			let delBtn = e.getElementsByClassName("deleteButton");
+			Array.from( delBtn ).forEach( (e)=>{
+				e.dataset.id = index;
+			});
+			
+			index++;
+			//alert(index);
+		 });
+	}
 </script>
 </html>

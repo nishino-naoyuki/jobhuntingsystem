@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EventForm {
+	private Integer eventId;
 	private Integer kind;
 	private String place;
 	private String startDateStr;

@@ -1,5 +1,6 @@
 package jp.ac.asojuku.jobhuntingsystem.controll;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -134,6 +135,8 @@ public class JobController extends FileController {
 		List<StepDto> stepList = eventService.getAllStepList();
 		
 		mv.addObject("eventList",eventList);
+		mv.addObject("companyId",companyId);
+		mv.addObject("recruitmentId",recruitmentId);
 		mv.addObject("stepList",stepList);
 		
         mv.setViewName("eventregi");
@@ -146,16 +149,30 @@ public class JobController extends FileController {
     public Object eventRegister(
     		@Valid EventsForm eventsForm,
     		BindingResult bindingResult
-    		) throws SystemErrorException, JsonProcessingException {
+    		) throws SystemErrorException, JsonProcessingException, PermitionException, ParseException {
 		
 		logger.info("job-regi！");
 
 		if( bindingResult.hasErrors() ) {
 			return getJson(bindingResult);
 		}
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 		
+		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(eventsForm.getCompanyId())) {
+			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",eventsForm.getCompanyId());
+		}else if( loginInfoDto.isAdmin()) {
+			logger.info("管理者がイベント登録画面を表示しようとしています。");
+		}else {
+			//登録・更新権限ない人
+			throw new PermitionException("この画面を表示する権限がありません");
+		}
 		
-		return "";
+		eventService.insert(eventsForm);
+		
+		return getJson(bindingResult);
 	}
     
 	@RequestMapping(value= {"/search"}, method=RequestMethod.GET)
