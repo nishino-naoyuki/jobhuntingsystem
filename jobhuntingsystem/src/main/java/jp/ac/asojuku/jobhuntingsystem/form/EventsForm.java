@@ -10,4 +10,5 @@ public class EventsForm {
 	private Integer recruitmentId;
 	private List<EventForm> addEvents;
 	private List<EventForm> editEvents;
+	private List<EventForm> delEvents;
 }

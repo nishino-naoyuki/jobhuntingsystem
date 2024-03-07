@@ -15,4 +15,5 @@ public class EventInfoDto {
 	private String place;
 	private Integer companyId;
 	private String companyName;
+	private Integer entryNum;
 }

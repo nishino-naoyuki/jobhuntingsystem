@@ -1,17 +1,24 @@
 package jp.ac.asojuku.jobhuntingsystem.service;
 
+import static jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentSpecifications.*;
+
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
+import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.RecruitmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
+import jp.ac.asojuku.jobhuntingsystem.form.JobSearchForm;
 import jp.ac.asojuku.jobhuntingsystem.param.JobType;
 import jp.ac.asojuku.jobhuntingsystem.repository.RecruitmentRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
@@ -22,6 +29,37 @@ public class JobService {
 	RecruitmentRepository recruitmentRepository;
 	
 	private final String DATE_FMT = "yyyy-MM-dd";
+	
+	/**
+	 * 求人検索処理
+	 * 
+	 * @param jobSearchForm
+	 * @return
+	 */
+	public List<JobOfferListDto> search(JobSearchForm jobSearchForm){
+		List<JobOfferListDto> searchResultList = new ArrayList<>();
+
+		List<Integer> industryList = new ArrayList<>();
+		if( jobSearchForm.getIndustryArry() != null ) {
+			industryList = Arrays.asList(jobSearchForm.getIndustryArry());
+		}
+		
+		List<RecruitmentEntity> entityList = 
+				recruitmentRepository.findAll(
+				Specification.where(companyContains( jobSearchForm.getCompanyName()) )
+				.and( companyKanaContains(jobSearchForm.getCompanyNameKana()) )
+				.and( industryContains(industryList) ),
+				Sort.by(Sort.Direction.ASC,"publicDate")
+				.and( Sort.by(Sort.Direction.ASC,"companyId") )
+				);
+		
+		for( RecruitmentEntity cEntity : entityList ) {
+			searchResultList.add(getFrom(cEntity));
+		}
+		
+		return searchResultList;
+	}
+	
 	/**
 	 * 求人登録処理
 	 * @param jobOfferInputForm
@@ -44,17 +82,7 @@ public class JobService {
 					recruitmentRepository.findByCompanyIdOrderByPublicDateDesc(companyId);
 		
 		for( RecruitmentEntity entity : entityList) {
-			JobOfferListDto dto = new JobOfferListDto();
-			dto.setCode(entity.getRecrutimentCode());
-			dto.setRecruitmentId(entity.getRecruitmentId());
-			dto.setRecruitmentType(entity.getRecrutimentTypeTbl().getName());
-			dto.setInOffer(entity.getOfferendFlg() == 0);
-			dto.setTarget(entity.getTargetYear());
-			Integer type = entity.getType();
-			JobType jt = JobType.search(type);
-			dto.setType(jt.getMsg());
-			dto = addIndustryKindList(dto,entity);
-			list.add(dto);
+			list.add(getFrom(entity));
 		}
 		
 		return list;
@@ -62,6 +90,21 @@ public class JobService {
 	
 	
 	/* -private metod- */
+	private JobOfferListDto getFrom(RecruitmentEntity entity) {
+		JobOfferListDto dto = new JobOfferListDto();
+		dto.setCompanyName(entity.getCompanyTbl().getName());
+		dto.setCode(entity.getRecrutimentCode());
+		dto.setRecruitmentId(entity.getRecruitmentId());
+		dto.setRecruitmentType(entity.getRecrutimentTypeTbl().getName());
+		dto.setInOffer(entity.getOfferendFlg() == 0);
+		dto.setTarget(entity.getTargetYear());
+		Integer type = entity.getType();
+		JobType jt = JobType.search(type);
+		dto.setType(jt.getMsg());
+		dto = addIndustryKindList(dto,entity);
+		
+		return dto;
+	}
 	/**
 	 * 
 	 * @param dto

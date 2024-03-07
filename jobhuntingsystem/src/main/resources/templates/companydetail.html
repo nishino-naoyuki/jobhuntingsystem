@@ -41,6 +41,7 @@
     					<button class="btn btn-primary">卒業生確認</button>
     					<button class="btn btn-primary">説明会申込</button>
     					<button class="btn btn-primary">受験申込</button>
+    					<button class="btn btn-primary" id="eventRegi">イベント登録</button>
     				</div>
     				<div class="card-body">
     					<div class="accordion" id="accordionExample">
@@ -270,5 +271,20 @@
   <div id="parent" th:replace="/common/footerlink"></div>  
 
 </body>
+<script th:inline="javascript">
+	const eventRegi = document.getElementById("eventRegi");
+	//イベント登録クリック
+	eventRegi.addEventListener('click',()=>{
+		
+ 		const formData = new FormData();
+ 		
+ 		formData.append('companyId',/*[[${companyDto.companyId}]]*/0 ); 		
+ 		
+        let url = /*[[@{/job/event/regi}]]*/ "/job/event/regi";
+ 
+ 		url += "?companyId=" + /*[[${companyDto.companyId}]]*/0;
 
+ 		window.location.href = url;
+	});
+</script>
 </html>

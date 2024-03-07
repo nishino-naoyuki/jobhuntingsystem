@@ -33,7 +33,7 @@
           <div class="col-lg-12">
             <div class="card">
   			  <div class="card-header">
- 				<button class="btn btn-primary" id="regi_event" disabled >イベント登録</button>
+ 				<button class="btn btn-primary" id="eventRegi" disabled >イベント登録</button>
   			  </div>
               <div class="card-body">
                 <h5 class="card-title">求人情報入力</h5>				    			
@@ -233,11 +233,11 @@
 <script th:inline="javascript">
 	const jobentrybutton = document.getElementById("jobentrybutton");
 	const registrationSuccess = document.getElementById("registration-success");
-	const regi_event = document.getElementById("regi_event");
+	const eventRegi = document.getElementById("eventRegi");
 	let recruitment_id = -1;
 	
 	//イベント登録クリック
-	regi_event.addEventListener('click',()=>{
+	eventRegi.addEventListener('click',()=>{
 		if( recruitment_id == -1 ){
 			alert("求人を登録してからイベント登録してください");
 			return;

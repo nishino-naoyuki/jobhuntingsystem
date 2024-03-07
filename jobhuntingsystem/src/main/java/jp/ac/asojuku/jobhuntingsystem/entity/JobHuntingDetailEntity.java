@@ -46,6 +46,7 @@ public class JobHuntingDetailEntity implements Serializable {
 	private Date stepStartDatetime;
 
 	/** イベントテーブル. */
+	private Integer eventId;
 	@OneToOne
     @JoinColumn(name="eventId",insertable=false ,updatable=false)
 	private EventEntity eventTbl;

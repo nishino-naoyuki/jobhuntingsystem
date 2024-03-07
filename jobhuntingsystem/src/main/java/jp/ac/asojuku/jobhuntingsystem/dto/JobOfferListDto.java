@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class JobOfferListDto {
 	private Integer recruitmentId;
+	private String companyName;
 	private String code;
 	private String type;
 	private String recruitmentType;

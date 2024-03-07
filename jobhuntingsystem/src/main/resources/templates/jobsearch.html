@@ -18,7 +18,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>学内説明会検索</h1>
+      <h1>求人検索</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -37,17 +37,17 @@
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="companyName">
 								</div>
-								<label for="inputText" class="col-sm-2 col-form-label">求人番号</label>
+								<label for="inputText" class="col-sm-2 col-form-label">企業名（ヨミガナ）</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="companyNameKana">
 								</div>
 							</div>
 		                	<div class="row mb-3">
-								<label for="inputText" class="col-sm-2 col-form-label">開催日</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control">から<input type="text" class="form-control">まで
+								<label for="inputText" class="col-sm-2 col-form-label">対象年度</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="targetYear">
 								</div>
 							</div>
 		                	<div class="row mb-3">
@@ -135,71 +135,17 @@
 								<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
 								<div class="col-sm-10">
 									<div class="accordion" id="accordionExample">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingOne">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-													IT系
+										<div class="accordion-item" th:each="industry : ${industryList}">
+											<h2 class="accordion-header" th:id="|heading${industry.id}|">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
 												</button>
 											</h2>
-											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+											<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															システムエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															プログラマ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															運用オペレータ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															カスタマーエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															IT系営業
-														</label>
-													</div>
-												</div>
-											</div>
-										</div><!-- accordion-item -->
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingTwo">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-													ビジネス系
-												</button>
-											</h2>
-											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															事務
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															営業
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															販売
+													<div th:each="kind : ${industry.kindList}" class="form-check">
+														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${industry.id}|" >
+														<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
+															
 														</label>
 													</div>
 												</div>
@@ -209,7 +155,7 @@
 								</div>
 							</div>
 							<div class="d-grid gap-2 col-6 mx-auto">
-								<button class="btn btn-outline-primary">検索</button>
+								<button class="btn btn-outline-primary" id="searchButton">検索</button>
 							</div>
 		                </form><!--form-->
     				</div>
@@ -222,142 +168,19 @@
     		 		<div class="card-body">
               			<h5 class="card-title">検索結果</h5>
               			<button class="btn btn-outline-primary">CSV出力</button>
-              			<table class="table datatable">
+              			<table class="table table-bordered table-striped" id="jobList">
 	              			<thead>
-			                  <tr>
-			                    <th scope="col">#</th>
-			                    <th scope="col">求人番号</th>
-			                    <th scope="col">企業名</th>
-			                    <th scope="col">職種</th>
-			                    <th scope="col">種類</th>
-			                    <th scope="col">実施日</th>
-			                    <th scope="col">開始時間</th>
-			                    <th scope="col">勤務地</th>
-			                    <th scope="col">参加者一覧（先生権限）</th>
+			                  <tr>			                    
+			                    <th>企業名</th>
+			                    <th>種類</th>
+			                    <th>契約</th>
+			                    <th>対象</th>
+			                    <th>募集中</th>
+			                    <th>募集職種</th>
+			                    <th>参加者一覧（先生権限）</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
-			                  <tr>
-			                    <th scope="row">1</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">2</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG OP</td>
-			                    <td>選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">3</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE</td>
-			                    <td>説明会/選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">4</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>CE</td>
-			                    <td>選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">5</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">6</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE OP</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">7</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">8</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">9</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">10</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">11</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
 			                </tbody>
               			</table><!-- table -->
               		</div><!-- card-body -->
@@ -372,7 +195,126 @@
   <div id="parent" th:replace="/common/footer"></div>  
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
+<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 
 </body>
 
+<script th:inline="javascript">
+	const searchButton = document.getElementById("searchButton");
+	let  dataTable = $('#jobList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+    });
+
+	const clickFavorit =(companyId) =>{
+		alert(companyId);
+	};
+	
+	searchButton.addEventListener('click',()=>{
+		const companyName = document.getElementById("companyName");
+		const companyNameKana = document.getElementById("companyNameKana");
+		const targetYear = document.getElementById("targetYear");		
+ 		let industryArry = [];
+ 		let index = 0;
+ 		for(let id=1; id <= /*[[${industryList.size()}]]*/0; id++){
+ 			const industryKind = document.getElementsByName("industryKind"+id);
+ 			for( let i=0; i<industryKind.length; i++){
+ 				if( industryKind[i].checked ){
+ 					industryArry[index] = industryKind[i].value
+ 					index++;
+ 				}
+ 			}
+ 		} 		
+ 		
+ 		const formData = new FormData();
+ 		formData.append('companyName',companyName.value );
+ 		formData.append('companyNameKana',companyNameKana.value );
+ 		formData.append('targetYear',targetYear.value );
+ 		formData.append('industryArry',industryArry );
+ 		 		
+        const url = /*[[@{/job/search}]]*/ "/job/search";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(resultList => {
+ 			alert( resultList.length );
+ 			dataTable.clear();
+ 			dataTable.destroy();
+ 			
+   		  dataTable = $('#jobList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+				"data":resultList,
+	            "columns": [
+	            	{
+	            		data:"companyName" ,
+	            		type:"recruitmentId",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+	                		return '<a href="'+url+'?id='+row.recruitmentId+'" target="jobofferdetail">'+data+'</a>';
+	                	}
+	            	},
+	            	{ data:"recruitmentType"},
+	            	{ data:"recruitmentId"},
+	            	{
+	            		data:"target" ,
+	            		type:"type",
+	                	render: function ( data, type, row ) {
+	                		return data+'年卒';
+	                	}
+	            	},
+	            	{
+	            		data:"inOffer" ,
+	            		type:"recruitmentId",
+	                	render: function ( data, type, row ) {
+	                		if( data ){
+	                			return "募集中";
+	                		}else{
+	                			return "募集終了";
+	                		}
+	                	}
+	            	},
+	            	{
+	            		data:"industryList" ,
+	            		type:"recruitmentId",
+	                	render: function ( data, type, row ) {
+	                		let tagStr = "";
+	                		for(let element of data){
+	                			tagStr += '<span class="badge bg-primary companydetailicon">'+ element.name +'</span>'
+	                		}
+	                		return tagStr;
+	                	}
+	            	},
+	            	{
+	            		data:"industryList" ,
+	            		type:"recruitmentId",
+	                	render: function ( data, type, row ) {
+	                		let tagStr = '<button class="btn btn-outline-primary">参加者一覧</button>';
+	                		return tagStr;
+	                	}
+	            	}
+	            ]
+	   	    });
+	   	    dataTable.draw();
+ 			//resultList.forEach(
+ 			//	element =>{
+ 			//		alert( element.name );
+ 			//	}
+ 			//);
+ 		});
+	});
+</script>
 </html>

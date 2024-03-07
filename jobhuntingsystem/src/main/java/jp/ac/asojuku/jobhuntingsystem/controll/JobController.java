@@ -19,16 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import jp.ac.asojuku.jobhuntingsystem.dto.CompanyDetailDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
-import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
+import jp.ac.asojuku.jobhuntingsystem.form.JobSearchForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
+import jp.ac.asojuku.jobhuntingsystem.service.CompanyService;
 import jp.ac.asojuku.jobhuntingsystem.service.EventService;
 import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
 import jp.ac.asojuku.jobhuntingsystem.service.JobService;
@@ -46,6 +50,8 @@ public class JobController extends FileController {
 	JobService jobService;
 	@Autowired
 	EventService eventService;
+	@Autowired
+	CompanyService companyService;
 	
 	/**
 	 * 企業ログイン後、企業自身が求人を登録する画面
@@ -112,7 +118,7 @@ public class JobController extends FileController {
 	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.GET)
     public ModelAndView eventInput(
     		@ModelAttribute("companyId")Integer companyId,
-    		@ModelAttribute("recruitmentId")Integer recruitmentId,
+    		//@ModelAttribute("recruitmentId")Integer recruitmentId,
     		ModelAndView mv
     		) throws SystemErrorException, PermitionException {
 		
@@ -131,19 +137,31 @@ public class JobController extends FileController {
 			throw new PermitionException("この画面を表示する権限がありません");
 		}
 		
-		List<EventInfoDto> eventList = eventService.getList(companyId,recruitmentId);
+		List<EventInfoDto> eventList = eventService.getList(companyId);
 		List<StepDto> stepList = eventService.getAllStepList();
+		CompanyDetailDto companyDetailDto = companyService.getDetail(companyId);
 		
 		mv.addObject("eventList",eventList);
 		mv.addObject("companyId",companyId);
-		mv.addObject("recruitmentId",recruitmentId);
+		//mv.addObject("recruitmentId",recruitmentId);
 		mv.addObject("stepList",stepList);
+		mv.addObject("companyDetailDto",companyDetailDto);
 		
         mv.setViewName("eventregi");
         
 		return mv;
 	}
 
+	/**
+	 * イベント登録処理
+	 * @param eventsForm
+	 * @param bindingResult
+	 * @return
+	 * @throws SystemErrorException
+	 * @throws JsonProcessingException
+	 * @throws PermitionException
+	 * @throws ParseException
+	 */
 	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.POST)
 	@ResponseBody
     public Object eventRegister(
@@ -170,20 +188,41 @@ public class JobController extends FileController {
 			throw new PermitionException("この画面を表示する権限がありません");
 		}
 		
-		eventService.insert(eventsForm);
+		eventService.insertUpdateDelete(eventsForm);
 		
 		return getJson(bindingResult);
 	}
     
+	/**
+	 * 求人検索
+	 * @param mv
+	 * @return
+	 * @throws SystemErrorException
+	 */
 	@RequestMapping(value= {"/search"}, method=RequestMethod.GET)
     public ModelAndView search(
     		ModelAndView mv
     		) throws SystemErrorException {
 		
 		logger.info("job-search！");
+
+		List<IndustryDto> industryList = industryService.getAllIndustryDto();
+		mv.addObject("industryList", industryList);
 		
         mv.setViewName("jobsearch");
         
 		return mv;
+	}
+
+	@RequestMapping(value= {"/search"}, method=RequestMethod.POST)
+	@ResponseBody
+    public Object searchResult(
+    		@Valid JobSearchForm jobSearchForm,
+    		ModelAndView mv
+    		) throws SystemErrorException {
+		
+		List<JobOfferListDto> jobList = jobService.search(jobSearchForm);
+		
+		return jobList;
 	}
 }

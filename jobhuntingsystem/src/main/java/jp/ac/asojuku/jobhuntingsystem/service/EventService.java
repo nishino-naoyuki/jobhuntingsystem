@@ -12,10 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.EventEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.JobHuntingDetailEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StepEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.EventForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
 import jp.ac.asojuku.jobhuntingsystem.repository.EventRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.JobHuntingDetailRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StepRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
 
@@ -27,9 +29,20 @@ public class EventService {
 	EventRepository eventRepository;
 	@Autowired
 	StepRepository stepRepository;
+	@Autowired
+	JobHuntingDetailRepository jobHuntingDetailRepository;
 
+	@Transactional(rollbackFor = Exception.class)
+	public void insertUpdateDelete(EventsForm eventsForm) throws ParseException {
+		//更新
+		update(eventsForm.getEditEvents(),eventsForm.getCompanyId(),eventsForm.getRecruitmentId());
+		//削除
+		delete(eventsForm.getDelEvents());
+		//挿入
+		insert(eventsForm.getAddEvents(),eventsForm.getCompanyId(),eventsForm.getRecruitmentId());
+	}
 	/**
-	 * 
+	 * 挿入する
 	 * @param eventsForm
 	 * @param companyId
 	 * @param recruitmentId
@@ -37,21 +50,8 @@ public class EventService {
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	public void insert(EventsForm eventsForm) throws ParseException {
-		List<EventEntity> evEntityList = new ArrayList<>();
 		
-		for(EventForm eForm : eventsForm.getAddEvents() ) {
-			EventEntity eEntity = new EventEntity();
-			eEntity.setName("");
-			eEntity.setPlace( eForm.getPlace() );
-			eEntity.setDocument( eForm.getDocumentStr() );
-			eEntity.setStartDatetime( Exchange.toDate(eForm.getStartDateStr(), DATETIME_FMT) );
-			eEntity.setEndDatetime( Exchange.toDate(eForm.getEndDateStr(), DATETIME_FMT) );
-			eEntity.setStepId( eForm.getKind() );
-			eEntity.setCompanyId( eventsForm.getCompanyId() );
-			eEntity.setRecruitmentId( eventsForm.getRecruitmentId() );
-			evEntityList.add(eEntity);
-		}
-		eventRepository.saveAll(evEntityList);
+		insert(eventsForm.getAddEvents(),eventsForm.getCompanyId(),eventsForm.getRecruitmentId());
 	}
 	
 	/**
@@ -71,7 +71,24 @@ public class EventService {
 		
 		return list;
 	}
-	
+
+	/**
+	 * EventInfoDtoのリストを取得する
+	 * 
+	 * @param companyId
+	 * @return
+	 */
+	public List<EventInfoDto> getList(Integer companyId){
+		List<EventInfoDto> list = new ArrayList<>();
+		List<EventEntity> entityList = 
+				eventRepository.findByCompanyIdOrderByStartDatetimeDesc(companyId);
+		
+		for( EventEntity entity : entityList ) {
+			list.add( getFrom(entity) );
+		}
+		
+		return list;
+	}
 	/**
 	 * Stepリストの取得
 	 * 
@@ -109,7 +126,70 @@ public class EventService {
 		dto.setPlace( entity.getPlace() );
 		dto.setCompanyId( entity.getCompanyTbl().getCompanyId() );
 		dto.setCompanyName( entity.getCompanyTbl().getName() );
+		List<JobHuntingDetailEntity> entryList =
+				jobHuntingDetailRepository.findByEventIdOrderByStepStartDatetime(entity.getEventId());
+		dto.setEntryNum(entryList.size());
 		
 		return dto;
+	}
+	
+
+	private void insert(List<EventForm> addEvents,Integer companyId,Integer recruitmentId) throws ParseException {
+		if( addEvents == null ) {
+			return;
+		}
+		List<EventEntity> evEntityList = new ArrayList<>();
+		
+		for(EventForm eForm : addEvents ) {
+			EventEntity eEntity = new EventEntity();
+			eEntity.setName("");
+			eEntity.setPlace( eForm.getPlace() );
+			eEntity.setDocument( eForm.getDocumentStr() );
+			eEntity.setStartDatetime( Exchange.toDate(eForm.getStartDateStr(), DATETIME_FMT) );
+			eEntity.setEndDatetime( Exchange.toDate(eForm.getEndDateStr(), DATETIME_FMT) );
+			eEntity.setStepId( eForm.getKind() );
+			eEntity.setCompanyId( companyId );
+			eEntity.setRecruitmentId( recruitmentId );
+			evEntityList.add(eEntity);
+		}
+		eventRepository.saveAll(evEntityList);
+	}
+
+	private void update(List<EventForm> editEvents,Integer companyId,Integer recruitmentId) throws ParseException {
+		if( editEvents == null ) {
+			return;
+		}
+		List<EventEntity> evEntityList = new ArrayList<>();
+		
+		for(EventForm eForm : editEvents ) {
+			EventEntity eEntity = eventRepository.getOne(eForm.getEventId());
+			eEntity.setName("");
+			eEntity.setPlace( eForm.getPlace() );
+			eEntity.setDocument( eForm.getDocumentStr() );
+			eEntity.setStartDatetime( Exchange.toDate(eForm.getStartDateStr(), DATETIME_FMT) );
+			eEntity.setEndDatetime( Exchange.toDate(eForm.getEndDateStr(), DATETIME_FMT) );
+			eEntity.setStepId( eForm.getKind() );
+			eEntity.setCompanyId( companyId );
+			eEntity.setRecruitmentId( recruitmentId );
+			evEntityList.add(eEntity);
+		}
+		eventRepository.saveAll(evEntityList);
+	}
+	
+
+	private void delete(List<EventForm> delEvents) throws ParseException {
+		if( delEvents == null ) {
+			return;
+		}
+		
+		for(EventForm eForm : delEvents ) {
+			List<JobHuntingDetailEntity> entryList =
+				jobHuntingDetailRepository.findByEventIdOrderByStepStartDatetime(eForm.getEventId());
+			if( entryList.size() == 0) {
+				//外部キーを張っているデータがない場合のみ即削除
+				EventEntity eEntity = eventRepository.getOne(eForm.getEventId());
+				eventRepository.delete(eEntity);
+			}
+		}
 	}
 }
