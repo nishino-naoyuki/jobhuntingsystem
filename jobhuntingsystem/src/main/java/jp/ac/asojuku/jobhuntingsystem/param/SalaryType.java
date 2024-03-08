@@ -1,10 +1,10 @@
 package jp.ac.asojuku.jobhuntingsystem.param;
 
-public enum JobType {
+public enum SalaryType {
 
-	PERMANENT(0,"正社員"),
-	CONTACT(1,"契約社員"),
-	PARTTIME(2,"アルバイト");
+	MONTHLY(0,"月給"),
+	ANNUAL(1,"年棒"),
+	DAILY(2,"日給");
 
 	//ステータス
 	private int id;
@@ -25,19 +25,19 @@ public enum JobType {
 	}
 
 
-	private JobType(int id, String msg) {
+	private SalaryType(int id, String msg) {
 		this.id = id;
 		this.msg = msg;
 	}
 	
-	public boolean isPermanent() {
-		return (this==PERMANENT);
+	public boolean isMonthly() {
+		return (this==MONTHLY);
 	}
-	public boolean isContact() {
-		return (this==CONTACT);
+	public boolean isAnnual() {
+		return (this==ANNUAL);
 	}
-	public boolean isParttime() {
-		return (this==PARTTIME);
+	public boolean isDaily() {
+		return (this==DAILY);
 	}
 
 	public boolean equals(Integer id){
@@ -48,9 +48,9 @@ public enum JobType {
 		return (this.id == id);
 	}
 
-	public static JobType search(Integer id){
-		JobType type = null;
-		for( JobType value : JobType.values() ) {
+	public static SalaryType search(Integer id){
+		SalaryType type = null;
+		for( SalaryType value : SalaryType.values() ) {
 			if( value.equals(id) ) {
 				type = value;
 			}
@@ -62,7 +62,7 @@ public enum JobType {
 
 	public static boolean check(int id){
 		boolean flg = false;
-		for( JobType value : JobType.values() ) {
+		for( SalaryType value : SalaryType.values() ) {
 			if( value.equals(id) ) {
 				flg = true;
 			}
@@ -72,8 +72,8 @@ public enum JobType {
 	}
 
 	public static String toString(Integer id){
-		JobType lvl = null;
-		for( JobType value : JobType.values() ) {
+		SalaryType lvl = null;
+		for( SalaryType value : SalaryType.values() ) {
 			if( value.equals(id) ) {
 				lvl = value;
 			}

@@ -26,6 +26,7 @@ import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
+import jp.ac.asojuku.jobhuntingsystem.entity.JobDetailDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
@@ -214,6 +215,13 @@ public class JobController extends FileController {
 		return mv;
 	}
 
+	/**
+	 * 求人検索処理
+	 * @param jobSearchForm
+	 * @param mv
+	 * @return
+	 * @throws SystemErrorException
+	 */
 	@RequestMapping(value= {"/search"}, method=RequestMethod.POST)
 	@ResponseBody
     public Object searchResult(
@@ -225,4 +233,31 @@ public class JobController extends FileController {
 		
 		return jobList;
 	}
+
+	@RequestMapping(value= {"/detail"}, method=RequestMethod.GET)
+    public ModelAndView detial(
+    		@ModelAttribute("recruitmentId")Integer recruitmentId,
+    		ModelAndView mv
+    		) throws SystemErrorException, PermitionException {
+		
+		logger.info("job-detial！");
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		JobDetailDto jobDetail = jobService.getDetal(recruitmentId);
+		
+		//不正チェック
+		if( loginInfoDto.isCompany() && loginInfoDto.getUid() != jobDetail.getCompanyId() ) {
+			//企業アカウントで別ギキョウの求人は見れない
+			throw new PermitionException("この画面を表示する権限がありません");
+		}
+		
+		mv.addObject("jobDetail", jobDetail);
+        mv.setViewName("jobdetail");
+        
+		return mv;
+	}
+	
 }

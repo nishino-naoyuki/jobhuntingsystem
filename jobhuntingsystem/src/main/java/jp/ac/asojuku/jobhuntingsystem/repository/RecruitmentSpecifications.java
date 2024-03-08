@@ -25,7 +25,11 @@ public class RecruitmentSpecifications {
         return (StringUtils.isEmpty(companyNameKana) ? null : 
         		 ( root,  query, cb) -> cb.like(root.join("companyTbl").get("furigana"),  "%" + companyNameKana + "%" ));
     }
-    
+
+    public static Specification<RecruitmentEntity> targetYearEqual(Integer targetYear) {
+        return (targetYear == null ? null : 
+        		 ( root,  query, cb) -> cb.equal(root.get("targetYear"),  targetYear));
+    }
 
 
     public static Specification<RecruitmentEntity> industryContains(List<Integer> industryList) {

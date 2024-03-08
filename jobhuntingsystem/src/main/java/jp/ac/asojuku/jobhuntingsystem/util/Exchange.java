@@ -53,6 +53,9 @@ public class Exchange {
 	public static LocalDateTime toLocalDateTime(final Date date) {
 		return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 	}
+	public static LocalDateTime toLocalDateTime(final String dateString,String format) throws ParseException {
+		return LocalDateTime.ofInstant(toDate(dateString,format).toInstant(), ZoneId.systemDefault());
+	}
 	/**
 	 * LocalDateTimeをTimestampに変換する
 	 * @param localDateTime

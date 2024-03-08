@@ -16,6 +16,7 @@ import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.CompanyEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.IndustrykindEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.JobDetailDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.RecruitmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobSearchForm;
@@ -30,6 +31,17 @@ public class JobService {
 	
 	private final String DATE_FMT = "yyyy-MM-dd";
 	
+	/**
+	 * 詳細取得
+	 * @param recruitmentId
+	 * @return
+	 */
+	public JobDetailDto getDetal(Integer recruitmentId) {
+		
+		RecruitmentEntity entity = recruitmentRepository.getOne(recruitmentId);
+		
+		return getDtoFrom(entity);
+	}
 	/**
 	 * 求人検索処理
 	 * 
@@ -48,6 +60,7 @@ public class JobService {
 				recruitmentRepository.findAll(
 				Specification.where(companyContains( jobSearchForm.getCompanyName()) )
 				.and( companyKanaContains(jobSearchForm.getCompanyNameKana()) )
+				.and( targetYearEqual( jobSearchForm.getTargetYear() ))
 				.and( industryContains(industryList) ),
 				Sort.by(Sort.Direction.ASC,"publicDate")
 				.and( Sort.by(Sort.Direction.ASC,"companyId") )
@@ -90,6 +103,64 @@ public class JobService {
 	
 	
 	/* -private metod- */
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
+	private JobDetailDto getDtoFrom(RecruitmentEntity entity) {
+		JobDetailDto dto = new JobDetailDto();
+		
+		dto.setCompanyId( entity.getCompanyId() );
+		dto.setCompanyName( entity.getCompanyTbl().getName() );
+		
+		dto.setJobtype1( entity.getIndustryKindId1industrykindTbl().getName() );
+		dto.setJobtype2( (entity.getIndustryKindId2industrykindTbl() != null ? entity.getIndustryKindId2industrykindTbl().getName():"") );
+		dto.setJobtype3( (entity.getIndustryKindId3industrykindTbl() != null ? entity.getIndustryKindId3industrykindTbl().getName():"") );
+		dto.setJobtype4( (entity.getIndustryKindId4industrykindTbl() != null ? entity.getIndustryKindId4industrykindTbl().getName():"") );
+		
+		dto.setEmploymentType( entity.getType() );
+		dto.setHousingAvailability( entity.getDormitory() );
+		dto.setSalaryType( entity.getSalaryType() );
+		
+		dto.setBaseSalaryFor2( entity.getBaseSalaryFor2() );
+		dto.setBaseSalaryFor3( entity.getBaseSalaryFor3() );
+		dto.setBaseSalaryFor4( entity.getBaseSalaryFor4() );
+		
+		dto.setOptionName1( entity.getSalaryOp1() );
+		dto.setOptionName2( entity.getSalaryOp2() );
+		dto.setOptionName3( entity.getSalaryOp3() );
+		dto.setOption1For2( entity.getSalaryOp1For2() );
+		dto.setOption1For3( entity.getSalaryOp1For3() );
+		dto.setOption1For4( entity.getSalaryOp1For4() );
+		dto.setOption2For2( entity.getSalaryOp2For2() );
+		dto.setOption2For3( entity.getSalaryOp2For3() );
+		dto.setOption2For4( entity.getSalaryOp2For4() );
+		dto.setOption3For2( entity.getSalaryOp3For2() );
+		dto.setOption3For3( entity.getSalaryOp3For3() );
+		dto.setOption3For4( entity.getSalaryOp3For4() );
+		
+		dto.setResume( entity.getRequiredResume() );
+		dto.setExpectedGraduation( entity.getRequiredExpected() );
+		dto.setTranscript( entity.getRequiredGrades() );
+		dto.setOtherInput( entity.getRequiredElse() );
+		
+		dto.setTargetYear( entity.getTargetYear() );
+		dto.setJoboffer( entity.getOfferendFlg() );
+		if( entity.getPublicDate() != null ) {
+			dto.setPublicDate( Exchange.toLocalDateTime(entity.getPublicDate()) );
+		}else {
+			dto.setPublicDate(null);
+		}
+		
+		return dto;
+	}
+	
+	/**
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	private JobOfferListDto getFrom(RecruitmentEntity entity) {
 		JobOfferListDto dto = new JobOfferListDto();
 		dto.setCompanyName(entity.getCompanyTbl().getName());
@@ -133,6 +204,12 @@ public class JobService {
 		
 		return dto;
 	}
+	
+	/**
+	 * 
+	 * @param jiForm
+	 * @return
+	 */
 	private RecruitmentEntity getFrom(JobOfferInputForm jiForm) {
 		RecruitmentEntity entity = new RecruitmentEntity();
 

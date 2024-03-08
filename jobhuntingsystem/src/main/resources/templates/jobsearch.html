@@ -33,7 +33,6 @@
     			<div class="card">
     				<div class="card-body">
     					<h5 class="card-title">検索条件</h5>
-		                <form>
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
 								<div class="col-sm-4">
@@ -157,7 +156,6 @@
 							<div class="d-grid gap-2 col-6 mx-auto">
 								<button class="btn btn-outline-primary" id="searchButton">検索</button>
 							</div>
-		                </form><!--form-->
     				</div>
     			</div><!-- card -->
     		</div><!-- col-lg-12 -->
@@ -243,7 +241,7 @@
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
         .then( response => response.json()).then(resultList => {
- 			alert( resultList.length );
+ 			//alert( resultList.length );
  			dataTable.clear();
  			dataTable.destroy();
  			
@@ -262,13 +260,13 @@
 	            		data:"companyName" ,
 	            		type:"recruitmentId",
 	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+	                		const url = /*[[@{/job/detail}]]*/ "/job/detail";
 
-	                		return '<a href="'+url+'?id='+row.recruitmentId+'" target="jobofferdetail">'+data+'</a>';
+	                		return '<a href="'+url+'?recruitmentId='+row.recruitmentId+'" target="jobofferdetail">'+data+'</a>';
 	                	}
 	            	},
 	            	{ data:"recruitmentType"},
-	            	{ data:"recruitmentId"},
+	            	{ data:"type"},
 	            	{
 	            		data:"target" ,
 	            		type:"type",
