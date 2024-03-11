@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import jp.ac.asojuku.jobhuntingsystem.entity.AdminEntity;
-import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 
 public interface AdminRepository 
 	extends JpaSpecificationExecutor<AdminEntity>, JpaRepository<AdminEntity, Integer>{

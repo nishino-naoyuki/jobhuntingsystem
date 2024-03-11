@@ -231,6 +231,9 @@ public class StudentTbl implements Serializable {
 	/** 進路決定テーブル 一覧. */
 	private Set<CareerReportTbl> careerReportTblSet;
 
+	/** お気に入りテーブル 一覧. */
+	private Set<FavoritTbl> favoritTblSet;
+
 	/** 就職テーブル 一覧. */
 	private Set<JobHuntingTbl> jobHuntingTblSet;
 
@@ -245,6 +248,7 @@ public class StudentTbl implements Serializable {
 	 */
 	public StudentTbl() {
 		this.careerReportTblSet = new HashSet<CareerReportTbl>();
+		this.favoritTblSet = new HashSet<FavoritTbl>();
 		this.jobHuntingTblSet = new HashSet<JobHuntingTbl>();
 		this.messageTblSet = new HashSet<MessageTbl>();
 		this.unreadTblSet = new HashSet<UnreadTbl>();
@@ -1626,6 +1630,35 @@ public class StudentTbl implements Serializable {
 	 */
 	public Set<CareerReportTbl> getCareerReportTblSet() {
 		return this.careerReportTblSet;
+	}
+
+	/**
+	 * お気に入りテーブル 一覧を設定します.
+	 * 
+	 * @param favoritTblSet
+	 *            お気に入りテーブル 一覧
+	 */
+	public void setFavoritTblSet(Set<FavoritTbl> favoritTblSet) {
+		this.favoritTblSet = favoritTblSet;
+	}
+
+	/**
+	 * お気に入りテーブル を追加します.
+	 * 
+	 * @param favoritTbl
+	 *            お気に入りテーブル
+	 */
+	public void addFavoritTbl(FavoritTbl favoritTbl) {
+		this.favoritTblSet.add(favoritTbl);
+	}
+
+	/**
+	 * お気に入りテーブル 一覧を取得します.
+	 * 
+	 * @return お気に入りテーブル 一覧
+	 */
+	public Set<FavoritTbl> getFavoritTblSet() {
+		return this.favoritTblSet;
 	}
 
 	/**

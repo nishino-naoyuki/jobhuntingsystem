@@ -100,12 +100,33 @@
   <!-- フッター -->
   <div id="parent" th:replace="/common/footer"></div>  
   <!-- フッターリンク -->
-  <div id="parent" th:replace="/common/footerlink"></div>  
+  <div id="parent" th:replace="/common/footerlink"></div>
+  
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success"　style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           お気に入り登録が完了しました！
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 </body>
 <script th:inline="javascript">
 	const searchButton = document.getElementById("searchButton");
+    const regiSuccessBtn = document.getElementById('registration-success');
+ 
 	let  dataTable = $('#companyList').DataTable({
 	   	      "paging": true,
       			"destroy":true,
@@ -118,7 +139,30 @@
     });
 
 	const clickFavorit =(companyId) =>{
-		alert(companyId);
+		//alert(companyId);
+		
+		if( !confirm("お気に入り登録します。確認画面はありません。よろしいですか？")){
+			return;
+		}
+ 		
+ 		const formData = new FormData();
+ 		formData.append('companyId',companyId );
+ 		 		
+        const url = /*[[@{/favorit/regi}]]*/ "/favorit/regi";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				alert(msgs);
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				regiSuccessBtn.click();
+ 			}
+ 		});
 	};
 	
 	searchButton.addEventListener('click',()=>{
@@ -174,8 +218,6 @@
 	            		data:"name" ,
 	            		type:"id",
 	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/user/info}]]*/ "/user/info";
-
 	                		return '<button type="button" class="btn btn-danger" onClick="javascript:clickFavorit('+row.id+')"><i class="bi bi-heart-fill"></i></button>';
 	                	}
 	            	}

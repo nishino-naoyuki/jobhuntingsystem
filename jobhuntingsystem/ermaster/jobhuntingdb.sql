@@ -3,6 +3,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS career_report_tbl;
+DROP TABLE IF EXISTS favorit_tbl;
 DROP TABLE IF EXISTS report_tbl;
 DROP TABLE IF EXISTS job_hunting_detail_tbl;
 DROP TABLE IF EXISTS job_hunting_tbl;
@@ -110,14 +111,26 @@ CREATE TABLE event_tbl
 	event_id int NOT NULL AUTO_INCREMENT,
 	step_id int NOT NULL COMMENT 'イベント種類',
 	document varchar(2000) NOT NULL COMMENT '必要書類',
-	start_datetime datetime NOT NULL COMMENT '開始日時',
+	start_datetime datetime NOT NULL COMMENT 'イベント開始日時',
 	end_datetime date COMMENT '終了日時
 不明な場合はNULL',
 	company_id int NOT NULL,
 	place varchar(1024) NOT NULL COMMENT '開催場所',
 	recruitment_id int COMMENT '求人情報へのリンク
 まだ、求人がない場合もあるのでNULL許可',
+	recruit_startdatetime datetime NOT NULL COMMENT '募集開始日時',
+	recruit_enddatetime datetime NOT NULL COMMENT '募集終了日時',
 	PRIMARY KEY (event_id)
+);
+
+
+CREATE TABLE favorit_tbl
+(
+	favorit_id int NOT NULL AUTO_INCREMENT,
+	company_id int NOT NULL,
+	student_id int NOT NULL,
+	regdatetime timestamp NOT NULL,
+	PRIMARY KEY (favorit_id)
 );
 
 
@@ -610,6 +623,14 @@ ALTER TABLE event_tbl
 ;
 
 
+ALTER TABLE favorit_tbl
+	ADD FOREIGN KEY (company_id)
+	REFERENCES company_tbl (company_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE graduate_tbl
 	ADD FOREIGN KEY (company_id)
 	REFERENCES company_tbl (company_id)
@@ -651,22 +672,6 @@ ALTER TABLE company_industry
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id4)
-	REFERENCES Industrykind_tbl (industrykind_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
-	REFERENCES Industrykind_tbl (industrykind_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id3)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
@@ -675,7 +680,23 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id4)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id2)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -764,6 +785,14 @@ ALTER TABLE event_tbl
 
 ALTER TABLE career_report_tbl
 	ADD FOREIGN KEY (student_no)
+	REFERENCES student_tbl (student_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE favorit_tbl
+	ADD FOREIGN KEY (student_id)
 	REFERENCES student_tbl (student_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
