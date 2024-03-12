@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.FavoritDto;
-import jp.ac.asojuku.jobhuntingsystem.entity.FavoritEntity;
-import jp.ac.asojuku.jobhuntingsystem.repository.FavoritRepository;
+import jp.ac.asojuku.jobhuntingsystem.entity.FavoriteEntity;
+import jp.ac.asojuku.jobhuntingsystem.repository.FavoriteRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
 
 @Service
-public class FavoritService {
+public class FavoriteService {
 	
 	@Autowired
-	FavoritRepository favoritRepository;
+	FavoriteRepository favoritRepository;
 	
 	/**
 	 * お気に入り登録
@@ -23,7 +23,7 @@ public class FavoritService {
 	 * @param companyId
 	 */
 	public void insert(Integer studentId,Integer companyId) {
-		FavoritEntity entity = new FavoritEntity();
+		FavoriteEntity entity = new FavoriteEntity();
 		
 		entity.setCompanyId(companyId);
 		entity.setStudentId(studentId);
@@ -40,10 +40,10 @@ public class FavoritService {
 	public List<FavoritDto> getList(Integer studentId){
 		List<FavoritDto> list = new ArrayList<>();
 		
-		List<FavoritEntity> entityList = 
+		List<FavoriteEntity> entityList = 
 				favoritRepository.findByStudentIdOrderByRegdatetimeDesc(studentId);
 		
-		for(FavoritEntity entity : entityList) {
+		for(FavoriteEntity entity : entityList) {
 			FavoritDto dto = new FavoritDto();
 			
 			dto.setCompanyId( entity.getCompanyId() );
@@ -65,7 +65,7 @@ public class FavoritService {
 	 * @return
 	 */
 	public boolean isAlreadyRegi(Integer studentId,Integer companyId) {
-		FavoritEntity entity = favoritRepository.findByStudentIdAndCompanyId(studentId, companyId);
+		FavoriteEntity entity = favoritRepository.findByStudentIdAndCompanyId(studentId, companyId);
 		return (entity != null);
 	}
 	
@@ -75,7 +75,7 @@ public class FavoritService {
 	 * @param companyId
 	 */
 	public void delete(Integer studentId,Integer companyId) {
-		FavoritEntity entity = favoritRepository.findByStudentIdAndCompanyId(studentId, companyId);
+		FavoriteEntity entity = favoritRepository.findByStudentIdAndCompanyId(studentId, companyId);
 		if( entity != null ) {
 			favoritRepository.delete(entity);
 		}

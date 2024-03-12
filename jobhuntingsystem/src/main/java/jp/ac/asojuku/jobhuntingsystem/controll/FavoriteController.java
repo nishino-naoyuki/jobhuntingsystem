@@ -21,15 +21,15 @@ import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.FavoritForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
-import jp.ac.asojuku.jobhuntingsystem.service.FavoritService;
+import jp.ac.asojuku.jobhuntingsystem.service.FavoriteService;
 
 @Controller
 @RequestMapping(value= {"/favorit"})
-public class FavoritController extends FileController {
-	Logger logger = LoggerFactory.getLogger(FavoritController.class);
+public class FavoriteController extends FileController {
+	Logger logger = LoggerFactory.getLogger(FavoriteController.class);
 	
 	@Autowired
-	FavoritService favoritService;
+	FavoriteService favoritService;
 	@Autowired
 	HttpSession session;
 

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div>  
+</head>
+
+<body>
+
+  
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/header"></div>  
+
+  <!-- サイドバー -->
+  <div id="parent" th:replace="/common/sidebar"></div>  
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>内定者一覧</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-12">
+          <div class="row">           
+
+            <!-- お知らせ -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                	
+	                <ul class="nav nav-tabs" id="myTabs">
+	                  <li class="nav-item">
+	                    <a class="nav-link active" id="tabA" data-bs-toggle="tab" href="#contentA">Aクラス</a>
+	                  </li>
+	                  <li class="nav-item">
+	                    <a class="nav-link" id="tabB" data-bs-toggle="tab" href="#contentB">Bクラス</a>
+	                  </li>
+	                  <li class="nav-item">
+	                    <a class="nav-link" id="tabC" data-bs-toggle="tab" href="#contentC">Cクラス</a>
+	                  </li>
+	                </ul>
+	                <div class="tab-content mt-3">
+	                	<div class="tab-pane fade show active" id="contentA">
+		                	<div class="d-flex justify-content-between mb-3">
+			                  <h5 class="card-title">Aクラス</h5>
+			                  <select class="form-select my-3 w-50" aria-label="Select list">
+			                    <option selected>選択してください</option>
+			                    <option value="ABCC">ABCC</option>
+			                    <option value="APC">APC</option>
+			                    <option value="AMFC">AMFC</option>
+			                    <option value="APFC">APFC</option>
+			                    <option value="ABKC">ABKC</option>
+			                    <option value="AFTC">AFTC</option>
+			                    <option value="AADC">AADC</option>
+			                    <option value="ABC">ABC</option>
+			                  </select>
+			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
+			                    CSV出力
+			                  </button>
+		                  	</div>	
+		                  <table class="table table-borderless datatable">
+		                    <thead>
+			                    <tr>
+			                      <th scope="col">No.</th>
+			                      <th scope="col">学籍番号</th>
+			                      <th scope="col">学科</th>
+			                      <th scope="col">学年</th>
+			                      <th scope="col">氏名</th>
+			                      <th scope="col">内定先企業</th>
+			                      <th scope="col">内定日</th>
+			                      <th scope="col">勤務地</th>
+			                      <th scope="col">資格</th>
+			                      <th scope="col">IS参加</th>
+			                      <th scope="col">採用職種</th>
+			                    </tr>
+		                    </thead>
+		                    <tbody>
+		                       <tr>
+			                      <td>1</td>
+			                      <td>123456</td>
+			                      <td>学科1</td>
+			                      <td>1</td>
+			                      <td>生徒1</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>福岡</td>
+			                      <td>FE</td>
+			                      <td>あり</td>
+			                      <td>SE</td>
+			                    </tr>
+			                    <tr>
+			                      <td>2</td>
+			                      <td>234567</td>
+			                      <td>学科2</td>
+			                      <td>2</td>
+			                      <td>生徒2</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>完答</td>
+			                      <td>なし</td>
+			                      <td>あり</td>
+			                      <td>PG</td>
+			                    </tr>
+			                    <tr>
+			                      <td>3</td>
+			                      <td>234567</td>
+			                      <td>学科2</td>
+			                      <td>2</td>
+			                      <td>生徒2</td>
+			                      <td><a href="company-detail.html"></a></td>
+			                      <td></td>
+			                      <td></td>
+			                      <td></td>
+			                      <td></td>
+			                      <td></td>
+			                    </tr>
+		                    </tbody>
+		                  </table>
+		               </div><!--contentA-->
+	                	<div class="tab-pane fade" id="contentB">
+		                	<div class="d-flex justify-content-between mb-3">
+			                  <h5 class="card-title">Bクラス</h5>
+			                  <select class="form-select my-3 w-50" aria-label="Select list">
+			                    <option selected>選択してください</option>
+			                    <option value="ABCC">ABCC</option>
+			                    <option value="APC">APC</option>
+			                    <option value="AMFC">AMFC</option>
+			                    <option value="APFC">APFC</option>
+			                    <option value="ABKC">ABKC</option>
+			                    <option value="AFTC">AFTC</option>
+			                    <option value="AADC">AADC</option>
+			                    <option value="ABC">ABC</option>
+			                  </select>
+			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
+			                    CSV出力
+			                  </button>
+		                  	</div>	
+		                  <table class="table table-borderless datatable">
+		                    <thead>
+			                    <tr>
+			                      <th scope="col">No.</th>
+			                      <th scope="col">学籍番号</th>
+			                      <th scope="col">学科</th>
+			                      <th scope="col">学年</th>
+			                      <th scope="col">氏名</th>
+			                      <th scope="col">内定先企業</th>
+			                      <th scope="col">内定日</th>
+			                      <th scope="col">勤務地</th>
+			                      <th scope="col">資格</th>
+			                      <th scope="col">IS参加</th>
+			                      <th scope="col">採用職種</th>
+			                    </tr>
+		                    </thead>
+		                    <tbody>
+		                       <tr>
+			                      <td>1</td>
+			                      <td>123456</td>
+			                      <td>学科1</td>
+			                      <td>1</td>
+			                      <td>生徒1</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>福岡</td>
+			                      <td>FE</td>
+			                      <td>あり</td>
+			                      <td>SE</td>
+			                    </tr>
+			                    <tr>
+			                      <td>2</td>
+			                      <td>234567</td>
+			                      <td>学科2</td>
+			                      <td>2</td>
+			                      <td>生徒2</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>完答</td>
+			                      <td>なし</td>
+			                      <td>あり</td>
+			                      <td>PG</td>
+			                    </tr>
+		                    </tbody>
+		                  </table>
+		               </div><!--contentB-->
+		               
+	                	<div class="tab-pane fade" id="contentC">
+		                	<div class="d-flex justify-content-between mb-3">
+			                  <h5 class="card-title">Cクラス</h5>
+			                  <select class="form-select my-3 w-50" aria-label="Select list">
+			                    <option selected>選択してください</option>
+			                    <option value="ABCC">ABCC</option>
+			                    <option value="APC">APC</option>
+			                    <option value="AMFC">AMFC</option>
+			                    <option value="APFC">APFC</option>
+			                    <option value="ABKC">ABKC</option>
+			                    <option value="AFTC">AFTC</option>
+			                    <option value="AADC">AADC</option>
+			                    <option value="ABC">ABC</option>
+			                  </select>
+			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
+			                    CSV出力
+			                  </button>
+		                  	</div>	
+		                  <table class="table table-borderless datatable">
+		                    <thead>
+			                    <tr>
+			                      <th scope="col">No.</th>
+			                      <th scope="col">学籍番号</th>
+			                      <th scope="col">学科</th>
+			                      <th scope="col">学年</th>
+			                      <th scope="col">氏名</th>
+			                      <th scope="col">内定先企業</th>
+			                      <th scope="col">内定日</th>
+			                      <th scope="col">勤務地</th>
+			                      <th scope="col">資格</th>
+			                      <th scope="col">IS参加</th>
+			                      <th scope="col">採用職種</th>
+			                    </tr>
+		                    </thead>
+		                    <tbody>
+		                       <tr>
+			                      <td>1</td>
+			                      <td>123456</td>
+			                      <td>学科1</td>
+			                      <td>1</td>
+			                      <td>生徒1</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>福岡</td>
+			                      <td>FE</td>
+			                      <td>あり</td>
+			                      <td>SE</td>
+			                    </tr>
+			                    <tr>
+			                      <td>2</td>
+			                      <td>234567</td>
+			                      <td>学科2</td>
+			                      <td>2</td>
+			                      <td>生徒2</td>
+			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
+			                      <td>2024-02-15</td>
+			                      <td>完答</td>
+			                      <td>なし</td>
+			                      <td>あり</td>
+			                      <td>PG</td>
+			                    </tr>
+		                    </tbody>
+		                  </table>
+		               </div><!--contentC-->
+	                </div>
+				</div>
+              </div>
+            </div><!-- End一覧 -->
+
+
+          </div>
+        </div><!-- End Left side columns -->
+
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+
+</html>

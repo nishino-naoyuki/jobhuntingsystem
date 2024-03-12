@@ -3,7 +3,7 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 /* Drop Tables */
 
 DROP TABLE IF EXISTS career_report_tbl;
-DROP TABLE IF EXISTS favorit_tbl;
+DROP TABLE IF EXISTS favorite_tbl;
 DROP TABLE IF EXISTS report_tbl;
 DROP TABLE IF EXISTS job_hunting_detail_tbl;
 DROP TABLE IF EXISTS job_hunting_tbl;
@@ -124,13 +124,13 @@ CREATE TABLE event_tbl
 );
 
 
-CREATE TABLE favorit_tbl
+CREATE TABLE favorite_tbl
 (
-	favorit_id int NOT NULL AUTO_INCREMENT,
+	favorite_id int NOT NULL AUTO_INCREMENT,
 	company_id int NOT NULL,
 	student_id int NOT NULL,
 	regdatetime timestamp NOT NULL,
-	PRIMARY KEY (favorit_id)
+	PRIMARY KEY (favorite_id)
 );
 
 
@@ -623,7 +623,7 @@ ALTER TABLE event_tbl
 ;
 
 
-ALTER TABLE favorit_tbl
+ALTER TABLE favorite_tbl
 	ADD FOREIGN KEY (company_id)
 	REFERENCES company_tbl (company_id)
 	ON UPDATE RESTRICT
@@ -672,7 +672,15 @@ ALTER TABLE company_industry
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id3)
+	ADD FOREIGN KEY (industry_kind_id2)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -688,15 +696,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id2)
-	REFERENCES Industrykind_tbl (industrykind_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
+	ADD FOREIGN KEY (industry_kind_id3)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -791,7 +791,7 @@ ALTER TABLE career_report_tbl
 ;
 
 
-ALTER TABLE favorit_tbl
+ALTER TABLE favorite_tbl
 	ADD FOREIGN KEY (student_id)
 	REFERENCES student_tbl (student_id)
 	ON UPDATE RESTRICT

@@ -21,8 +21,8 @@ import lombok.Data;
  */
 @Data
 @Entity 
-@Table(name="favorit_tbl")
-public class FavoritEntity implements Serializable {
+@Table(name="favorite_tbl")
+public class FavoriteEntity implements Serializable {
 
 	/** serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -30,7 +30,7 @@ public class FavoritEntity implements Serializable {
 	/** favorit_id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer favoritId;
+	private Integer favoriteId;
 
 	/** 企業テーブル. */
 	private Integer companyId;
