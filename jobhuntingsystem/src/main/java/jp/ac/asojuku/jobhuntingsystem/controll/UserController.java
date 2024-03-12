@@ -100,6 +100,12 @@ public class UserController extends FileController{
         return jsonString;
 	}
 
+	/**
+	 * クラス一覧を取得する
+	 * @param did
+	 * @return
+	 * @throws JsonProcessingException
+	 */
 	@RequestMapping(value = { "/getcls" }, method = RequestMethod.GET)
 	@ResponseBody
 	public Object getClassList(
@@ -252,6 +258,8 @@ public class UserController extends FileController{
 		//処理件数を返す
        return outputCubicResult(cubicList,updateCount);
 	}
+	
+
 	
 	/* -private- */
 	/**

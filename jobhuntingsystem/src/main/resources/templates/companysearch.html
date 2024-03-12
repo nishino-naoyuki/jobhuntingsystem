@@ -148,7 +148,7 @@
  		const formData = new FormData();
  		formData.append('companyId',companyId );
  		 		
-        const url = /*[[@{/favorit/regi}]]*/ "/favorit/regi";
+        const url = /*[[@{/favorite/regi}]]*/ "/favorite/regi";
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
         .then( response => response.json()).then(result => {

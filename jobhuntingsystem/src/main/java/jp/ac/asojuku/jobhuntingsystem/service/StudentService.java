@@ -15,6 +15,7 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import jp.ac.asojuku.jobhuntingsystem.csv.CubicCSV;
 import jp.ac.asojuku.jobhuntingsystem.csv.StudentCSV;
+import jp.ac.asojuku.jobhuntingsystem.dto.StudentDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.DepartmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
@@ -35,6 +36,16 @@ public class StudentService {
 	@Autowired
 	DepartmentRepository departmentRepository;
 
+	/**
+	 * ユーザー情報詳細データ取得
+	 * @param studentId
+	 * @return
+	 */
+	public StudentDto getDetail(Integer studentId) {
+		StudentEntity sEntity = studentRepository.getOne(studentId);
+		
+		return getFrom(sEntity);
+	}
 	/**
 	 * 学生登録
 	 * 
@@ -271,6 +282,27 @@ public class StudentService {
 		}
 		
 		return form;
+	}
+	
+	/**
+	 * 
+	 * @param sEntity
+	 * @return
+	 */
+	private StudentDto getFrom( StudentEntity sEntity ) {
+		StudentDto dto = new StudentDto();
+
+		dto.setStudentId(sEntity.getStudentId());
+		dto.setName(sEntity.getName());
+		dto.setStudentNo(sEntity.getStudentNo());
+		dto.setJobhuntingStatusId(sEntity.getJobhuntingStatusId());
+		dto.setJobhuntingStatusName(sEntity.getJobhuntingStatusTbl().getName());
+		dto.setClassId(sEntity.getClassId());
+		dto.setClassName(sEntity.getClassTbl().getDepartmentTbl().getName());
+		dto.setTeacherName(sEntity.getClassTbl().getAdminTbl().getName());
+		//活動履歴 todo
+		
+		return dto;
 	}
 	
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jp.ac.asojuku.jobhuntingsystem.dto.FavoritDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.FavoriteDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.FavoriteEntity;
 import jp.ac.asojuku.jobhuntingsystem.repository.FavoriteRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
@@ -37,15 +37,15 @@ public class FavoriteService {
 	 * @param studentId
 	 * @return
 	 */
-	public List<FavoritDto> getList(Integer studentId){
-		List<FavoritDto> list = new ArrayList<>();
+	public List<FavoriteDto> getList(Integer studentId){
+		List<FavoriteDto> list = new ArrayList<>();
 		
 		List<FavoriteEntity> entityList = 
 				favoritRepository.findByStudentIdOrderByRegdatetimeDesc(studentId);
 		
 		for(FavoriteEntity entity : entityList) {
-			FavoritDto dto = new FavoritDto();
-			
+			FavoriteDto dto = new FavoriteDto();
+			dto.setFavoriteId( entity.getFavoriteId() );
 			dto.setCompanyId( entity.getCompanyId() );
 			dto.setCompanyName( entity.getCompanyTbl().getName() );
 			dto.setStudentId( entity.getCompanyId() );

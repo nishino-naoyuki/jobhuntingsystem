@@ -62,7 +62,7 @@
       </li><!-- End Components Nav -->
       
       <li class="nav-item" th:if="${session['loginInfo'].isAdmin() || session['loginInfo'].isStudent()}">
-        <a class="nav-link " th:href="@{/student/favorit}">
+        <a class="nav-link " th:href="@{/favorite/list}">
           <i class="bi bi-suit-heart-fill"></i>
           <span>お気に入り</span>
         </a>

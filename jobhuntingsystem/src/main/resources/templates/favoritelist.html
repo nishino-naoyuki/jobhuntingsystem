@@ -18,11 +18,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>内定者一覧</h1>
+      <h1>お気に入り企業一覧</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">お気に入り企業一覧</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -37,228 +37,25 @@
             <!-- お知らせ -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
-                <div class="card-body">
-                	
-	                <ul class="nav nav-tabs" id="myTabs">
-	                  <li class="nav-item">
-	                    <a class="nav-link active" id="tabA" data-bs-toggle="tab" href="#contentA">Aクラス</a>
-	                  </li>
-	                  <li class="nav-item">
-	                    <a class="nav-link" id="tabB" data-bs-toggle="tab" href="#contentB">Bクラス</a>
-	                  </li>
-	                  <li class="nav-item">
-	                    <a class="nav-link" id="tabC" data-bs-toggle="tab" href="#contentC">Cクラス</a>
-	                  </li>
-	                </ul>
-	                <div class="tab-content mt-3">
-	                	<div class="tab-pane fade show active" id="contentA">
-		                	<div class="d-flex justify-content-between mb-3">
-			                  <h5 class="card-title">Aクラス</h5>
-			                  <select class="form-select my-3 w-50" aria-label="Select list">
-			                    <option selected>選択してください</option>
-			                    <option value="ABCC">ABCC</option>
-			                    <option value="APC">APC</option>
-			                    <option value="AMFC">AMFC</option>
-			                    <option value="APFC">APFC</option>
-			                    <option value="ABKC">ABKC</option>
-			                    <option value="AFTC">AFTC</option>
-			                    <option value="AADC">AADC</option>
-			                    <option value="ABC">ABC</option>
-			                  </select>
-			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
-			                    CSV出力
-			                  </button>
-		                  	</div>	
-		                  <table class="table table-borderless datatable">
-		                    <thead>
-			                    <tr>
-			                      <th scope="col">No.</th>
-			                      <th scope="col">学籍番号</th>
-			                      <th scope="col">学科</th>
-			                      <th scope="col">学年</th>
-			                      <th scope="col">氏名</th>
-			                      <th scope="col">内定先企業</th>
-			                      <th scope="col">内定日</th>
-			                      <th scope="col">勤務地</th>
-			                      <th scope="col">資格</th>
-			                      <th scope="col">IS参加</th>
-			                      <th scope="col">採用職種</th>
-			                    </tr>
-		                    </thead>
-		                    <tbody>
-		                       <tr>
-			                      <td>1</td>
-			                      <td>123456</td>
-			                      <td>学科1</td>
-			                      <td>1</td>
-			                      <td>生徒1</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>福岡</td>
-			                      <td>FE</td>
-			                      <td>あり</td>
-			                      <td>SE</td>
-			                    </tr>
-			                    <tr>
-			                      <td>2</td>
-			                      <td>234567</td>
-			                      <td>学科2</td>
-			                      <td>2</td>
-			                      <td>生徒2</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>完答</td>
-			                      <td>なし</td>
-			                      <td>あり</td>
-			                      <td>PG</td>
-			                    </tr>
-			                    <tr>
-			                      <td>3</td>
-			                      <td>234567</td>
-			                      <td>学科2</td>
-			                      <td>2</td>
-			                      <td>生徒2</td>
-			                      <td><a href="company-detail.html"></a></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                      <td></td>
-			                    </tr>
-		                    </tbody>
-		                  </table>
-		               </div><!--contentA-->
-	                	<div class="tab-pane fade" id="contentB">
-		                	<div class="d-flex justify-content-between mb-3">
-			                  <h5 class="card-title">Bクラス</h5>
-			                  <select class="form-select my-3 w-50" aria-label="Select list">
-			                    <option selected>選択してください</option>
-			                    <option value="ABCC">ABCC</option>
-			                    <option value="APC">APC</option>
-			                    <option value="AMFC">AMFC</option>
-			                    <option value="APFC">APFC</option>
-			                    <option value="ABKC">ABKC</option>
-			                    <option value="AFTC">AFTC</option>
-			                    <option value="AADC">AADC</option>
-			                    <option value="ABC">ABC</option>
-			                  </select>
-			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
-			                    CSV出力
-			                  </button>
-		                  	</div>	
-		                  <table class="table table-borderless datatable">
-		                    <thead>
-			                    <tr>
-			                      <th scope="col">No.</th>
-			                      <th scope="col">学籍番号</th>
-			                      <th scope="col">学科</th>
-			                      <th scope="col">学年</th>
-			                      <th scope="col">氏名</th>
-			                      <th scope="col">内定先企業</th>
-			                      <th scope="col">内定日</th>
-			                      <th scope="col">勤務地</th>
-			                      <th scope="col">資格</th>
-			                      <th scope="col">IS参加</th>
-			                      <th scope="col">採用職種</th>
-			                    </tr>
-		                    </thead>
-		                    <tbody>
-		                       <tr>
-			                      <td>1</td>
-			                      <td>123456</td>
-			                      <td>学科1</td>
-			                      <td>1</td>
-			                      <td>生徒1</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>福岡</td>
-			                      <td>FE</td>
-			                      <td>あり</td>
-			                      <td>SE</td>
-			                    </tr>
-			                    <tr>
-			                      <td>2</td>
-			                      <td>234567</td>
-			                      <td>学科2</td>
-			                      <td>2</td>
-			                      <td>生徒2</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>完答</td>
-			                      <td>なし</td>
-			                      <td>あり</td>
-			                      <td>PG</td>
-			                    </tr>
-		                    </tbody>
-		                  </table>
-		               </div><!--contentB-->
-		               
-	                	<div class="tab-pane fade" id="contentC">
-		                	<div class="d-flex justify-content-between mb-3">
-			                  <h5 class="card-title">Cクラス</h5>
-			                  <select class="form-select my-3 w-50" aria-label="Select list">
-			                    <option selected>選択してください</option>
-			                    <option value="ABCC">ABCC</option>
-			                    <option value="APC">APC</option>
-			                    <option value="AMFC">AMFC</option>
-			                    <option value="APFC">APFC</option>
-			                    <option value="ABKC">ABKC</option>
-			                    <option value="AFTC">AFTC</option>
-			                    <option value="AADC">AADC</option>
-			                    <option value="ABC">ABC</option>
-			                  </select>
-			                  <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#csvModal">
-			                    CSV出力
-			                  </button>
-		                  	</div>	
-		                  <table class="table table-borderless datatable">
-		                    <thead>
-			                    <tr>
-			                      <th scope="col">No.</th>
-			                      <th scope="col">学籍番号</th>
-			                      <th scope="col">学科</th>
-			                      <th scope="col">学年</th>
-			                      <th scope="col">氏名</th>
-			                      <th scope="col">内定先企業</th>
-			                      <th scope="col">内定日</th>
-			                      <th scope="col">勤務地</th>
-			                      <th scope="col">資格</th>
-			                      <th scope="col">IS参加</th>
-			                      <th scope="col">採用職種</th>
-			                    </tr>
-		                    </thead>
-		                    <tbody>
-		                       <tr>
-			                      <td>1</td>
-			                      <td>123456</td>
-			                      <td>学科1</td>
-			                      <td>1</td>
-			                      <td>生徒1</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>福岡</td>
-			                      <td>FE</td>
-			                      <td>あり</td>
-			                      <td>SE</td>
-			                    </tr>
-			                    <tr>
-			                      <td>2</td>
-			                      <td>234567</td>
-			                      <td>学科2</td>
-			                      <td>2</td>
-			                      <td>生徒2</td>
-			                      <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                      <td>2024-02-15</td>
-			                      <td>完答</td>
-			                      <td>なし</td>
-			                      <td>あり</td>
-			                      <td>PG</td>
-			                    </tr>
-		                    </tbody>
-		                  </table>
-		               </div><!--contentC-->
-	                </div>
-				</div>
+                <div class="card-body p-3">
+                  <table class="table table-bordered table-striped">
+                    <thead>
+	                    <tr>
+	                      <th scope="col">企業名</th>
+	                      <th scope="col">登録日</th>
+	                      <th scope="col">削除</th>
+	                    </tr>
+                    </thead>
+                    <tbody>
+                       <tr th:each="favorite:${favoriteList}">
+	                      <td><a th:href="|@{/company/detail}?id=${favorite.companyId}|" th:text="${favorite.companyName}"></a></td>
+	                      <td th:text="${favorite.registryDatetime}">123456</td>
+	                      <td><button class="btn btn-primary my-2"　th:data-companyname="${favorite.companyName}" th:onClick="|javascript:deleteFavo(this,${favorite.companyId});|">削除</button></td>
+	                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
             </div><!-- End一覧 -->
 
@@ -269,7 +66,6 @@
 
         </div><!-- End Right side columns -->
 
-      </div>
     </section>
 
   </main><!-- End #main -->
@@ -278,6 +74,60 @@
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
 
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success" style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title">削除完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           削除が完了しました！
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" onClick="javascript:closeModal();" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 </body>
+<script th:inline="javascript">
+	const regiSuccessBtn = document.getElementById("registration-success");
+	
+	const closeModal = ()=>{
+		location.reload();
+	}
+	
+	//お気に入り削除
+	const deleteFavo = ( obj,companyId )=>{
 
+		if( !confirm("お気に入り情報を削除します。宜しいですか？")){
+			return;
+		}
+		
+ 		const formData = new FormData();
+ 		formData.append('companyId',companyId );
+ 		 		
+        const url = /*[[@{/favorite/delete}]]*/ "/favorite/delete";
+        fetch(url,{method:"delete",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				regiSuccessBtn.click();
+ 			}
+ 		});
+	};
+</script>
 </html>

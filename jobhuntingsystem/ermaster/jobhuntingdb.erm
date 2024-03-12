@@ -138,7 +138,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2024-01-23 17:13:47</creation_date>
-			<updated_date>2024-03-11 10:27:32</updated_date>
+			<updated_date>2024-03-12 10:14:05</updated_date>
 			<model_property>
 				<name>プロジェクト名</name>
 				<value></value>
@@ -1531,8 +1531,8 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>favorit_id</logical_name>
-			<physical_name>favorit_id</physical_name>
+			<logical_name>favorite_id</logical_name>
+			<physical_name>favorite_id</physical_name>
 			<type>integer</type>
 		</word>
 		<word>
@@ -7804,7 +7804,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>110</word_id>
+					<word_id>111</word_id>
 					<id>121</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -10461,7 +10461,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>111</word_id>
+					<word_id>110</word_id>
 					<id>198</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -11383,7 +11383,7 @@
 				<normal_column>
 					<id>219</id>
 					<referenced_column>4</referenced_column>
-					<relation>22</relation>
+					<relation>20</relation>
 					<description>募集職種１</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id1</logical_name>
@@ -11417,7 +11417,7 @@
 				<normal_column>
 					<id>220</id>
 					<referenced_column>4</referenced_column>
-					<relation>21</relation>
+					<relation>19</relation>
 					<description>募集職種２</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id2</logical_name>
@@ -11451,7 +11451,7 @@
 				<normal_column>
 					<id>221</id>
 					<referenced_column>4</referenced_column>
-					<relation>19</relation>
+					<relation>22</relation>
 					<description>募集職種３</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id3</logical_name>
@@ -11485,7 +11485,7 @@
 				<normal_column>
 					<id>222</id>
 					<referenced_column>4</referenced_column>
-					<relation>20</relation>
+					<relation>21</relation>
 					<description>募集職種４</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id4</logical_name>
@@ -12814,7 +12814,7 @@
 					<referenced_complex_unique_key>null</referenced_complex_unique_key>
 				</relation>
 			</connections>
-			<physical_name>favorit_tbl</physical_name>
+			<physical_name>favorite_tbl</physical_name>
 			<logical_name>お気に入りテーブル</logical_name>
 			<description></description>
 			<constraint></constraint>
