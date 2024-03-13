@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS report_tbl;
 DROP TABLE IF EXISTS job_hunting_detail_tbl;
 DROP TABLE IF EXISTS job_hunting_tbl;
 DROP TABLE IF EXISTS message_tbl;
+DROP TABLE IF EXISTS student_industry_tbl;
 DROP TABLE IF EXISTS unread_tbl;
 DROP TABLE IF EXISTS student_tbl;
 DROP TABLE IF EXISTS class_tbl;
@@ -444,6 +445,15 @@ CREATE TABLE step_tbl
 );
 
 
+CREATE TABLE student_industry_tbl
+(
+	si_id int NOT NULL AUTO_INCREMENT,
+	student_id int NOT NULL,
+	industrykind_id int NOT NULL,
+	PRIMARY KEY (si_id)
+);
+
+
 CREATE TABLE student_tbl
 (
 	student_id int NOT NULL AUTO_INCREMENT,
@@ -680,6 +690,14 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
+	ADD FOREIGN KEY (industry_kind_id3)
+	REFERENCES Industrykind_tbl (industrykind_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE recruitment_tbl
 	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
@@ -695,8 +713,8 @@ ALTER TABLE recruitment_tbl
 ;
 
 
-ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id3)
+ALTER TABLE student_industry_tbl
+	ADD FOREIGN KEY (industrykind_id)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -808,6 +826,14 @@ ALTER TABLE job_hunting_tbl
 
 
 ALTER TABLE message_tbl
+	ADD FOREIGN KEY (student_id)
+	REFERENCES student_tbl (student_id)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE student_industry_tbl
 	ADD FOREIGN KEY (student_id)
 	REFERENCES student_tbl (student_id)
 	ON UPDATE RESTRICT

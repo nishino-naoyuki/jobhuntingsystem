@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>0.8</zoom>
-	<x>0</x>
-	<y>0</y>
+	<x>93</x>
+	<y>1145</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -138,7 +138,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2024-01-23 17:13:47</creation_date>
-			<updated_date>2024-03-12 10:14:05</updated_date>
+			<updated_date>2024-03-13 14:28:27</updated_date>
 			<model_property>
 				<name>プロジェクト名</name>
 				<value></value>
@@ -2650,13 +2650,29 @@
 			<binary>false</binary>
 			<args></args>
 			<char_semantics>false</char_semantics>
+			<description></description>
+			<logical_name>si_id</logical_name>
+			<physical_name>si_id</physical_name>
+			<type>integer</type>
+		</word>
+		<word>
+			<id>155</id>
+			<length>null</length>
+			<decimal>null</decimal>
+			<array>false</array>
+			<array_dimension>null</array_dimension>
+			<unsigned>false</unsigned>
+			<zerofill>false</zerofill>
+			<binary>false</binary>
+			<args></args>
+			<char_semantics>false</char_semantics>
 			<description>イベント開始日時</description>
 			<logical_name>start_datetime</logical_name>
 			<physical_name>start_datetime</physical_name>
 			<type>datetime</type>
 		</word>
 		<word>
-			<id>155</id>
+			<id>156</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2672,7 +2688,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>156</id>
+			<id>157</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2688,7 +2704,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>157</id>
+			<id>158</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2704,7 +2720,7 @@
 			<type>datetime</type>
 		</word>
 		<word>
-			<id>158</id>
+			<id>159</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2720,7 +2736,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>159</id>
+			<id>160</id>
 			<length>7</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2736,7 +2752,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>160</id>
+			<id>161</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2752,7 +2768,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>161</id>
+			<id>162</id>
 			<length>30</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2768,7 +2784,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>162</id>
+			<id>163</id>
 			<length>30</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2784,7 +2800,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>163</id>
+			<id>164</id>
 			<length>50</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2800,7 +2816,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>164</id>
+			<id>165</id>
 			<length>255</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2816,7 +2832,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>165</id>
+			<id>166</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2832,7 +2848,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>166</id>
+			<id>167</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2848,7 +2864,7 @@
 			<type>integer</type>
 		</word>
 		<word>
-			<id>167</id>
+			<id>168</id>
 			<length>1024</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2864,7 +2880,7 @@
 			<type>varchar(n)</type>
 		</word>
 		<word>
-			<id>168</id>
+			<id>169</id>
 			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
@@ -2889,7 +2905,7 @@
 			<width>220</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>1104</x>
+			<x>780</x>
 			<y>1452</y>
 			<color>
 				<r>128</r>
@@ -2990,8 +3006,8 @@
 			<width>248</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>1056</x>
-			<y>1728</y>
+			<x>756</x>
+			<y>1620</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -3091,7 +3107,7 @@
 			<width>220</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>1104</x>
+			<x>803</x>
 			<y>1236</y>
 			<color>
 				<r>128</r>
@@ -3265,7 +3281,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>156</word_id>
+					<word_id>157</word_id>
 					<id>7</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3702,7 +3718,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>155</word_id>
+					<word_id>156</word_id>
 					<id>15</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3735,7 +3751,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>157</word_id>
+					<word_id>158</word_id>
 					<id>16</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3925,7 +3941,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>159</word_id>
+					<word_id>160</word_id>
 					<id>20</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3991,7 +4007,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>168</word_id>
+					<word_id>169</word_id>
 					<id>22</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6070,7 +6086,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>161</word_id>
+					<word_id>162</word_id>
 					<id>85</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -6184,11 +6200,11 @@
 		</table>
 		<table>
 			<id>8</id>
-			<height>100</height>
+			<height>126</height>
 			<width>217</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>1080</x>
+			<x>804</x>
 			<y>1044</y>
 			<color>
 				<r>128</r>
@@ -6364,12 +6380,12 @@
 		</table>
 		<table>
 			<id>9</id>
-			<height>100</height>
+			<height>126</height>
 			<width>215</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>398</x>
-			<y>864</y>
+			<x>396</x>
+			<y>876</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -6609,7 +6625,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>166</word_id>
+					<word_id>167</word_id>
 					<id>94</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7034,7 +7050,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>163</word_id>
+					<word_id>164</word_id>
 					<id>104</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7537,12 +7553,12 @@
 		</table>
 		<table>
 			<id>15</id>
-			<height>126</height>
+			<height>152</height>
 			<width>220</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>396</x>
-			<y>672</y>
+			<x>394</x>
+			<y>696</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -7635,7 +7651,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>109</word_id>
+					<word_id>108</word_id>
 					<id>117</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -7804,7 +7820,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>111</word_id>
+					<word_id>110</word_id>
 					<id>121</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8048,7 +8064,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>158</word_id>
+					<word_id>159</word_id>
 					<id>126</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8114,7 +8130,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>159</word_id>
+					<word_id>160</word_id>
 					<id>128</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8314,7 +8330,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>162</word_id>
+					<word_id>163</word_id>
 					<id>134</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -8380,7 +8396,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>168</word_id>
+					<word_id>169</word_id>
 					<id>136</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -10461,7 +10477,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>110</word_id>
+					<word_id>111</word_id>
 					<id>198</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -10692,7 +10708,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>167</word_id>
+					<word_id>168</word_id>
 					<id>205</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -10824,7 +10840,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>164</word_id>
+					<word_id>165</word_id>
 					<id>209</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -10999,7 +11015,7 @@
 			<width>290</width>
 				<font_name>Yu Gothic UI</font_name>
 				<font_size>9</font_size>
-			<x>737</x>
+			<x>1128</x>
 			<y>1056</y>
 			<color>
 				<r>128</r>
@@ -11215,7 +11231,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>165</word_id>
+					<word_id>166</word_id>
 					<id>214</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -11383,7 +11399,7 @@
 				<normal_column>
 					<id>219</id>
 					<referenced_column>4</referenced_column>
-					<relation>20</relation>
+					<relation>21</relation>
 					<description>募集職種１</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id1</logical_name>
@@ -11451,7 +11467,7 @@
 				<normal_column>
 					<id>221</id>
 					<referenced_column>4</referenced_column>
-					<relation>22</relation>
+					<relation>20</relation>
 					<description>募集職種３</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id3</logical_name>
@@ -11485,7 +11501,7 @@
 				<normal_column>
 					<id>222</id>
 					<referenced_column>4</referenced_column>
-					<relation>21</relation>
+					<relation>22</relation>
 					<description>募集職種４</description>
 					<unique_key_name></unique_key_name>
 					<logical_name>industry_kind_id4</logical_name>
@@ -12177,7 +12193,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>160</word_id>
+					<word_id>161</word_id>
 					<id>243</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -12377,7 +12393,7 @@
 			<option></option>
 			<columns>
 				<normal_column>
-					<word_id>108</word_id>
+					<word_id>109</word_id>
 					<id>246</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -12510,7 +12526,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>154</word_id>
+					<word_id>155</word_id>
 					<id>250</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -12934,6 +12950,186 @@
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
 					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+			</columns>
+			<indexes>
+			</indexes>
+			<complex_unique_key_list>
+			</complex_unique_key_list>
+			<table_properties>
+				<schema></schema>
+				<character_set></character_set>
+				<collation></collation>
+				<storage_engine></storage_engine>
+				<primary_key_length_of_text>null</primary_key_length_of_text>
+			</table_properties>
+		</table>
+		<table>
+			<id>23</id>
+			<height>75</height>
+			<width>120</width>
+				<font_name>Yu Gothic UI</font_name>
+				<font_size>9</font_size>
+			<x>735</x>
+			<y>1832</y>
+			<color>
+				<r>128</r>
+				<g>128</g>
+				<b>192</b>
+			</color>
+			<connections>
+				<relation>
+					<id>29</id>
+					<source>2</source>
+					<target>23</target>
+						<source_xp>-1</source_xp>
+						<source_yp>-1</source_yp>
+						<target_xp>-1</target_xp>
+						<target_yp>-1</target_yp>
+						<color>
+							<r>0</r>
+							<g>0</g>
+							<b>0</b>
+						</color>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+				<relation>
+					<id>30</id>
+					<source>17</source>
+					<target>23</target>
+						<source_xp>-1</source_xp>
+						<source_yp>-1</source_yp>
+						<target_xp>-1</target_xp>
+						<target_yp>-1</target_yp>
+						<color>
+							<r>0</r>
+							<g>0</g>
+							<b>0</b>
+						</color>
+					<child_cardinality>1..n</child_cardinality>
+					<parent_cardinality>1</parent_cardinality>
+					<reference_for_pk>true</reference_for_pk>
+					<name></name>
+					<on_delete_action>RESTRICT</on_delete_action>
+					<on_update_action>RESTRICT</on_update_action>
+					<referenced_column>null</referenced_column>
+					<referenced_complex_unique_key>null</referenced_complex_unique_key>
+				</relation>
+			</connections>
+			<physical_name>student_industry_tbl</physical_name>
+			<logical_name>学生職種テーブル</logical_name>
+			<description></description>
+			<constraint></constraint>
+			<primary_key_name></primary_key_name>
+			<option></option>
+			<columns>
+				<normal_column>
+					<word_id>154</word_id>
+					<id>261</id>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>true</auto_increment>
+					<foreign_key>false</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>true</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<id>262</id>
+					<referenced_column>126</referenced_column>
+					<relation>30</relation>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>true</foreign_key>
+					<not_null>true</not_null>
+					<primary_key>false</primary_key>
+					<unique_key>false</unique_key>
+					<character_set></character_set>
+					<collation></collation>
+					<sequence>
+						<name></name>
+						<schema></schema>
+						<increment></increment>
+						<min_value></min_value>
+						<max_value></max_value>
+						<start></start>
+						<cache></cache>
+						<nocache>false</nocache>
+						<cycle>false</cycle>
+						<order>false</order>
+						<description></description>
+						<data_type></data_type>
+						<decimal_size>0</decimal_size>
+					</sequence>
+				</normal_column>
+				<normal_column>
+					<id>263</id>
+					<referenced_column>4</referenced_column>
+					<relation>29</relation>
+					<description></description>
+					<unique_key_name></unique_key_name>
+					<logical_name></logical_name>
+					<physical_name></physical_name>
+					<type>integer</type>
+					<constraint></constraint>
+					<default_value></default_value>
+					<auto_increment>false</auto_increment>
+					<foreign_key>true</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
 					<unique_key>false</unique_key>

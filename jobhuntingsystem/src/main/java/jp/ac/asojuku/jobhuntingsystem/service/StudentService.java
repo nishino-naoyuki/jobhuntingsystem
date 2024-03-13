@@ -15,14 +15,17 @@ import com.opencsv.bean.CsvToBeanBuilder;
 
 import jp.ac.asojuku.jobhuntingsystem.csv.CubicCSV;
 import jp.ac.asojuku.jobhuntingsystem.csv.StudentCSV;
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StudentDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.DepartmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.StudentIndustryEntity;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.DefineStrings;
 import jp.ac.asojuku.jobhuntingsystem.repository.ClassRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.DepartmentRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.StudentIndustryRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StudentRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Digest;
 
@@ -35,7 +38,31 @@ public class StudentService {
 	ClassRepository classRepository;
 	@Autowired
 	DepartmentRepository departmentRepository;
+	@Autowired
+	StudentIndustryRepository studentIndustryRepository;
 
+	/**
+	 * 希望職種の更新（いったん削除してリストを作り直す）
+	 * @param studentId
+	 * @param industryArry
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void insertIndustryKind(Integer studentId,Integer[] industryArry) {
+		List<StudentIndustryEntity> siList = studentIndustryRepository.findByStudentIdOrderByIndustrykindId(studentId);
+		if( siList.size() > 0 ) {
+			//いったん削除する
+			studentIndustryRepository.deleteInBatch(siList);
+		}
+		//作成しなおす
+		List<StudentIndustryEntity> siInsertList = new ArrayList<>();
+		for(Integer industryId : industryArry) {
+			StudentIndustryEntity siEntity = new StudentIndustryEntity();
+			siEntity.setStudentId(studentId);
+			siEntity.setIndustrykindId(industryId);
+			siInsertList.add(siEntity);
+		}
+		studentIndustryRepository.saveAll(siInsertList);
+	}
 	/**
 	 * ユーザー情報詳細データ取得
 	 * @param studentId
@@ -43,8 +70,9 @@ public class StudentService {
 	 */
 	public StudentDto getDetail(Integer studentId) {
 		StudentEntity sEntity = studentRepository.getOne(studentId);
+		List<StudentIndustryEntity> siList = studentIndustryRepository.findByStudentIdOrderByIndustrykindId(studentId);
 		
-		return getFrom(sEntity);
+		return getFrom(sEntity,siList);
 	}
 	/**
 	 * 学生登録
@@ -289,7 +317,7 @@ public class StudentService {
 	 * @param sEntity
 	 * @return
 	 */
-	private StudentDto getFrom( StudentEntity sEntity ) {
+	private StudentDto getFrom( StudentEntity sEntity,List<StudentIndustryEntity> siList) {
 		StudentDto dto = new StudentDto();
 
 		dto.setStudentId(sEntity.getStudentId());
@@ -300,6 +328,14 @@ public class StudentService {
 		dto.setClassId(sEntity.getClassId());
 		dto.setClassName(sEntity.getClassTbl().getDepartmentTbl().getName());
 		dto.setTeacherName(sEntity.getClassTbl().getAdminTbl().getName());
+		for(StudentIndustryEntity siEntity : siList ) {
+			IndustryKindDto ikDto = new IndustryKindDto();
+			ikDto.setId(siEntity.getSiId());
+			ikDto.setName(siEntity.getIndustrykindTbl().getName());
+			ikDto.setIndustryId(siEntity.getIndustrykindTbl().getIndustryTbl().getIndustryId());
+			ikDto.setIndustryName(siEntity.getIndustrykindTbl().getIndustryTbl().getName());
+			dto.addIkList(ikDto);
+		}
 		//活動履歴 todo
 		
 		return dto;

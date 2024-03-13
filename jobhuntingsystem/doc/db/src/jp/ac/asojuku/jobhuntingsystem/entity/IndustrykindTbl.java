@@ -39,12 +39,16 @@ public class IndustrykindTbl implements Serializable {
 	/** 採用求人テーブル 一覧. */
 	private Set<RecruitmentTbl> recruitmentTblSet;
 
+	/** 学生職種テーブル 一覧. */
+	private Set<StudentIndustryTbl> studentIndustryTblSet;
+
 	/**
 	 * コンストラクタ.
 	 */
 	public IndustrykindTbl() {
 		this.companyIndustrySet = new HashSet<CompanyIndustry>();
 		this.recruitmentTblSet = new HashSet<RecruitmentTbl>();
+		this.studentIndustryTblSet = new HashSet<StudentIndustryTbl>();
 	}
 
 	/**
@@ -247,6 +251,35 @@ public class IndustrykindTbl implements Serializable {
 	 */
 	public Set<RecruitmentTbl> getRecruitmentTblSet() {
 		return this.recruitmentTblSet;
+	}
+
+	/**
+	 * 学生職種テーブル 一覧を設定します.
+	 * 
+	 * @param studentIndustryTblSet
+	 *            学生職種テーブル 一覧
+	 */
+	public void setStudentIndustryTblSet(Set<StudentIndustryTbl> studentIndustryTblSet) {
+		this.studentIndustryTblSet = studentIndustryTblSet;
+	}
+
+	/**
+	 * 学生職種テーブル を追加します.
+	 * 
+	 * @param studentIndustryTbl
+	 *            学生職種テーブル
+	 */
+	public void addStudentIndustryTbl(StudentIndustryTbl studentIndustryTbl) {
+		this.studentIndustryTblSet.add(studentIndustryTbl);
+	}
+
+	/**
+	 * 学生職種テーブル 一覧を取得します.
+	 * 
+	 * @return 学生職種テーブル 一覧
+	 */
+	public Set<StudentIndustryTbl> getStudentIndustryTblSet() {
+		return this.studentIndustryTblSet;
 	}
 
 	/**

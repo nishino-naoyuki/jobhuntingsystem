@@ -1,31 +1,70 @@
 package jp.ac.asojuku.jobhuntingsystem.controll;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jp.ac.asojuku.jobhuntingsystem.dto.DepartmentDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StudentDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
+import jp.ac.asojuku.jobhuntingsystem.param.json.DepartmentJson;
+import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
 import jp.ac.asojuku.jobhuntingsystem.service.StudentService;
 
 @Controller
 @RequestMapping(value= {"/student"})
-public class StudentController {
+public class StudentController extends FileController{
 
 	Logger logger = LoggerFactory.getLogger(StudentController.class);
 	@Autowired
 	StudentService studentService;
 	@Autowired
+	IndustryService industryService;
+	@Autowired
 	HttpSession session;
+	
+
+	@RequestMapping(value = { "/industryArry" }, method = RequestMethod.POST)
+	@ResponseBody
+	public Object savaIndustryArry(
+			@ModelAttribute("industryArry")Integer[] industryArry
+			) throws JsonProcessingException {
+		String result = "OK";
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		studentService.insertIndustryKind(loginInfoDto.getUid(), industryArry);
+
+		DepartmentJson jsonObj = new DepartmentJson();
+		
+		jsonObj.setResult( result );
+
+		ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(jsonObj);
+
+        logger.trace("jsonString:{}",jsonString);
+
+        return jsonString;
+	}
 	
 	@RequestMapping(value= {"/progress"}, method=RequestMethod.GET)
     public ModelAndView progress(
@@ -58,7 +97,9 @@ public class StudentController {
 
 		
 		StudentDto studentDto = studentService.getDetail( loginInfoDto.getUid() );
+		List<IndustryDto> industryList = industryService.getAllIndustryDto();
 		
+		mv.addObject("industryList", industryList);
 		mv.addObject("studentDto", studentDto);
         mv.setViewName("studentdetail");
         

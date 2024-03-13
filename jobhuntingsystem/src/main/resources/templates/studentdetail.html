@@ -46,7 +46,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">希望職種編集</button>
                 </li>
 
                 <li class="nav-item">
@@ -87,8 +87,10 @@
                   </div>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">年齢</div>
-                    <div class="col-lg-9 col-md-8">19歳</div>
+                    <div class="col-lg-3 col-md-4 label">希望職種</div>
+					<div class="col-sm-10">
+						<span th:each="industry : ${studentDto.ikList}" class="badge bg-primary companydetailicon" th:text="${industry.name}" >システムエンジニア</span>
+					</div>
                   </div>
 
                   <div class="row">
@@ -106,106 +108,34 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
-                    <div class="row mb-3">
-                      <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                      <div class="col-md-8 col-lg-9">
-                        <img src="assets/img/profile-img.jpg" alt="Profile">
-                        <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                        </div>
-                      </div>
-                    </div>
+                	<div class="row mb-3">
+						<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
+						<div class="col-sm-10">
+							<div class="accordion" id="accordionExample">
+								<div class="accordion-item" th:each="industry : ${industryList}">
+									<h2 class="accordion-header" th:id="|heading${industry.id}|">
+										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
+										</button>
+									</h2>
+									<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<div th:each="kind : ${industry.kindList}" class="form-check">
+												<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${industry.id}|" th:checked="${studentDto.isContainList(kind.id)}" >
+												<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
+													
+												</label>
+											</div>
+										</div>
+									</div>
+								</div><!-- accordion-item -->
+							</div><!-- accordion -->
+						</div>
+					</div>
 
-                    <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin Anderson">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
-                      <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="Job" value="Web Designer">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="USA">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="A108 Adam Street, New York, NY 535022">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="(436) 486-3538 x29071">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="k.anderson@example.com">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
+                      <button type="button" class="btn btn-primary" id="saveIndustryListButton">Save Changes</button>
                     </div>
-                  </form><!-- End Profile Edit Form -->
 
                 </div>
 
@@ -219,28 +149,28 @@
                   <form>
 
                     <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">現在のパスワード</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="password" type="password" class="form-control" id="currentPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">新しいパスワード</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="newpassword" type="password" class="form-control" id="newPassword">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">新しいパスワード（確認）</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="renewpassword" type="password" class="form-control" id="renewPassword">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary" id="changepassbutton">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -262,6 +192,81 @@
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
 
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success"　style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="msgTitle">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body" id="msgBody">
+           登録が完了しました！
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 </body>
-
+<script th:inline="javascript">
+	const saveIndustryListButton = document.getElementById("saveIndustryListButton");
+	const changepassbutton = document.getElementById("changepassbutton");
+	const registrationSuccess = document.getElementById("registration-success");
+	const msgTitle = document.getElementById("msgTitle");
+	const msgBody = document.getElementById("msgBody");
+	
+	saveIndustryListButton.addEventListener('click',()=>{		
+ 		let industryArry = [];
+ 		let index = 0;
+ 		for(let id=1; id <= /*[[${industryList.size()}]]*/0; id++){
+ 			const industryKind = document.getElementsByName("industryKind"+id);
+ 			for( let i=0; i<industryKind.length; i++){
+ 				if( industryKind[i].checked ){
+ 					industryArry[index] = industryKind[i].value
+ 					index++;
+ 				}
+ 			}
+ 		} 		
+ 		
+ 		const formData = new FormData();
+ 		formData.append('industryArry',industryArry );
+ 		 		
+        const url = /*[[@{/student/industryArry}]]*/ "/student/industryArry";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				errorText.innerHTML = msgs;
+ 				alertarea.style.display = "block";
+ 				location.href="#alertmsg";
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
+	});
+	
+	changepassbutton.addEventListener('click',()=>{
+		const currentPassword = document.getElementById("currentPassword");
+		const newPassword = document.getElementById("newPassword");
+		const renewPassword = document.getElementById("renewPassword");
+		
+		
+		if( newPassword != renewPassword ){
+			msgTitle.innserHTML = "エラー";
+			msgBody.innerHTML = "新しいパスワードが一致しません";
+			registrationSuccess.click();
+			return;
+		}
+	});
+</script>
 </html>

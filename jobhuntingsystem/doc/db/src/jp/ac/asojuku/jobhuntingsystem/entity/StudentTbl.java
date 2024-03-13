@@ -232,13 +232,16 @@ public class StudentTbl implements Serializable {
 	private Set<CareerReportTbl> careerReportTblSet;
 
 	/** お気に入りテーブル 一覧. */
-	private Set<FavoritTbl> favoritTblSet;
+	private Set<FavoriteTbl> favoriteTblSet;
 
 	/** 就職テーブル 一覧. */
 	private Set<JobHuntingTbl> jobHuntingTblSet;
 
 	/** 個別メッセージテーブル 一覧. */
 	private Set<MessageTbl> messageTblSet;
+
+	/** 学生職種テーブル 一覧. */
+	private Set<StudentIndustryTbl> studentIndustryTblSet;
 
 	/** 未読テーブル 一覧. */
 	private Set<UnreadTbl> unreadTblSet;
@@ -248,9 +251,10 @@ public class StudentTbl implements Serializable {
 	 */
 	public StudentTbl() {
 		this.careerReportTblSet = new HashSet<CareerReportTbl>();
-		this.favoritTblSet = new HashSet<FavoritTbl>();
+		this.favoriteTblSet = new HashSet<FavoriteTbl>();
 		this.jobHuntingTblSet = new HashSet<JobHuntingTbl>();
 		this.messageTblSet = new HashSet<MessageTbl>();
+		this.studentIndustryTblSet = new HashSet<StudentIndustryTbl>();
 		this.unreadTblSet = new HashSet<UnreadTbl>();
 	}
 
@@ -1635,21 +1639,21 @@ public class StudentTbl implements Serializable {
 	/**
 	 * お気に入りテーブル 一覧を設定します.
 	 * 
-	 * @param favoritTblSet
+	 * @param favoriteTblSet
 	 *            お気に入りテーブル 一覧
 	 */
-	public void setFavoritTblSet(Set<FavoritTbl> favoritTblSet) {
-		this.favoritTblSet = favoritTblSet;
+	public void setFavoriteTblSet(Set<FavoriteTbl> favoriteTblSet) {
+		this.favoriteTblSet = favoriteTblSet;
 	}
 
 	/**
 	 * お気に入りテーブル を追加します.
 	 * 
-	 * @param favoritTbl
+	 * @param favoriteTbl
 	 *            お気に入りテーブル
 	 */
-	public void addFavoritTbl(FavoritTbl favoritTbl) {
-		this.favoritTblSet.add(favoritTbl);
+	public void addFavoriteTbl(FavoriteTbl favoriteTbl) {
+		this.favoriteTblSet.add(favoriteTbl);
 	}
 
 	/**
@@ -1657,8 +1661,8 @@ public class StudentTbl implements Serializable {
 	 * 
 	 * @return お気に入りテーブル 一覧
 	 */
-	public Set<FavoritTbl> getFavoritTblSet() {
-		return this.favoritTblSet;
+	public Set<FavoriteTbl> getFavoriteTblSet() {
+		return this.favoriteTblSet;
 	}
 
 	/**
@@ -1717,6 +1721,35 @@ public class StudentTbl implements Serializable {
 	 */
 	public Set<MessageTbl> getMessageTblSet() {
 		return this.messageTblSet;
+	}
+
+	/**
+	 * 学生職種テーブル 一覧を設定します.
+	 * 
+	 * @param studentIndustryTblSet
+	 *            学生職種テーブル 一覧
+	 */
+	public void setStudentIndustryTblSet(Set<StudentIndustryTbl> studentIndustryTblSet) {
+		this.studentIndustryTblSet = studentIndustryTblSet;
+	}
+
+	/**
+	 * 学生職種テーブル を追加します.
+	 * 
+	 * @param studentIndustryTbl
+	 *            学生職種テーブル
+	 */
+	public void addStudentIndustryTbl(StudentIndustryTbl studentIndustryTbl) {
+		this.studentIndustryTblSet.add(studentIndustryTbl);
+	}
+
+	/**
+	 * 学生職種テーブル 一覧を取得します.
+	 * 
+	 * @return 学生職種テーブル 一覧
+	 */
+	public Set<StudentIndustryTbl> getStudentIndustryTblSet() {
+		return this.studentIndustryTblSet;
 	}
 
 	/**

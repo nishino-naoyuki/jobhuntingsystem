@@ -61,7 +61,7 @@ public class CompanyTbl implements Serializable {
 	private Set<EventTbl> eventTblSet;
 
 	/** お気に入りテーブル 一覧. */
-	private Set<FavoritTbl> favoritTblSet;
+	private Set<FavoriteTbl> favoriteTblSet;
 
 	/** 学生テーブル 一覧. */
 	private Set<GraduateTbl> graduateTblSet;
@@ -75,7 +75,7 @@ public class CompanyTbl implements Serializable {
 	public CompanyTbl() {
 		this.companyIndustrySet = new HashSet<CompanyIndustry>();
 		this.eventTblSet = new HashSet<EventTbl>();
-		this.favoritTblSet = new HashSet<FavoritTbl>();
+		this.favoriteTblSet = new HashSet<FavoriteTbl>();
 		this.graduateTblSet = new HashSet<GraduateTbl>();
 		this.recruitmentTblSet = new HashSet<RecruitmentTbl>();
 	}
@@ -388,21 +388,21 @@ public class CompanyTbl implements Serializable {
 	/**
 	 * お気に入りテーブル 一覧を設定します.
 	 * 
-	 * @param favoritTblSet
+	 * @param favoriteTblSet
 	 *            お気に入りテーブル 一覧
 	 */
-	public void setFavoritTblSet(Set<FavoritTbl> favoritTblSet) {
-		this.favoritTblSet = favoritTblSet;
+	public void setFavoriteTblSet(Set<FavoriteTbl> favoriteTblSet) {
+		this.favoriteTblSet = favoriteTblSet;
 	}
 
 	/**
 	 * お気に入りテーブル を追加します.
 	 * 
-	 * @param favoritTbl
+	 * @param favoriteTbl
 	 *            お気に入りテーブル
 	 */
-	public void addFavoritTbl(FavoritTbl favoritTbl) {
-		this.favoritTblSet.add(favoritTbl);
+	public void addFavoriteTbl(FavoriteTbl favoriteTbl) {
+		this.favoriteTblSet.add(favoriteTbl);
 	}
 
 	/**
@@ -410,8 +410,8 @@ public class CompanyTbl implements Serializable {
 	 * 
 	 * @return お気に入りテーブル 一覧
 	 */
-	public Set<FavoritTbl> getFavoritTblSet() {
-		return this.favoritTblSet;
+	public Set<FavoriteTbl> getFavoriteTblSet() {
+		return this.favoriteTblSet;
 	}
 
 	/**
