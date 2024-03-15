@@ -18,7 +18,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>学内説明会検索</h1>
+      <h1>イベント検索</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -33,21 +33,25 @@
     			<div class="card">
     				<div class="card-body">
     					<h5 class="card-title">検索条件</h5>
-		                <form>
 		                	<div class="row mb-3">
-								<label for="inputText" class="col-sm-2 col-form-label">企業名</label>
-								<div class="col-sm-4">
-									<input type="text" class="form-control">
+								<label for="inputText" class="col-sm-2 col-form-label" th:if="!${session['loginInfo'].isCompany()}">企業名</label>
+								<div class="col-sm-4" th:if="!${session['loginInfo'].isCompany()}">
+									<input type="text" class="form-control" id="companyName">
 								</div>
-								<label for="inputText" class="col-sm-2 col-form-label">求人番号</label>
+								<label for="inputText" class="col-sm-2 col-form-label">イベント種類</label>
 								<div class="col-sm-4">
-									<input type="text" class="form-control">
+									<div class="form-check-inline" th:each="step,stat : ${stepList}">
+										<input class="form-check-input" type="checkbox" name="stepchk" th:value="${step.id}">
+										<label class="form-check-label" for="gridCheck" th:text="${step.name}">
+											
+										</label>
+									</div>
 								</div>
 							</div>
 		                	<div class="row mb-3">
 								<label for="inputText" class="col-sm-2 col-form-label">開催日</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control">から<input type="text" class="form-control">まで
+								<div class="col-sm-8 d-flex">
+									<input type="date" class="form-control" id="startDate">～<input type="date" class="form-control" id="endDate">
 								</div>
 							</div>
 		                	<div class="row mb-3">
@@ -135,71 +139,17 @@
 								<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
 								<div class="col-sm-10">
 									<div class="accordion" id="accordionExample">
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingOne">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-													IT系
+										<div class="accordion-item" th:each="industry,stat : ${industryList}">
+											<h2 class="accordion-header" th:id="|heading${industry.id}|">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
 												</button>
 											</h2>
-											<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+											<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															システムエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															プログラマ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															運用オペレータ
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															カスタマーエンジニア
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															IT系営業
-														</label>
-													</div>
-												</div>
-											</div>
-										</div><!-- accordion-item -->
-										<div class="accordion-item">
-											<h2 class="accordion-header" id="headingTwo">
-												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-													ビジネス系
-												</button>
-											</h2>
-											<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-												<div class="accordion-body">
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck1">
-														<label class="form-check-label" for="gridCheck1">
-															事務
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															営業
-														</label>
-													</div>
-													<div class="form-check">
-														<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-														<label class="form-check-label" for="gridCheck2">
-															販売
+													<div th:each="kind : ${industry.kindList}" class="form-check">
+														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${stat.count}|" >
+														<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
+															
 														</label>
 													</div>
 												</div>
@@ -209,9 +159,8 @@
 								</div>
 							</div>
 							<div class="d-grid gap-2 col-6 mx-auto">
-								<button class="btn btn-outline-primary">検索</button>
+								<button class="btn btn-outline-primary" id="eventsearchButton">検索</button>
 							</div>
-		                </form><!--form-->
     				</div>
     			</div><!-- card -->
     		</div><!-- col-lg-12 -->
@@ -222,142 +171,17 @@
     		 		<div class="card-body">
               			<h5 class="card-title">検索結果</h5>
               			<button class="btn btn-outline-primary">CSV出力</button>
-              			<table class="table datatable">
+              			<table class="table table-bordered table-striped" id="eventList">
 	              			<thead>
 			                  <tr>
-			                    <th scope="col">#</th>
-			                    <th scope="col">求人番号</th>
 			                    <th scope="col">企業名</th>
-			                    <th scope="col">職種</th>
 			                    <th scope="col">種類</th>
-			                    <th scope="col">実施日</th>
-			                    <th scope="col">開始時間</th>
-			                    <th scope="col">勤務地</th>
+			                    <th scope="col">開始日時</th>
+			                    <th scope="col">終了日時</th>
 			                    <th scope="col">参加者一覧（先生権限）</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
-			                  <tr>
-			                    <th scope="row">1</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">2</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG OP</td>
-			                    <td>選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">3</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE</td>
-			                    <td>説明会/選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">4</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>CE</td>
-			                    <td>選考会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">5</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">6</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE OP</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">7</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">8</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">9</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">10</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">11</th>
-			                    <td>0000000</td>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td>SE PG</td>
-			                    <td>説明会</td>
-			                    <td>2016-05-25</td>
-			                    <td>13:00</td>
-			                    <td>東京</td>
-			                    <td><button class="btn btn-outline-primary" onclick="window.open('student-participant-list.html','window1');return false;">参加者一覧</button></td>
-			                  </tr>
 			                </tbody>
               			</table><!-- table -->
               		</div><!-- card-body -->
@@ -373,6 +197,105 @@
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
 
+<link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 </body>
 
+<script th:inline="javascript">
+	const eventsearchButton = document.getElementById("eventsearchButton");
+	
+	const openList = ( eventId )=>{
+		alert(eventId);
+	}
+	
+	let  dataTable = $('#eventList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+    });
+    
+	eventsearchButton.addEventListener('click',()=>{
+	
+		const companyName = document.getElementById("companyName");
+		const startDate = document.getElementById("startDate");		
+		const endDate = document.getElementById("endDate");		
+ 		let industryArry = [];
+ 		let index = 0;
+ 		for(let id=1; id <= /*[[${industryList.size()}]]*/0; id++){
+ 			const industryKind = document.getElementsByName("industryKind"+id);
+ 			for( let i=0; i<industryKind.length; i++){
+ 				if( industryKind[i].checked ){
+ 					industryArry[index] = industryKind[i].value
+ 					index++;
+ 				}
+ 			}
+ 		} 		
+ 		let stepArry = [];
+ 		index = 0;
+		const stepchekes = document.getElementsByName("stepchk");
+		for( let i=0; i<stepchekes.length; i++){
+			if( stepchekes[i].checked ){
+				stepArry[index] = stepchekes[i].value
+				index++;
+			}
+		}
+ 		
+ 		const formData = new FormData();
+ 		formData.append('companyName',(companyName != null ? companyName.value : "") );
+ 		formData.append('startDateStr',startDate.value );
+ 		formData.append('endDateStr',endDate.value );
+ 		formData.append('industryArry',industryArry );
+ 		formData.append('stepArry',stepArry );
+ 		 		
+        const url = /*[[@{/event/search}]]*/ "/event/search";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(resultList => {
+ 			//alert( resultList.length );
+ 			dataTable.clear();
+ 			dataTable.destroy();
+ 			
+   		  dataTable = $('#eventList').DataTable({
+	   	      "paging": true,
+      			"destroy":true,
+	   	      "lengthChange": false,
+	   	      "searching": true,
+	   	      "ordering": true,
+	   	      "info": true,
+	   	      "autoWidth": false,
+	   	      "responsive": true,
+				"data":resultList,
+	            "columns": [
+	            	{
+	            		data:"companyName" ,
+	            		type:"companyId",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+	                		return '<a href="'+url+'?id='+row.companyId+'" target="companydetail">'+data+'</a>';
+	                	}
+	            	},
+	            	{ data:"stepName"},
+	            	{ data:"startDatetimeStr"},
+	            	{ data:"endDatetimeStr"},
+	            	{
+	            		data:"companyName" ,
+	            		type:"companyId",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+	                		return '<button class="btn btn-outline-primary" onclick="javascript:openList('+row.eventId+');">参加者一覧</button>';
+	                	}
+	            	},
+	            ]
+	   	    });
+	   	    dataTable.draw();
+ 		});
+	});
+</script>
 </html>

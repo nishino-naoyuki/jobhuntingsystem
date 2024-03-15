@@ -199,7 +199,7 @@
 		
  		const formData = new FormData(eventRegiForm);
  		 		
-        const url = /*[[@{/job/event/regi}]]*/ "/job/event/regi";
+        const url = /*[[@{/event/regi}]]*/ "/event/regi";
         fetch(url,{method:"post",body: formData})
         //レスポンスの受け取り
         .then( response => response.json()).then(result => {

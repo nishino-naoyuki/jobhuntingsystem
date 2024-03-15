@@ -41,14 +41,14 @@
       </li><!-- End Components Nav -->
       
       <li class="nav-item">
-        <a class="nav-link " th:href="@{/job/search}">
+        <a class="nav-link " th:href="@{/event/search}">
           <i class="bi bi-search"></i>
           <span>イベント検索</span>
         </a>
       </li><!-- End Components Nav -->
       
       <li class="nav-item" th:if="${session['loginInfo'].isCompany()}">
-        <a class="nav-link " th:href="|@{/job/event/regi}?companyId=${session['loginInfo'].uid}|">
+        <a class="nav-link " th:href="|@{/event/regi}?companyId=${session['loginInfo'].uid}|">
           <i class="bi bi-box-arrow-in-up"></i>
           <span>イベント登録</span>
         </a>

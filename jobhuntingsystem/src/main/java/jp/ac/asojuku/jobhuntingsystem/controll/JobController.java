@@ -19,17 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import jp.ac.asojuku.jobhuntingsystem.dto.CompanyDetailDto;
-import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryKindDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
-import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.JobDetailDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
-import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobOfferInputForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobSearchForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
@@ -109,90 +105,6 @@ public class JobController extends FileController {
 		return getJson(bindingResult,String.valueOf(recruitmentId));
 	}
 	
-	/**
-	 * 求人情報の付随するイベントの登録画面表示処理
-	 * @param mv
-	 * @return
-	 * @throws SystemErrorException
-	 * @throws PermitionException 
-	 */
-	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.GET)
-    public ModelAndView eventInput(
-    		@ModelAttribute("companyId")Integer companyId,
-    		//@ModelAttribute("recruitmentId")Integer recruitmentId,
-    		ModelAndView mv
-    		) throws SystemErrorException, PermitionException {
-		
-		logger.info("event-input！");
-
-		//せっしょんからログイン情報取得
-		LoginInfoDto loginInfoDto =
-				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-		
-		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(companyId)) {
-			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",companyId);
-		}else if( loginInfoDto.isAdmin()) {
-			logger.info("管理者がイベント登録画面を表示しようとしています。");
-		}else {
-			//登録・更新権限ない人
-			throw new PermitionException("この画面を表示する権限がありません");
-		}
-		
-		List<EventInfoDto> eventList = eventService.getList(companyId);
-		List<StepDto> stepList = eventService.getAllStepList();
-		CompanyDetailDto companyDetailDto = companyService.getDetail(companyId);
-		
-		mv.addObject("eventList",eventList);
-		mv.addObject("companyId",companyId);
-		//mv.addObject("recruitmentId",recruitmentId);
-		mv.addObject("stepList",stepList);
-		mv.addObject("companyDetailDto",companyDetailDto);
-		
-        mv.setViewName("eventregi");
-        
-		return mv;
-	}
-
-	/**
-	 * イベント登録処理
-	 * @param eventsForm
-	 * @param bindingResult
-	 * @return
-	 * @throws SystemErrorException
-	 * @throws JsonProcessingException
-	 * @throws PermitionException
-	 * @throws ParseException
-	 */
-	@RequestMapping(value= {"/event/regi"}, method=RequestMethod.POST)
-	@ResponseBody
-    public Object eventRegister(
-    		@Valid EventsForm eventsForm,
-    		BindingResult bindingResult
-    		) throws SystemErrorException, JsonProcessingException, PermitionException, ParseException {
-		
-		logger.info("job-regi！");
-
-		if( bindingResult.hasErrors() ) {
-			return getJson(bindingResult);
-		}
-
-		//せっしょんからログイン情報取得
-		LoginInfoDto loginInfoDto =
-				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
-		
-		if( loginInfoDto.isCompany() && loginInfoDto.getUid().equals(eventsForm.getCompanyId())) {
-			logger.info("企業ID：%dがイベント登録画面を表示しようとしています。",eventsForm.getCompanyId());
-		}else if( loginInfoDto.isAdmin()) {
-			logger.info("管理者がイベント登録画面を表示しようとしています。");
-		}else {
-			//登録・更新権限ない人
-			throw new PermitionException("この画面を表示する権限がありません");
-		}
-		
-		eventService.insertUpdateDelete(eventsForm);
-		
-		return getJson(bindingResult);
-	}
     
 	/**
 	 * 求人検索
@@ -207,7 +119,17 @@ public class JobController extends FileController {
 		
 		logger.info("job-search！");
 
-		List<IndustryDto> industryList = industryService.getAllIndustryDto();
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		List<IndustryDto> industryList = null;
+		if( loginInfoDto.isStudent() ) {
+			industryList = industryService.getIndustryDtoForStudent(loginInfoDto.getUid());
+		}else {
+			industryList = industryService.getAllIndustryDto();
+		}
+		
 		mv.addObject("industryList", industryList);
 		
         mv.setViewName("jobsearch");

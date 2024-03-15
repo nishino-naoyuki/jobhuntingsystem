@@ -134,7 +134,7 @@
 								<label for="inputText" class="col-sm-2 col-form-label">募集職種</label>
 								<div class="col-sm-10">
 									<div class="accordion" id="accordionExample">
-										<div class="accordion-item" th:each="industry : ${industryList}">
+										<div class="accordion-item" th:each="industry,stat : ${industryList}">
 											<h2 class="accordion-header" th:id="|heading${industry.id}|">
 												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" th:data-bs-target="|#collapse${industry.id}|" aria-expanded="false" th:aria-controls="|collapse${industry.id}|" th:text="${industry.name}">
 												</button>
@@ -142,7 +142,7 @@
 											<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 												<div class="accordion-body">
 													<div th:each="kind : ${industry.kindList}" class="form-check">
-														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${industry.id}|" >
+														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${stat.count}|" >
 														<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
 															
 														</label>

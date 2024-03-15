@@ -3,6 +3,7 @@ package jp.ac.asojuku.jobhuntingsystem.controll;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -25,11 +26,13 @@ import jp.ac.asojuku.jobhuntingsystem.dto.CompanyInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.InfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.JobOfferListDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.RecrutimentTypeDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.CompanyRegiForm;
 import jp.ac.asojuku.jobhuntingsystem.form.CompanySearchForm;
 import jp.ac.asojuku.jobhuntingsystem.param.Level;
+import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
 import jp.ac.asojuku.jobhuntingsystem.param.json.ErrorField;
 import jp.ac.asojuku.jobhuntingsystem.param.json.InfoDetailJson;
 import jp.ac.asojuku.jobhuntingsystem.service.CompanyService;
@@ -48,6 +51,8 @@ public class CompanyController extends RestControllerBase{
 	CompanyService companyService;
 	@Autowired
 	JobService jobService;
+	@Autowired
+	HttpSession session;
 	
 	/**
 	 * 企業の登録画面表示
@@ -127,9 +132,18 @@ public class CompanyController extends RestControllerBase{
     		) throws SystemErrorException {
 		
 		logger.info("search-company！");
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 		
 		List<RecrutimentTypeDto> ryDtoList = companyService.getRecrutimentTypeAllList();
-		List<IndustryDto> industryList = industryService.getAllIndustryDto();
+		List<IndustryDto> industryList = null;
+		if( loginInfoDto.isStudent() ) {
+			industryList = industryService.getIndustryDtoForStudent(loginInfoDto.getUid());
+		}else {
+			industryList = industryService.getAllIndustryDto();
+		}
 		
 		mv.addObject("industryList", industryList);
 		mv.addObject("ryDtoList",ryDtoList);

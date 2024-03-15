@@ -13,6 +13,8 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *　変換
  * @author nishino
@@ -38,6 +40,9 @@ public class Exchange {
 		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	}
 	public static Date toDate(String dateString,String fmt) throws ParseException {
+		if( StringUtils.isEmpty(dateString) ) {
+			return null;
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat(fmt);
 		return sdf.parse(dateString);
 	}

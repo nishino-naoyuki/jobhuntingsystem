@@ -330,7 +330,7 @@ public class StudentService {
 		dto.setTeacherName(sEntity.getClassTbl().getAdminTbl().getName());
 		for(StudentIndustryEntity siEntity : siList ) {
 			IndustryKindDto ikDto = new IndustryKindDto();
-			ikDto.setId(siEntity.getSiId());
+			ikDto.setId(siEntity.getIndustrykindId());
 			ikDto.setName(siEntity.getIndustrykindTbl().getName());
 			ikDto.setIndustryId(siEntity.getIndustrykindTbl().getIndustryTbl().getIndustryId());
 			ikDto.setIndustryName(siEntity.getIndustrykindTbl().getIndustryTbl().getName());
