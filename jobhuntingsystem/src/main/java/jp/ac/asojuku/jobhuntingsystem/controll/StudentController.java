@@ -3,11 +3,14 @@ package jp.ac.asojuku.jobhuntingsystem.controll;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +25,10 @@ import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StudentDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
+import jp.ac.asojuku.jobhuntingsystem.exception.NotMatchPasswordException;
+import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
+import jp.ac.asojuku.jobhuntingsystem.form.PasswordChangeForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
 import jp.ac.asojuku.jobhuntingsystem.param.json.DepartmentJson;
 import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
@@ -30,7 +36,7 @@ import jp.ac.asojuku.jobhuntingsystem.service.StudentService;
 
 @Controller
 @RequestMapping(value= {"/student"})
-public class StudentController extends FileController{
+public class StudentController extends RestControllerBase{
 
 	Logger logger = LoggerFactory.getLogger(StudentController.class);
 	@Autowired
@@ -41,6 +47,48 @@ public class StudentController extends FileController{
 	HttpSession session;
 	
 
+	/**
+	 * 
+	 * @param passwordChangeForm
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws PermitionException
+	 * @throws NotMatchPasswordException
+	 */
+	@RequestMapping(value = { "/passchg" }, method = RequestMethod.POST)
+	@ResponseBody
+	public Object passChange(
+			@Valid PasswordChangeForm passwordChangeForm,
+			BindingResult bindingResult
+			) throws JsonProcessingException, PermitionException {
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+
+		if( !loginInfoDto.isStudent() ) {
+			//お気に入り登録は学生のみ
+			throw new PermitionException("この画面を表示する権限がありません");
+		}
+		
+		try {
+			studentService.changePassword(
+					loginInfoDto.getUid(), 
+					passwordChangeForm.getOldPassword(), 
+					passwordChangeForm.getNewPassword());
+		}catch(NotMatchPasswordException e) {
+			bindingResult.addError(new FieldError(bindingResult.getObjectName(), "password", "旧パスワードが一致しません") );
+		}
+
+		return getJson(bindingResult);		
+	}
+	
+	/**
+	 * 
+	 * @param industryArry
+	 * @return
+	 * @throws JsonProcessingException
+	 */
 	@RequestMapping(value = { "/industryArry" }, method = RequestMethod.POST)
 	@ResponseBody
 	public Object savaIndustryArry(

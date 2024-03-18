@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import jp.ac.asojuku.jobhuntingsystem.entity.ClassEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.DepartmentEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentIndustryEntity;
+import jp.ac.asojuku.jobhuntingsystem.exception.NotMatchPasswordException;
 import jp.ac.asojuku.jobhuntingsystem.form.UserInputForm;
 import jp.ac.asojuku.jobhuntingsystem.param.DefineStrings;
 import jp.ac.asojuku.jobhuntingsystem.repository.ClassRepository;
@@ -41,6 +43,28 @@ public class StudentService {
 	@Autowired
 	StudentIndustryRepository studentIndustryRepository;
 
+	/**
+	 * パスワード変更処理
+	 * 
+	 * @param userId
+	 * @param oldPassword
+	 * @param newPassword
+	 * @throws NotMatchPasswordException
+	 */
+	public void changePassword(Integer userId,String oldPassword,String newPassword) throws NotMatchPasswordException {
+		StudentEntity studentEntity = studentRepository.getOne(userId);
+		String oldPwdHash = Digest.createPassword(studentEntity.getMail(), oldPassword);
+		
+		//旧パスワード一致チェック
+		if( !StringUtils.equals(studentEntity.getPassword(), oldPwdHash) ) {
+			throw new NotMatchPasswordException();
+		}
+		
+		String newPwdHash = Digest.createPassword(studentEntity.getMail(), newPassword);
+		studentEntity.setPassword(newPwdHash);
+		
+		studentRepository.save(studentEntity);
+	}
 	/**
 	 * 希望職種の更新（いったん削除してリストを作り直す）
 	 * @param studentId

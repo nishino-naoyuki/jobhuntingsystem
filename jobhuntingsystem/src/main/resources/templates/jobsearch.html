@@ -142,7 +142,7 @@
 											<div th:id="|collapse${industry.id}|" class="accordion-collapse collapse" th:aria-labelledby="|heading${industry.id}|" data-bs-parent="#accordionExample">
 												<div class="accordion-body">
 													<div th:each="kind : ${industry.kindList}" class="form-check">
-														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${stat.count}|" >
+														<input class="form-check-input" type="checkbox" th:value="${kind.id}" th:name="|industryKind${stat.count}|" th:checked="${industry.isContainList(kind.id)}">
 														<label class="form-check-label" for="gridCheck1" th:text="${kind.name}">
 															
 														</label>

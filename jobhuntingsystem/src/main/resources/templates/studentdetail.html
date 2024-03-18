@@ -54,7 +54,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">パスワード変更</button>
                 </li>
 
               </ul>
@@ -146,12 +146,10 @@
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
-
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">現在のパスワード</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
+                        <input name="password" type="password" class="form-control" id="oldPassword">
                       </div>
                     </div>
 
@@ -170,10 +168,8 @@
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary" id="changepassbutton">Change Password</button>
+                      <button type="submit" class="btn btn-primary" id="changepassbutton">パスワード変更</button>
                     </div>
-                  </form><!-- End Change Password Form -->
-
                 </div>
 
               </div><!-- End Bordered Tabs -->
@@ -259,14 +255,42 @@
 		const currentPassword = document.getElementById("currentPassword");
 		const newPassword = document.getElementById("newPassword");
 		const renewPassword = document.getElementById("renewPassword");
+		const oldPassword = document.getElementById("oldPassword");
 		
-		
-		if( newPassword != renewPassword ){
-			msgTitle.innserHTML = "エラー";
+		//alert(newPassword.value+":"+renewPassword.value);
+		if( newPassword.value != renewPassword.value ){
+			msgTitle.innerHTML = "エラー";
 			msgBody.innerHTML = "新しいパスワードが一致しません";
 			registrationSuccess.click();
 			return;
 		}
+		
+ 		const formData = new FormData();
+ 		formData.append('oldPassword',oldPassword.value );
+ 		formData.append('newPassword',newPassword.value );
+ 		 		
+        const url = /*[[@{/student/passchg}]]*/ "/student/passchg";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+ 				const errorText = document.getElementById('errrmessage');
+ 				const alertarea = document.getElementById('alertmsg');
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				
+				msgTitle.innerHTML = "エラー";
+				msgBody.innerHTML = msgs;
+				registrationSuccess.click();
+				return;
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				registrationSuccess.click();
+ 			}
+ 		});
+		
 	});
 </script>
 </html>

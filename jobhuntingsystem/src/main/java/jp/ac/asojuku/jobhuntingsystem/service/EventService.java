@@ -39,6 +39,16 @@ public class EventService {
 	JobHuntingDetailRepository jobHuntingDetailRepository;
 
 	/**
+	 * 詳細情報を取得する
+	 * @param eventId
+	 * @return
+	 */
+	public EventInfoDto getDetail(Integer eventId) {
+		EventEntity eEntity = eventRepository.getOne(eventId);
+		
+		return getFrom(eEntity);
+	}
+	/**
 	 * イベント情報検索処理
 	 * @param eventSearchForm
 	 * @return

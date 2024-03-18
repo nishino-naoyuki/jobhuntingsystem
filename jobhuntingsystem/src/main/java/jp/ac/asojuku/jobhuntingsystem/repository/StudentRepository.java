@@ -8,6 +8,7 @@ import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
 public interface StudentRepository 
 	extends JpaSpecificationExecutor<StudentEntity>, JpaRepository<StudentEntity, Integer>{
 
+	public StudentEntity findByStudentIdAndPassword(Integer userId,String password);
 	public StudentEntity findByMailAndPassword(String mail,String password);
 	
 	public StudentEntity findByStudentNo(String studentNo);

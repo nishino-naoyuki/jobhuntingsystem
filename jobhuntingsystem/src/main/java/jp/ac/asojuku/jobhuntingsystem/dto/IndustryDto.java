@@ -17,4 +17,21 @@ public class IndustryDto {
 		}
 		kindList.add(kindDto);
 	}
+	
+
+	public boolean isContainList(Integer ikId) {
+		if( kindList == null ) {
+			return false;
+		}
+		boolean isContain = false;
+		
+		for(IndustryKindDto idDto : kindList ) {
+			if( ikId == idDto.getId() ) {
+				isContain = true;
+				break;
+			}
+		}
+		
+		return isContain;
+	}
 }

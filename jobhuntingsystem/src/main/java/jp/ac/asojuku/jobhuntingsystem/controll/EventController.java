@@ -47,8 +47,19 @@ public class EventController extends FileController{
 	CompanyService companyService;
 	@Autowired
 	IndustryService industryService;
-	
 
+	@RequestMapping(value= {"/detail"}, method=RequestMethod.GET)
+	public ModelAndView detail( 
+			@ModelAttribute("eventId")Integer eventId,
+			ModelAndView mv ) {
+		EventInfoDto eventDto = eventService.getDetail(eventId);
+		
+		mv.addObject("eventDto", eventDto);
+
+        mv.setViewName("eventdetail");
+        
+		return mv;
+	}
 	/**
 	 * イベント情報検索画面表示
 	 * @param mv

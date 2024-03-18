@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ヘッダー -->
+  <div id="parent" th:replace="/common/headerlink"></div> 
+</head>
+
+<body>
+
+  <!-- ヘッダー -->
+  <div>
+  	<div id="parent" th:replace="/common/header"></div>  
+  </div>
+  
+
+  <!-- サイドバー -->
+  <div>
+  	<div id="parent" th:replace="/common/sidebar"></div>  
+  </div>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>イベント詳細</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">イベント詳細</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+    	<div class="row">
+    		<div class="col-lg-12">
+    			<div class="card">
+    				<div class="card-header">
+    					<button class="btn btn-primary" id="entryevent" >このイベントに申し込む</button>
+    				</div>
+    				<div class="card-body">
+    					<div class="accordion" id="accordionExample">
+    						<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+										イベント情報詳細
+									</button>
+								</h2>
+								<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">企業</label>
+												<div class="col-sm-10" th:text="${eventDto.companyName}">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">種類</label>
+												<div class="col-sm-3" th:text="${eventDto.stepName}">
+													株式会社〇×△
+												</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">開始日時</label>
+												<div class="col-sm-7" th:text="${eventDto.startDatetimeStr}">
+													株式会社〇×△
+												</div>
+											</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">場所</label>
+												<div class="col-sm-10" th:text="${eventDto.place}">
+													株式会社〇×△
+												</div>
+											</div>
+						                	<div class="row mb-3">
+												<label for="inputText" class="col-sm-2 col-form-label">必要書類</label>
+												<div class="col-sm-10" th:text="${eventDto.document}">
+													0000000000
+												</div>
+											</div>
+									</div>
+								</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div><!-- card -->
+    		</div><!-- col-lg-12 -->
+    	</div><!--row-->
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- フッター -->
+  <div id="parent" th:replace="/common/footer"></div>  
+  <!-- フッターリンク -->
+  <div id="parent" th:replace="/common/footerlink"></div>  
+
+</body>
+<script th:inline="javascript">
+	const eventRegi = document.getElementById("eventRegi");
+	//イベント登録クリック
+	eventRegi.addEventListener('click',()=>{
+		
+ 		const formData = new FormData();
+ 		
+ 		formData.append('companyId',/*[[${companyDto.companyId}]]*/0 ); 		
+ 		
+        let url = /*[[@{/event/regi}]]*/ "/event/regi";
+ 
+ 		url += "?companyId=" + /*[[${companyDto.companyId}]]*/0;
+
+ 		window.location.href = url;
+	});
+</script>
+</html>
