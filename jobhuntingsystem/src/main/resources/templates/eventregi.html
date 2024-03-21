@@ -74,6 +74,12 @@
 	                <textarea class="form-control ans-input evt-document" name="evt-document" placeholder="必要書類"></textarea>
 	              </div>
               	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-10 p-1">
+	                <label for="ans-input">イベント概要<span class="float-right text-danger">（必須）</span></label>
+	                <textarea class="form-control ans-input evt-overview" name="evt-overview" placeholder="概要"></textarea>
+	              </div>
+              	</div>
               </div>
             </div>
             <div class="card editEventElement eventElement" th:each="event:${eventList}">
@@ -113,6 +119,12 @@
 	              <div class="form-group col-md-10 p-1">
 	                <label for="ans-input">必要書類<span class="float-right text-danger">（必須）</span></label>
 	                <textarea class="form-control ans-input evt-document" name="evt-document" placeholder="必要書類" th:text="${event.document}"></textarea>
+	              </div>
+              	</div>
+              	<div class="d-flex">
+	              <div class="form-group col-md-10 p-1">
+	                <label for="ans-input">イベント概要<span class="float-right text-danger">（必須）</span></label>
+	                <textarea class="form-control ans-input evt-overview" name="evt-overview" placeholder="概要" th:text="${event.overview}"></textarea>
 	              </div>
               	</div>
               </div>
@@ -245,6 +257,10 @@
 			Array.from( documents ).forEach( (e)=>{
 				e.setAttribute("name","addEvents["+index+"].documentStr");
 			});
+			let overviews = e.getElementsByClassName("evt-overview");
+			Array.from( overviews ).forEach( (e)=>{
+				e.setAttribute("name","addEvents["+index+"].overviewStr");
+			});
 			let delBtn = e.getElementsByClassName("deleteButton");
 			Array.from( delBtn ).forEach( (e)=>{
 				e.dataset.id = index;
@@ -286,6 +302,10 @@
 			Array.from( documents ).forEach( (e)=>{
 				e.setAttribute("name","editEvents["+index+"].documentStr");
 			});
+			let overviews = e.getElementsByClassName("evt-overview");
+			Array.from( overviews ).forEach( (e)=>{
+				e.setAttribute("name","editEvents["+index+"].overviewStr");
+			});
 			let delBtn = e.getElementsByClassName("deleteButton");
 			Array.from( delBtn ).forEach( (e)=>{
 				e.dataset.id = index;
@@ -326,6 +346,10 @@
 			let documents = e.getElementsByClassName("evt-document");
 			Array.from( documents ).forEach( (e)=>{
 				e.setAttribute("name","delEvents["+index+"].documentStr");
+			});
+			let overviews = e.getElementsByClassName("evt-overview");
+			Array.from( overviews ).forEach( (e)=>{
+				e.setAttribute("name","delEvents["+index+"].overviewStr");
 			});
 			
 			index++;

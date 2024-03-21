@@ -48,6 +48,7 @@ public class EventController extends FileController{
 	@Autowired
 	IndustryService industryService;
 
+	
 	@RequestMapping(value= {"/detail"}, method=RequestMethod.GET)
 	public ModelAndView detail( 
 			@ModelAttribute("eventId")Integer eventId,

@@ -10,4 +10,5 @@ public class EventForm {
 	private String startDateStr;
 	private String endDateStr;
 	private String documentStr;
+	private String overviewStr;
 }

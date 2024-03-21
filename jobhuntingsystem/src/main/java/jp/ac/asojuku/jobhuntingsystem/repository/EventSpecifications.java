@@ -10,6 +10,10 @@ import org.springframework.data.jpa.domain.Specification;
 import jp.ac.asojuku.jobhuntingsystem.entity.EventEntity;
 
 public class EventSpecifications {
+	
+	public static Specification<EventEntity> distinct() {
+		return ( root,  query, cb) -> { query.distinct(true); return null; };
+	}
 
     public static Specification<EventEntity> companyContains(String companyName) {
         return (StringUtils.isEmpty(companyName) ? null : 

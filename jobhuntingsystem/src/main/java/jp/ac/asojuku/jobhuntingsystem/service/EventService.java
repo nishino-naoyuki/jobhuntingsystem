@@ -23,6 +23,7 @@ import jp.ac.asojuku.jobhuntingsystem.repository.EventRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.JobHuntingDetailRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StepRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
+import jp.ac.asojuku.jobhuntingsystem.util.HtmlUtil;
 
 import static jp.ac.asojuku.jobhuntingsystem.repository.EventSpecifications.*;
 
@@ -67,12 +68,13 @@ public class EventService {
 		}
 		
 		List<EventEntity> eventEntityList = eventRepository.findAll(
-				Specification.where(companyContains( eventSearchForm.getCompanyName() ) )
+				Specification.where( distinct() )
+							.and(companyContains( eventSearchForm.getCompanyName() ))
 							.and(startDateGreaterThan( Exchange.toDate(eventSearchForm.getStartDateStr(), DATETIME_FMT)  ))
 							.and(endDateLessThan( Exchange.toDate(eventSearchForm.getEndDateStr(), DATETIME_FMT)  ))
 							.and(stepContains(stepList))
 							.and(industryContains(industryList)),
-							Sort.by(Sort.Direction.DESC,"startDatetime")
+				Sort.by(Sort.Direction.DESC,"startDatetime")
 							.and( Sort.by(Sort.Direction.ASC,"stepId") )
 				);
 		
@@ -175,7 +177,7 @@ public class EventService {
 		dto.setEventId(entity.getEventId());
 		dto.setStepId(entity.getStepTbl().getStepId());
 		dto.setStepName(entity.getStepTbl().getName());
-		dto.setDocument(entity.getDocument());
+		dto.setDocument( HtmlUtil.nl2be(entity.getDocument()) );
 		dto.setStart_datetime(Exchange.toLocalDateTime(entity.getStartDatetime()));
 		dto.setEnd_datetime(Exchange.toLocalDateTime(entity.getEndDatetime()));
 		dto.setPlace( entity.getPlace() );
@@ -186,11 +188,18 @@ public class EventService {
 		dto.setEntryNum(entryList.size());
 		dto.setStartDatetimeStr(Exchange.toFormatString(entity.getStartDatetime(),DATETIME_FMT_DISP));
 		dto.setEndDatetimeStr(Exchange.toFormatString(entity.getEndDatetime(),DATETIME_FMT_DISP));
+		dto.setOverview( HtmlUtil.nl2be(entity.getOverview()) );
 		
 		return dto;
 	}
 	
-
+	/**
+	 * 
+	 * @param addEvents
+	 * @param companyId
+	 * @param recruitmentId
+	 * @throws ParseException
+	 */
 	private void insert(List<EventForm> addEvents,Integer companyId,Integer recruitmentId) throws ParseException {
 		if( addEvents == null ) {
 			return;
@@ -202,6 +211,7 @@ public class EventService {
 			eEntity.setName("");
 			eEntity.setPlace( eForm.getPlace() );
 			eEntity.setDocument( eForm.getDocumentStr() );
+			eEntity.setOverview(eForm.getOverviewStr());
 			eEntity.setStartDatetime( Exchange.toDate(eForm.getStartDateStr(), DATETIME_FMT) );
 			eEntity.setEndDatetime( Exchange.toDate(eForm.getEndDateStr(), DATETIME_FMT) );
 			eEntity.setStepId( eForm.getKind() );
@@ -212,6 +222,13 @@ public class EventService {
 		eventRepository.saveAll(evEntityList);
 	}
 
+	/**
+	 * 
+	 * @param editEvents
+	 * @param companyId
+	 * @param recruitmentId
+	 * @throws ParseException
+	 */
 	private void update(List<EventForm> editEvents,Integer companyId,Integer recruitmentId) throws ParseException {
 		if( editEvents == null ) {
 			return;
@@ -223,6 +240,7 @@ public class EventService {
 			eEntity.setName("");
 			eEntity.setPlace( eForm.getPlace() );
 			eEntity.setDocument( eForm.getDocumentStr() );
+			eEntity.setOverview(eForm.getOverviewStr());
 			eEntity.setStartDatetime( Exchange.toDate(eForm.getStartDateStr(), DATETIME_FMT) );
 			eEntity.setEndDatetime( Exchange.toDate(eForm.getEndDateStr(), DATETIME_FMT) );
 			eEntity.setStepId( eForm.getKind() );
@@ -233,7 +251,11 @@ public class EventService {
 		eventRepository.saveAll(evEntityList);
 	}
 	
-
+	/**
+	 * 
+	 * @param delEvents
+	 * @throws ParseException
+	 */
 	private void delete(List<EventForm> delEvents) throws ParseException {
 		if( delEvents == null ) {
 			return;

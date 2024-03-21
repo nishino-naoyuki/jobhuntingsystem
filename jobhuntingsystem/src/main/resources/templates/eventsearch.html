@@ -170,10 +170,14 @@
     		 	<div class="card">
     		 		<div class="card-body">
               			<h5 class="card-title">検索結果</h5>
-              			<button class="btn btn-outline-primary">CSV出力</button>
+              			<div class="d-flex p-3">
+              				<button class="btn btn-outline-primary m-2">CSV出力</button>
+              				<button class="btn btn-outline-primary m-2" id="eventEntryButton" >イベント一括申し込み</button>
+              			</div>
               			<table class="table table-bordered table-striped" id="eventList">
 	              			<thead>
 			                  <tr>
+			                    <th scope="col">#</th>
 			                    <th scope="col">企業名</th>
 			                    <th scope="col">種類</th>
 			                    <th scope="col">開始日時</th>
@@ -203,6 +207,25 @@
 
 <script th:inline="javascript">
 	const eventsearchButton = document.getElementById("eventsearchButton");
+	const eventEntryButton = document.getElementById("eventEntryButton");
+	
+	
+	eventEntryButton.addEventListener('click',()=>{
+		
+		if( !confirm("イベントに申し込みします。確認画面はありません。よろしいですか？")){
+			return;
+		}
+				
+		let chkBoxes = document.getElementsByClassName("entrychk");
+		if( chkBoxes );
+		Array.from( chkBoxes ).forEach( (e)=>{
+			alert( e );
+			if( e.checked ){
+				//IDを取得
+				alert( e.value );
+			}
+		});
+	});
 	
 	const openList = ( eventId )=>{
 		alert(eventId);
@@ -263,7 +286,7 @@
    		  dataTable = $('#eventList').DataTable({
 	   	      "paging": true,
       			"destroy":true,
-	   	      "lengthChange": false,
+	   	      "lengthChange": true,
 	   	      "searching": true,
 	   	      "ordering": true,
 	   	      "info": true,
@@ -271,6 +294,15 @@
 	   	      "responsive": true,
 				"data":resultList,
 	            "columns": [
+	            	{
+	            		data:"stepName" ,
+	            		type:"eventId",
+	                	render: function ( data, type, row ) {
+	                		const url = /*[[@{/event/detail}]]*/ "/event/entry";
+
+	                		return '<input type="checkbox" name="entrychk" value="'+row.eventId+'" >';
+	                	}
+	            	},
 	            	{
 	            		data:"companyName" ,
 	            		type:"companyId",

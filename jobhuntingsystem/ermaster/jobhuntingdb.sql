@@ -121,6 +121,7 @@ CREATE TABLE event_tbl
 まだ、求人がない場合もあるのでNULL許可',
 	recruit_startdatetime datetime NOT NULL COMMENT '募集開始日時',
 	recruit_enddatetime datetime NOT NULL COMMENT '募集終了日時',
+	overview varchar(10000) NOT NULL COMMENT '概要',
 	PRIMARY KEY (event_id)
 );
 
@@ -690,7 +691,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id3)
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -698,7 +699,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
+	ADD FOREIGN KEY (industry_kind_id3)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT

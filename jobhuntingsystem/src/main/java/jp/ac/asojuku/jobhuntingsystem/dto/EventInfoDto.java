@@ -11,6 +11,7 @@ public class EventInfoDto {
 	private Integer stepId;
 	private String stepName;
 	private String document;
+	private String overview;
 	private LocalDateTime start_datetime;
 	private LocalDateTime end_datetime;
 	private String place;

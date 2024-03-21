@@ -67,6 +67,8 @@ public class EventEntity implements Serializable {
     @JoinColumn(name="recruitmentId",insertable=false ,updatable=false)
 	private RecruitmentEntity recruitmentTbl;
 
+	/** overview */
+	private String overview;
 
 
 }
