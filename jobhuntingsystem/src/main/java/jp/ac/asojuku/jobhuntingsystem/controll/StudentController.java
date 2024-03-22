@@ -116,6 +116,7 @@ public class StudentController extends RestControllerBase{
 	
 	@RequestMapping(value= {"/progress"}, method=RequestMethod.GET)
     public ModelAndView progress(
+    		@ModelAttribute("id")String userId,
     		ModelAndView mv
     		) throws SystemErrorException {
 		

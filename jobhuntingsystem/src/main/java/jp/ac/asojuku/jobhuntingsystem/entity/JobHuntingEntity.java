@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,15 +35,30 @@ public class JobHuntingEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer jobHuntingId;
 
+	/** status. */
+	private Integer status;
+
+	/** step_start_datetime. */
+	private Date stepStartDatetime;
+
+	/** イベントテーブル. */
+	private Integer eventId;
+	@ManyToOne
+    @JoinColumn(name="eventId",insertable=false ,updatable=false)
+	private EventEntity eventTbl;
+
+	/** need_report. */
+	private Integer needReport;
+
 	/** 学生テーブル. */
+	private Integer studentId;
 	@OneToOne
     @JoinColumn(name="studentId",insertable=false ,updatable=false)
 	private StudentEntity studentTbl;
 
-	/** 採用求人テーブル. */
-	@OneToOne
-    @JoinColumn(name="recruitmentId",insertable=false ,updatable=false)
-	private RecruitmentEntity recruitmentTbl;
+	/** onbehalf_flg. */
+	private Integer onbehalfFlg;
+
 
 
 }

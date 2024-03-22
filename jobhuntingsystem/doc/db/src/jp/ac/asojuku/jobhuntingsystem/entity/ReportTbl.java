@@ -16,8 +16,8 @@ public class ReportTbl implements Serializable {
 	/** report_id. */
 	private Integer reportId;
 
-	/** 就職活動詳細テーブル. */
-	private JobHuntingDetailTbl jobHuntingDetailTbl;
+	/** 就職活動テーブル. */
+	private JobHuntingTbl jobHuntingTbl;
 
 	/**
 	 * コンストラクタ.
@@ -45,22 +45,22 @@ public class ReportTbl implements Serializable {
 	}
 
 	/**
-	 * 就職活動詳細テーブル を設定します.
+	 * 就職活動テーブル を設定します.
 	 * 
-	 * @param jobHuntingDetailTbl
-	 *            就職活動詳細テーブル
+	 * @param jobHuntingTbl
+	 *            就職活動テーブル
 	 */
-	public void setJobHuntingDetailTbl(JobHuntingDetailTbl jobHuntingDetailTbl) {
-		this.jobHuntingDetailTbl = jobHuntingDetailTbl;
+	public void setJobHuntingTbl(JobHuntingTbl jobHuntingTbl) {
+		this.jobHuntingTbl = jobHuntingTbl;
 	}
 
 	/**
-	 * 就職活動詳細テーブル を取得します.
+	 * 就職活動テーブル を取得します.
 	 * 
-	 * @return 就職活動詳細テーブル
+	 * @return 就職活動テーブル
 	 */
-	public JobHuntingDetailTbl getJobHuntingDetailTbl() {
-		return this.jobHuntingDetailTbl;
+	public JobHuntingTbl getJobHuntingTbl() {
+		return this.jobHuntingTbl;
 	}
 
 	/**

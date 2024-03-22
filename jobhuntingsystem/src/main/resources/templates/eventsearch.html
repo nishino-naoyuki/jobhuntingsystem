@@ -172,7 +172,8 @@
               			<h5 class="card-title">検索結果</h5>
               			<div class="d-flex p-3">
               				<button class="btn btn-outline-primary m-2">CSV出力</button>
-              				<button class="btn btn-outline-primary m-2" id="eventEntryButton" >イベント一括申し込み</button>
+              				<button class="btn btn-outline-primary m-2" id="eventEntryButton" th:if="${session['loginInfo'].isStudent()}" >イベント一括申し込み</button>
+              				<button class="btn btn-outline-primary m-2" id="eventEntryOnBehalfButton" th:if="${session['loginInfo'].isAdmin()}"　>代理申し込み</button>
               			</div>
               			<table class="table table-bordered table-striped" id="eventList">
 	              			<thead>
@@ -182,7 +183,7 @@
 			                    <th scope="col">種類</th>
 			                    <th scope="col">開始日時</th>
 			                    <th scope="col">終了日時</th>
-			                    <th scope="col">参加者一覧（先生権限）</th>
+			                    <th scope="col" th:if="${session['loginInfo'].isAdmin()}">参加者一覧</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
@@ -205,31 +206,29 @@
 <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.0/datatables.min.js"></script>
 </body>
 
+   <!-- Vertically centered Modal -->
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success" style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="modaltitle">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <p id="modalmsg">登録が完了しました！</p>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
+   
 <script th:inline="javascript">
 	const eventsearchButton = document.getElementById("eventsearchButton");
 	const eventEntryButton = document.getElementById("eventEntryButton");
-	
-	
-	eventEntryButton.addEventListener('click',()=>{
-		
-		if( !confirm("イベントに申し込みします。確認画面はありません。よろしいですか？")){
-			return;
-		}
-				
-		let chkBoxes = document.getElementsByClassName("entrychk");
-		if( chkBoxes );
-		Array.from( chkBoxes ).forEach( (e)=>{
-			alert( e );
-			if( e.checked ){
-				//IDを取得
-				alert( e.value );
-			}
-		});
-	});
-	
-	const openList = ( eventId )=>{
-		alert(eventId);
-	}
+	const registrationSuccess = document.getElementById("registration-success");
 	
 	let  dataTable = $('#eventList').DataTable({
 	   	      "paging": true,
@@ -241,6 +240,55 @@
 	   	      "autoWidth": false,
 	   	      "responsive": true,
     });
+    
+    
+	eventEntryButton.addEventListener('click',()=>{
+		
+		if( !confirm("イベントに申し込みします。確認画面はありません。よろしいですか？")){
+			return;
+		}
+				
+		let chkBoxes = document.getElementsByClassName("entrychk");
+		
+		if( chkBoxes.length == 0 ){
+			alert("最低１つはチェックをしてください");
+			return;
+		}
+		
+		let evtIdArry = [];
+		Array.from( chkBoxes ).forEach( (e)=>{
+			if( e.checked ){
+				//IDを取得
+				evtIdArry.push( e.value );
+			}
+		});
+		
+ 		const formData = new FormData();
+ 		formData.append('evtIdArry',evtIdArry );
+ 		 		
+        const url = /*[[@{/event/entry}]]*/ "/event/entry";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+				const modaltitle = document.getElementById("modaltitle");
+				const modalmsg = document.getElementById("modalmsg");
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				modaltitle.innerHTML = "登録エラー";
+ 				modalmsg.innerHTML = msgs;
+ 				registrationSuccess.click();
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				modaltitle.innerHTML = "登録完了";
+ 				modalmsg.innerHTML = "登録が完了しました！";
+ 				registrationSuccess.click();
+ 			}
+ 		});
+	});
+	
     
 	eventsearchButton.addEventListener('click',()=>{
 	
@@ -280,62 +328,123 @@
         //レスポンスの受け取り
         .then( response => response.json()).then(resultList => {
  			//alert( resultList.length );
- 			dataTable.clear();
- 			dataTable.destroy();
- 			
-   		  dataTable = $('#eventList').DataTable({
-	   	      "paging": true,
-      			"destroy":true,
-	   	      "lengthChange": true,
-	   	      "searching": true,
-	   	      "ordering": true,
-	   	      "info": true,
-	   	      "autoWidth": false,
-	   	      "responsive": true,
-				"data":resultList,
-	            "columns": [
-	            	{
-	            		data:"stepName" ,
-	            		type:"eventId",
-	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/event/detail}]]*/ "/event/entry";
-
-	                		return '<input type="checkbox" name="entrychk" value="'+row.eventId+'" >';
-	                	}
-	            	},
-	            	{
-	            		data:"companyName" ,
-	            		type:"companyId",
-	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/company/detail}]]*/ "/company/detail";
-
-	                		return '<a href="'+url+'?id='+row.companyId+'" target="companydetail">'+data+'</a>';
-	                	}
-	            	},
-	            	{
-	            		data:"stepName" ,
-	            		type:"eventId",
-	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/event/detail}]]*/ "/event/detail";
-
-	                		return '<a href="'+url+'?eventId='+row.eventId+'" target="eventdetail">'+data+'</a>';
-	                	}
-	            	},
-	            	{ data:"startDatetimeStr"},
-	            	{ data:"endDatetimeStr"},
-	            	{
-	            		data:"companyName" ,
-	            		type:"companyId",
-	                	render: function ( data, type, row ) {
-	                		const url = /*[[@{/event/detail}]]*/ "/event/detail";
-
-	                		return '<button class="btn btn-outline-primary" onclick="javascript:openList('+row.eventId+');">参加者一覧</button>';
-	                	}
-	            	},
-	            ]
-	   	    });
-	   	    dataTable.draw();
+ 			updateTable(resultList);
  		});
 	});
+</script>
+<script th:inline="javascript" th:if="${session['loginInfo'].isAdmin()}">
+	
+	const openList = ( eventId )=>{
+		alert(eventId);
+	}
+	
+	const updateTable = (resultList)=>{
+		dataTable.clear();
+		dataTable.destroy();
+		
+ 		 dataTable = $('#eventList').DataTable({
+  	      "paging": true,
+    			"destroy":true,
+  	      "lengthChange": true,
+  	      "searching": true,
+  	      "ordering": true,
+  	      "info": true,
+  	      "autoWidth": false,
+  	      "responsive": true,
+		"data":resultList,
+           "columns": [
+           	{
+           		data:"stepName" ,
+           		type:"eventId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/event/detail}]]*/ "/event/entry";
+
+               		return '<input type="checkbox" class="entrychk" value="'+row.eventId+'" >';
+               	}
+           	},
+           	{
+           		data:"companyName" ,
+           		type:"companyId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+               		return '<a href="'+url+'?id='+row.companyId+'" target="companydetail">'+data+'</a>';
+               	}
+           	},
+           	{
+           		data:"stepName" ,
+           		type:"eventId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/event/detail}]]*/ "/event/detail";
+
+               		return '<a href="'+url+'?eventId='+row.eventId+'" target="eventdetail">'+data+'</a>';
+               	}
+           	},
+           	{ data:"startDatetimeStr"},
+           	{ data:"endDatetimeStr"},
+           	{
+           		data:"companyName" ,
+           		type:"companyId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/event/detail}]]*/ "/event/detail";
+
+               		return '<button class="btn btn-outline-primary" onclick="javascript:openList('+row.eventId+');">参加者一覧</button>';
+               	}
+           	},
+           ]
+  	    });
+  	    dataTable.draw();
+	}
+</script>
+
+<script th:inline="javascript" th:if="!${session['loginInfo'].isAdmin()}">
+	const updateTable = (resultList)=>{
+		dataTable.clear();
+		dataTable.destroy();
+		
+ 		 dataTable = $('#eventList').DataTable({
+  	      "paging": true,
+    			"destroy":true,
+  	      "lengthChange": true,
+  	      "searching": true,
+  	      "ordering": true,
+  	      "info": true,
+  	      "autoWidth": false,
+  	      "responsive": true,
+		"data":resultList,
+           "columns": [
+           	{
+           		data:"stepName" ,
+           		type:"eventId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/event/detail}]]*/ "/event/entry";
+
+               		return '<input type="checkbox" class="entrychk" value="'+row.eventId+'" >';
+               	}
+           	},
+           	{
+           		data:"companyName" ,
+           		type:"companyId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/company/detail}]]*/ "/company/detail";
+
+               		return '<a href="'+url+'?id='+row.companyId+'" target="companydetail">'+data+'</a>';
+               	}
+           	},
+           	{
+           		data:"stepName" ,
+           		type:"eventId",
+               	render: function ( data, type, row ) {
+               		const url = /*[[@{/event/detail}]]*/ "/event/detail";
+
+               		return '<a href="'+url+'?eventId='+row.eventId+'" target="eventdetail">'+data+'</a>';
+               	}
+           	},
+           	{ data:"startDatetimeStr"},
+           	{ data:"endDatetimeStr"}
+           ]
+  	    });
+  	    dataTable.draw();
+	}
 </script>
 </html>

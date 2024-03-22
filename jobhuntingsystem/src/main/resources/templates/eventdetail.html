@@ -36,7 +36,8 @@
     		<div class="col-lg-12">
     			<div class="card">
     				<div class="card-header">
-    					<button class="btn btn-primary" id="entryevent" >このイベントに申し込む</button>
+    					<button class="btn btn-primary" id="entryevent" th:if="${session['loginInfo'].isStudent()}">このイベントに申し込む</button>
+              				<button class="btn btn-outline-primary m-2" id="eventEntryOnBehalfButton" th:if="${session['loginInfo'].isAdmin()}"　>このイベントに代理で申し込む</button>
     				</div>
     				<div class="card-body">
     					<div class="accordion" id="accordionExample">
@@ -101,18 +102,56 @@
   <!-- フッターリンク -->
   <div id="parent" th:replace="/common/footerlink"></div>  
 
+   <button id="registration-success" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#regi-success" style='display:none'></button>
+   <div class="modal fade" id="regi-success" tabindex="-1">
+     <div class="modal-dialog modal-dialog-centered">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="modaltitle">登録完了<i class="bx bxs-smile"></i>　</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+           <p id="modalmsg">登録が完了しました！</p>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         </div>
+       </div>
+     </div>
+   </div><!-- End Vertically centered Modal-->
 </body>
 <script th:inline="javascript">
-	const eventRegi = document.getElementById("eventRegi");
+	const entryevent = document.getElementById("entryevent");
+	const registrationSuccess = document.getElementById("registration-success");
 	//イベント登録クリック
-	eventRegi.addEventListener('click',()=>{
-		
+	entryevent.addEventListener('click',()=>{ 
+		const eventId = /*[[${eventDto.eventId}]]*/0;
+ 		let evtIdArry = [];
+ 		evtIdArry.push( eventId );
  		const formData = new FormData();
- 		
- 		formData.append('eventId',/*[[${eventDto.eventId}]]*/0 ); 		
- 		
-        let url = /*[[@{/event/regi}]]*/ "/event/regi";
- 
+ 		formData.append('evtIdArry',evtIdArry );
+ 		 		
+        const url = /*[[@{/event/entry}]]*/ "/event/entry";
+        fetch(url,{method:"post",body: formData})
+        //レスポンスの受け取り
+        .then( response => response.json()).then(result => {
+ 			if( result.result != "OK"){
+				const modaltitle = document.getElementById("modaltitle");
+				const modalmsg = document.getElementById("modalmsg");
+ 				var msgs = "";
+ 				for(var err of result.errorList ){
+ 					msgs += err.msg + "<BR>";
+ 				}
+ 				modaltitle.innerHTML = "登録エラー";
+ 				modalmsg.innerHTML = msgs;
+ 				registrationSuccess.click();
+ 			}else{
+ 				//console.log(regiSuccessBtn);
+ 				modaltitle.innerHTML = "登録完了";
+ 				modalmsg.innerHTML = "登録が完了しました！";
+ 				registrationSuccess.click();
+ 			}
+ 		});
 	});
 </script>
 </html>

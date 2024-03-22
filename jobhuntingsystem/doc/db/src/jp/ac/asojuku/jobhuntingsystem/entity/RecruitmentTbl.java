@@ -121,15 +121,11 @@ public class RecruitmentTbl implements Serializable {
 	/** イベントテーブル 一覧. */
 	private Set<EventTbl> eventTblSet;
 
-	/** 就職テーブル 一覧. */
-	private Set<JobHuntingTbl> jobHuntingTblSet;
-
 	/**
 	 * コンストラクタ.
 	 */
 	public RecruitmentTbl() {
 		this.eventTblSet = new HashSet<EventTbl>();
-		this.jobHuntingTblSet = new HashSet<JobHuntingTbl>();
 	}
 
 	/**
@@ -805,35 +801,6 @@ public class RecruitmentTbl implements Serializable {
 	 */
 	public Set<EventTbl> getEventTblSet() {
 		return this.eventTblSet;
-	}
-
-	/**
-	 * 就職テーブル 一覧を設定します.
-	 * 
-	 * @param jobHuntingTblSet
-	 *            就職テーブル 一覧
-	 */
-	public void setJobHuntingTblSet(Set<JobHuntingTbl> jobHuntingTblSet) {
-		this.jobHuntingTblSet = jobHuntingTblSet;
-	}
-
-	/**
-	 * 就職テーブル を追加します.
-	 * 
-	 * @param jobHuntingTbl
-	 *            就職テーブル
-	 */
-	public void addJobHuntingTbl(JobHuntingTbl jobHuntingTbl) {
-		this.jobHuntingTblSet.add(jobHuntingTbl);
-	}
-
-	/**
-	 * 就職テーブル 一覧を取得します.
-	 * 
-	 * @return 就職テーブル 一覧
-	 */
-	public Set<JobHuntingTbl> getJobHuntingTblSet() {
-		return this.jobHuntingTblSet;
 	}
 
 	/**

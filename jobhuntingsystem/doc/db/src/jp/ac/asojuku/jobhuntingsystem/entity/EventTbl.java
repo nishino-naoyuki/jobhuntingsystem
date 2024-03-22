@@ -49,14 +49,17 @@ public class EventTbl implements Serializable {
 	/** recruit_enddatetime. */
 	private Date recruitEnddatetime;
 
-	/** 就職活動詳細テーブル 一覧. */
-	private Set<JobHuntingDetailTbl> jobHuntingDetailTblSet;
+	/** overview. */
+	private String overview;
+
+	/** 就職活動テーブル 一覧. */
+	private Set<JobHuntingTbl> jobHuntingTblSet;
 
 	/**
 	 * コンストラクタ.
 	 */
 	public EventTbl() {
-		this.jobHuntingDetailTblSet = new HashSet<JobHuntingDetailTbl>();
+		this.jobHuntingTblSet = new HashSet<JobHuntingTbl>();
 	}
 
 	/**
@@ -269,32 +272,51 @@ public class EventTbl implements Serializable {
 	}
 
 	/**
-	 * 就職活動詳細テーブル 一覧を設定します.
+	 * overview を設定します.
 	 * 
-	 * @param jobHuntingDetailTblSet
-	 *            就職活動詳細テーブル 一覧
+	 * @param overview
+	 *            overview
 	 */
-	public void setJobHuntingDetailTblSet(Set<JobHuntingDetailTbl> jobHuntingDetailTblSet) {
-		this.jobHuntingDetailTblSet = jobHuntingDetailTblSet;
+	public void setOverview(String overview) {
+		this.overview = overview;
 	}
 
 	/**
-	 * 就職活動詳細テーブル を追加します.
+	 * overview を取得します.
 	 * 
-	 * @param jobHuntingDetailTbl
-	 *            就職活動詳細テーブル
+	 * @return overview
 	 */
-	public void addJobHuntingDetailTbl(JobHuntingDetailTbl jobHuntingDetailTbl) {
-		this.jobHuntingDetailTblSet.add(jobHuntingDetailTbl);
+	public String getOverview() {
+		return this.overview;
 	}
 
 	/**
-	 * 就職活動詳細テーブル 一覧を取得します.
+	 * 就職活動テーブル 一覧を設定します.
 	 * 
-	 * @return 就職活動詳細テーブル 一覧
+	 * @param jobHuntingTblSet
+	 *            就職活動テーブル 一覧
 	 */
-	public Set<JobHuntingDetailTbl> getJobHuntingDetailTblSet() {
-		return this.jobHuntingDetailTblSet;
+	public void setJobHuntingTblSet(Set<JobHuntingTbl> jobHuntingTblSet) {
+		this.jobHuntingTblSet = jobHuntingTblSet;
+	}
+
+	/**
+	 * 就職活動テーブル を追加します.
+	 * 
+	 * @param jobHuntingTbl
+	 *            就職活動テーブル
+	 */
+	public void addJobHuntingTbl(JobHuntingTbl jobHuntingTbl) {
+		this.jobHuntingTblSet.add(jobHuntingTbl);
+	}
+
+	/**
+	 * 就職活動テーブル 一覧を取得します.
+	 * 
+	 * @return 就職活動テーブル 一覧
+	 */
+	public Set<JobHuntingTbl> getJobHuntingTblSet() {
+		return this.jobHuntingTblSet;
 	}
 
 	/**

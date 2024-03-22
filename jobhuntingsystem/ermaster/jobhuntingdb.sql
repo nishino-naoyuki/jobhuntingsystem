@@ -5,7 +5,6 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS career_report_tbl;
 DROP TABLE IF EXISTS favorite_tbl;
 DROP TABLE IF EXISTS report_tbl;
-DROP TABLE IF EXISTS job_hunting_detail_tbl;
 DROP TABLE IF EXISTS job_hunting_tbl;
 DROP TABLE IF EXISTS message_tbl;
 DROP TABLE IF EXISTS student_industry_tbl;
@@ -313,11 +312,10 @@ CREATE TABLE jobhunting_status_tbl
 );
 
 
-CREATE TABLE job_hunting_detail_tbl
+CREATE TABLE job_hunting_tbl
 (
 	job_hunting_detail_id int NOT NULL AUTO_INCREMENT,
-	job_hunting_id int NOT NULL,
-	stateus int NOT NULL COMMENT '状況
+	status int NOT NULL COMMENT '状況
 ０：実施前
 １：実施後
 ２：合格
@@ -327,16 +325,11 @@ CREATE TABLE job_hunting_detail_tbl
 	need_report int NOT NULL COMMENT 'レポート必須
 ０：不要
 １：必須',
-	PRIMARY KEY (job_hunting_detail_id)
-);
-
-
-CREATE TABLE job_hunting_tbl
-(
-	job_hunting_id int NOT NULL AUTO_INCREMENT,
 	student_id int NOT NULL,
-	recruitment_id int NOT NULL,
-	PRIMARY KEY (job_hunting_id)
+	onbehalf_flg int DEFAULT 0 NOT NULL COMMENT '代理かどうかのフラグ
+0:代理ではない
+1:代理',
+	PRIMARY KEY (job_hunting_detail_id)
 );
 
 
@@ -666,7 +659,7 @@ ALTER TABLE class_tbl
 ;
 
 
-ALTER TABLE job_hunting_detail_tbl
+ALTER TABLE job_hunting_tbl
 	ADD FOREIGN KEY (event_id)
 	REFERENCES event_tbl (event_id)
 	ON UPDATE RESTRICT
@@ -683,7 +676,7 @@ ALTER TABLE company_industry
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id2)
+	ADD FOREIGN KEY (industry_kind_id1)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -691,7 +684,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id1)
+	ADD FOREIGN KEY (industry_kind_id4)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -707,7 +700,7 @@ ALTER TABLE recruitment_tbl
 
 
 ALTER TABLE recruitment_tbl
-	ADD FOREIGN KEY (industry_kind_id4)
+	ADD FOREIGN KEY (industry_kind_id2)
 	REFERENCES Industrykind_tbl (industrykind_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
@@ -748,29 +741,13 @@ ALTER TABLE student_tbl
 
 ALTER TABLE report_tbl
 	ADD FOREIGN KEY (job_hunting_detail_id)
-	REFERENCES job_hunting_detail_tbl (job_hunting_detail_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE job_hunting_detail_tbl
-	ADD FOREIGN KEY (job_hunting_id)
-	REFERENCES job_hunting_tbl (job_hunting_id)
+	REFERENCES job_hunting_tbl (job_hunting_detail_id)
 	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE event_tbl
-	ADD FOREIGN KEY (recruitment_id)
-	REFERENCES recruitment_tbl (recruitment_id)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE job_hunting_tbl
 	ADD FOREIGN KEY (recruitment_id)
 	REFERENCES recruitment_tbl (recruitment_id)
 	ON UPDATE RESTRICT

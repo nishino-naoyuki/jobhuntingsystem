@@ -14,13 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.EventEntity;
-import jp.ac.asojuku.jobhuntingsystem.entity.JobHuntingDetailEntity;
+import jp.ac.asojuku.jobhuntingsystem.entity.JobHuntingEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.StepEntity;
+import jp.ac.asojuku.jobhuntingsystem.form.EventEntryForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventSearchForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
+import jp.ac.asojuku.jobhuntingsystem.param.JHStatus;
 import jp.ac.asojuku.jobhuntingsystem.repository.EventRepository;
-import jp.ac.asojuku.jobhuntingsystem.repository.JobHuntingDetailRepository;
+import jp.ac.asojuku.jobhuntingsystem.repository.JobHuntingRepository;
 import jp.ac.asojuku.jobhuntingsystem.repository.StepRepository;
 import jp.ac.asojuku.jobhuntingsystem.util.Exchange;
 import jp.ac.asojuku.jobhuntingsystem.util.HtmlUtil;
@@ -37,8 +39,49 @@ public class EventService {
 	@Autowired
 	StepRepository stepRepository;
 	@Autowired
-	JobHuntingDetailRepository jobHuntingDetailRepository;
+	JobHuntingRepository jobHuntingRepository;
 
+	public List<EventInfoDto> getEventList(Integer studentId){
+		List<EventInfoDto> list = new ArrayList<>();
+		
+		jobHuntingRepository.findByStudentId(studentId);
+	
+		return list;
+	}
+	/**
+	 * 指定したイベントに既に登録済みかを返す
+	 * @param userId
+	 * @param eventId
+	 * @return
+	 */
+	public EventInfoDto getAlreadyEntry(Integer userId,Integer eventId) {
+		JobHuntingEntity entity = jobHuntingRepository.findByEventIdAndStudentId(eventId, userId);
+		
+		return (entity != null ? getFrom(entity.getEventTbl()):null);
+	}
+	/**
+	 * イベントに学生を登録する
+	 * @param eventEntryForm
+	 * @param isOnBehalf
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	public void entryEvent(EventEntryForm eventEntryForm,boolean isOnBehalf) {
+		List<JobHuntingEntity> jhEntityList = new ArrayList<>();
+
+		for(Integer eventId : eventEntryForm.getEvtIdArry()) {
+			JobHuntingEntity jobHuntingEntity = new JobHuntingEntity();
+			EventEntity eEntity = eventRepository.getOne( eventId );
+			jobHuntingEntity.setStudentId(eventEntryForm.getUId());
+			jobHuntingEntity.setStatus(JHStatus.BEFORE.getId());
+			jobHuntingEntity.setEventId(eventId);
+			jobHuntingEntity.setStepStartDatetime(eEntity.getStartDatetime());
+			jobHuntingEntity.setOnbehalfFlg((isOnBehalf ? 1:0));
+			jobHuntingEntity.setNeedReport(0); //TODO
+			jhEntityList.add(jobHuntingEntity);
+		}
+		
+		jobHuntingRepository.saveAll( jhEntityList );
+	}
 	/**
 	 * 詳細情報を取得する
 	 * @param eventId
@@ -183,8 +226,8 @@ public class EventService {
 		dto.setPlace( entity.getPlace() );
 		dto.setCompanyId( entity.getCompanyTbl().getCompanyId() );
 		dto.setCompanyName( entity.getCompanyTbl().getName() );
-		List<JobHuntingDetailEntity> entryList =
-				jobHuntingDetailRepository.findByEventIdOrderByStepStartDatetime(entity.getEventId());
+		List<JobHuntingEntity> entryList =
+				jobHuntingRepository.findByEventIdOrderByStepStartDatetime(entity.getEventId());
 		dto.setEntryNum(entryList.size());
 		dto.setStartDatetimeStr(Exchange.toFormatString(entity.getStartDatetime(),DATETIME_FMT_DISP));
 		dto.setEndDatetimeStr(Exchange.toFormatString(entity.getEndDatetime(),DATETIME_FMT_DISP));
@@ -262,8 +305,8 @@ public class EventService {
 		}
 		
 		for(EventForm eForm : delEvents ) {
-			List<JobHuntingDetailEntity> entryList =
-				jobHuntingDetailRepository.findByEventIdOrderByStepStartDatetime(eForm.getEventId());
+			List<JobHuntingEntity> entryList =
+				jobHuntingRepository.findByEventIdOrderByStepStartDatetime(eForm.getEventId());
 			if( entryList.size() == 0) {
 				//外部キーを張っているデータがない場合のみ即削除
 				EventEntity eEntity = eventRepository.getOne(eForm.getEventId());

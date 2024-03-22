@@ -234,7 +234,7 @@ public class StudentTbl implements Serializable {
 	/** お気に入りテーブル 一覧. */
 	private Set<FavoriteTbl> favoriteTblSet;
 
-	/** 就職テーブル 一覧. */
+	/** 就職活動テーブル 一覧. */
 	private Set<JobHuntingTbl> jobHuntingTblSet;
 
 	/** 個別メッセージテーブル 一覧. */
@@ -1666,29 +1666,29 @@ public class StudentTbl implements Serializable {
 	}
 
 	/**
-	 * 就職テーブル 一覧を設定します.
+	 * 就職活動テーブル 一覧を設定します.
 	 * 
 	 * @param jobHuntingTblSet
-	 *            就職テーブル 一覧
+	 *            就職活動テーブル 一覧
 	 */
 	public void setJobHuntingTblSet(Set<JobHuntingTbl> jobHuntingTblSet) {
 		this.jobHuntingTblSet = jobHuntingTblSet;
 	}
 
 	/**
-	 * 就職テーブル を追加します.
+	 * 就職活動テーブル を追加します.
 	 * 
 	 * @param jobHuntingTbl
-	 *            就職テーブル
+	 *            就職活動テーブル
 	 */
 	public void addJobHuntingTbl(JobHuntingTbl jobHuntingTbl) {
 		this.jobHuntingTblSet.add(jobHuntingTbl);
 	}
 
 	/**
-	 * 就職テーブル 一覧を取得します.
+	 * 就職活動テーブル 一覧を取得します.
 	 * 
-	 * @return 就職テーブル 一覧
+	 * @return 就職活動テーブル 一覧
 	 */
 	public Set<JobHuntingTbl> getJobHuntingTblSet() {
 		return this.jobHuntingTblSet;

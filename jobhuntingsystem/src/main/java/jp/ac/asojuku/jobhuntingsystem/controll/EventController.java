@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +28,7 @@ import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.exception.PermitionException;
 import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
+import jp.ac.asojuku.jobhuntingsystem.form.EventEntryForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventSearchForm;
 import jp.ac.asojuku.jobhuntingsystem.form.EventsForm;
 import jp.ac.asojuku.jobhuntingsystem.form.JobSearchForm;
@@ -48,6 +50,46 @@ public class EventController extends FileController{
 	@Autowired
 	IndustryService industryService;
 
+
+	@RequestMapping(value= {"/entry"}, method=RequestMethod.POST)
+	@ResponseBody
+    public Object eventEntry(
+    		@Valid EventEntryForm eventEntryForm,
+    		BindingResult bindingResult
+    		) throws SystemErrorException, JsonProcessingException, PermitionException, ParseException {
+		
+		logger.info("job-regi！");
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		
+		if( loginInfoDto.isCompany() ) {
+			throw new PermitionException("企業はこの機能をしようする権限がありません");
+		}else if( loginInfoDto.isStudent() ) {
+			eventEntryForm.setUId( loginInfoDto.getUid() );
+		}
+		
+		for( Integer eventId : eventEntryForm.getEvtIdArry() ) {
+			EventInfoDto eDto = eventService.getAlreadyEntry(eventEntryForm.getUId(),eventId);
+			if( eDto != null ) {
+				bindingResult.addError(
+						new FieldError(
+								bindingResult.getObjectName(), 
+								"eventId", 
+								eDto.getCompanyName()+"の"+eDto.getStepName()+"("+eDto.getStartDatetimeStr()+")"+"は既に登録されています") 
+				);
+			}
+		}
+		
+		if( bindingResult.hasErrors() ) {
+			return getJson(bindingResult);
+		}
+		
+		eventService.entryEvent(eventEntryForm,loginInfoDto.isAdmin());
+		
+		return getJson(bindingResult);
+	}
 	
 	@RequestMapping(value= {"/detail"}, method=RequestMethod.GET)
 	public ModelAndView detail( 
