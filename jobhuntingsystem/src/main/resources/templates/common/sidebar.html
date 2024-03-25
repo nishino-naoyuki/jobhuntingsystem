@@ -55,7 +55,7 @@
       </li><!-- End Components Nav -->
 
       <li class="nav-item" th:if="${session['loginInfo'].isStudent()}">
-        <a class="nav-link " th:href="@{/student/progress}">
+        <a class="nav-link " th:href="|@{/student/progress}?id=${session['loginInfo'].uid}|">
           <i class="bi bi-pencil"></i>
           <span>受験中一覧</span>
         </a>

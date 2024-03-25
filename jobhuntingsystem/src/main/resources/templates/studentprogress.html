@@ -33,146 +33,31 @@
     		 		<div class="card-body">
               			<h5 class="card-title">受験中企業一覧</h5>
               			<button class="btn btn-outline-primary">追加</button>
-              			<table class="table table-bordered">
+              			<table class="table table-bordered datatable">
 	              			<thead>
 			                  <tr>
-			                    <th scope="col">#</th>
 			                    <th scope="col">企業名</th>
+			                    <th scope="col">種類</th>
 			                    <th scope="col">状況</th>
-			                    <th scope="col">次回</th>
+			                    <th scope="col">日時</th>
 			                    <th scope="col">#</th>
 			                  </tr>
 			                </thead>
 			                <tbody>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details1" aria-expanded="false">
-			                    <th scope="row" >1</th>
-			                    <td class="no-accordion"><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-secondary">1次落<span></td>
-			                    <td>2022-05-25</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                    <tr id="details1" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">1次落</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col"><button class="btn btn-primary">報告書作成</button></td>
-						                  </tr>
-						                </tbody>
-			                        </table>
+		                       <tr th:each="jh:${jhList}">
+			                      <td><a th:href="|@{/company/detail}?id=${jh.companyId}|" th:text="${jh.companyName}"></a></td>
+			                      <td th:text="${jh.stepName}">123456</td>
+			                      <td>
+                          			<span class="badge bg-secondary" th:if="${jh.status.isBefore()}" th:text="${jh.getStatusName()}" ></span>
+                          			<span class="badge bg-info text-dark" th:if="${jh.status.isAfter()}" th:text="${jh.getStatusName()}" ></span>
+                          			<span class="badge bg-success" th:if="${jh.status.isPassed()}" th:text="${jh.getStatusName()}" ></span>
+                          			<span class="badge bg-dark" th:if="${jh.status.isNotPassed()}" th:text="${jh.getStatusName()}" ></span>
+			                      </td>
+			                      <td th:text="${jh.eventDate}">123456</td>
+			                      <td>
+			                      	<button class="btn btn-primary"　th:data-companyname="${jh.companyName}" th:onClick="|javascript:deleteFavo(this,${jh.companyId});|">報告書</button>
 			                      </td>
 			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details2" aria-expanded="false">
-			                    <th scope="row">2</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-secondary">筆記落<span></td>
-			                    <td>2022-05-28</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                    <tr id="details2" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">筆記落</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col">報告書作成済</td>
-						                  </tr>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details3" aria-expanded="false">
-			                    <th scope="row">3</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-primary">1次試</span></td>
-			                    <td>2022-05-29</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                    <tr id="details3" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#details4" aria-expanded="false">
-			                    <th scope="row">4</th>
-			                    <td><a href="#">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-danger">最終試</span></td>
-			                    <td>2022-05-30</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                    <tr id="details4" class="accordion-body collapse">
-			                      <td colspan="8">
-			                        <table class="table table-bordered">
-				              			<thead>
-						                  <tr>
-						                    <th scope="col">状況</th>
-						                    <th scope="col">日付</th>
-						                    <th scope="col">#</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                  <tr>
-						                    <td scope="col">1次合</td>
-						                    <td scope="col">2023/12/20</td>
-						                    <td scope="col">報告書作成済</td>
-						                  </tr>
-						                  <tr>
-						                    <td scope="col">2次合</td>
-						                    <td scope="col">2023/12/25</td>
-						                    <td scope="col"><button class="btn btn-primary">報告書作成</button></td>
-						                  </tr>
-						                </tbody>
-			                        </table>
-			                      </td>
-			                    </tr>
-			                  <tr>
-			                    <th scope="row">5</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-03</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">6</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-05</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
-			                  <tr>
-			                    <th scope="row">7</th>
-			                    <td><a href="company-detail.html">株式会社〇×△</a></td>
-			                    <td><span class="badge rounded-pill bg-warning text-dark">説明会</span></td>
-			                    <td>2022-06-06</td>
-			                    <td><button class="btn btn-primary">状況更新</button></td>
-			                  </tr>
 			                </tbody>
               			</table><!-- table -->
               		</div><!-- card-body -->
@@ -189,14 +74,7 @@
   <div id="parent" th:replace="/common/footerlink"></div>  
   
   <script>
-  document.querySelectorAll('.no-accordion a').forEach(function(link) {
-      link.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        window.location.href = link.getAttribute('href');
-      });
-    });
-  });
+
   </script>
 
 </body>

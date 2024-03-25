@@ -17,5 +17,5 @@ public interface JobHuntingRepository
 	
 	JobHuntingEntity findByEventIdAndStudentId(Integer eventId,Integer studentId);
 
-	List<JobHuntingEntity> findByStudentId(Integer studentId);
+	List<JobHuntingEntity> findByStudentIdOrderByStepStartDatetimeDesc(Integer studentId);
 }

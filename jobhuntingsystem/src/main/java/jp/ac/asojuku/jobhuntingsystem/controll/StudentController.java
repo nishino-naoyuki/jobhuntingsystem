@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.DepartmentDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.IndustryDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.JobHuntingDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.LoginInfoDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StudentDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.StudentEntity;
@@ -31,6 +32,7 @@ import jp.ac.asojuku.jobhuntingsystem.exception.SystemErrorException;
 import jp.ac.asojuku.jobhuntingsystem.form.PasswordChangeForm;
 import jp.ac.asojuku.jobhuntingsystem.param.SessionConst;
 import jp.ac.asojuku.jobhuntingsystem.param.json.DepartmentJson;
+import jp.ac.asojuku.jobhuntingsystem.service.EventService;
 import jp.ac.asojuku.jobhuntingsystem.service.IndustryService;
 import jp.ac.asojuku.jobhuntingsystem.service.StudentService;
 
@@ -45,6 +47,8 @@ public class StudentController extends RestControllerBase{
 	IndustryService industryService;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	EventService eventService;
 	
 
 	/**
@@ -114,14 +118,34 @@ public class StudentController extends RestControllerBase{
         return jsonString;
 	}
 	
+	/**
+	 * 参加中のイベント一覧を取得する
+	 * @param userId
+	 * @param mv
+	 * @return
+	 * @throws SystemErrorException
+	 * @throws PermitionException
+	 */
 	@RequestMapping(value= {"/progress"}, method=RequestMethod.GET)
     public ModelAndView progress(
-    		@ModelAttribute("id")String userId,
+    		@ModelAttribute("id")Integer userId,
     		ModelAndView mv
-    		) throws SystemErrorException {
+    		) throws SystemErrorException, PermitionException {
 		
 		logger.info("student-progress！");
+
+		//せっしょんからログイン情報取得
+		LoginInfoDto loginInfoDto =
+				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
+		if( loginInfoDto.isStudent() && userId != loginInfoDto.getUid() ) {
+			throw new PermitionException("この画面を表示する権限がありません");
+		}else if( loginInfoDto.isCompany() ) {
+			throw new PermitionException("この画面を表示する権限がありません");
+		}
 		
+		List<JobHuntingDto> jhList = eventService.getEntryList(userId);
+		
+		mv.addObject("jhList", jhList);
         mv.setViewName("studentprogress");
         
 		return mv;
@@ -144,7 +168,6 @@ public class StudentController extends RestControllerBase{
 		LoginInfoDto loginInfoDto =
 				(LoginInfoDto)session.getAttribute(SessionConst.LOGININFO);
 
-		
 		StudentDto studentDto = studentService.getDetail( loginInfoDto.getUid() );
 		List<IndustryDto> industryList = industryService.getAllIndustryDto();
 		

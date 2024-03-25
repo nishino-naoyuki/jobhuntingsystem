@@ -34,6 +34,18 @@ public enum JHStatus {
 		return msg;
 	}
 
+	public boolean isBefore() {
+		return equals(BEFORE.getId());
+	}
+	public boolean isAfter() {
+		return equals(AFTER.getId());
+	}
+	public boolean isPassed() {
+		return equals(PASSED.getId());
+	}
+	public boolean isNotPassed() {
+		return equals(NOTPASSED.getId());
+	}
 
 	private JHStatus(int id, String msg) {
 		this.id = id;

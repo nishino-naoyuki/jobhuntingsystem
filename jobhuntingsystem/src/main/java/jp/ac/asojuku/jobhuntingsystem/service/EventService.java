@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.ac.asojuku.jobhuntingsystem.dto.EventInfoDto;
+import jp.ac.asojuku.jobhuntingsystem.dto.JobHuntingDto;
 import jp.ac.asojuku.jobhuntingsystem.dto.StepDto;
 import jp.ac.asojuku.jobhuntingsystem.entity.EventEntity;
 import jp.ac.asojuku.jobhuntingsystem.entity.JobHuntingEntity;
@@ -40,11 +41,27 @@ public class EventService {
 	StepRepository stepRepository;
 	@Autowired
 	JobHuntingRepository jobHuntingRepository;
+	
+	/**
+	 * イベント登録情報リストの取得
+	 * @param studentId
+	 * @return
+	 */
+	public List<JobHuntingDto> getEntryList(Integer studentId){
+		List<JobHuntingDto> list = new ArrayList<>();
+		List<JobHuntingEntity> entityList = jobHuntingRepository.findByStudentIdOrderByStepStartDatetimeDesc(studentId);
+		
+		for( JobHuntingEntity jEntity : entityList ) {			
+			list.add( getForm(jEntity) );
+		}
+		
+		return list;
+	}
 
 	public List<EventInfoDto> getEventList(Integer studentId){
 		List<EventInfoDto> list = new ArrayList<>();
 		
-		jobHuntingRepository.findByStudentId(studentId);
+		jobHuntingRepository.findByStudentIdOrderByStepStartDatetimeDesc(studentId);
 	
 		return list;
 	}
@@ -208,6 +225,20 @@ public class EventService {
 		return list;
 	}
 	/* -private methods- */
+	private JobHuntingDto getForm(JobHuntingEntity jEntity) {
+
+		JobHuntingDto dto = new JobHuntingDto();
+		dto.setCompanyId( jEntity.getEventTbl().getCompanyId() );
+		dto.setCompanyName( jEntity.getEventTbl().getCompanyTbl().getName() );
+		dto.setStepId( jEntity.getEventTbl().getStepTbl().getStepId());
+		dto.setStepName( jEntity.getEventTbl().getStepTbl().getName() );
+		dto.setStatus(JHStatus.search( jEntity.getStatus() ));
+		dto.setEventDate( jEntity.getStepStartDatetime() );
+		dto.setNeedReport( jEntity.getNeedReport());
+		
+		return dto;
+	}
+	
 	/**
 	 * Entity→DTO変換
 	 * 
